@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Oído — Centro Auditivo Barcelona</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;color:#1C2D35;background:#fff;scroll-behavior:smooth}
+nav{background:#1A7A7A;padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{color:#fff;font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;gap:4px}
+.nav-link{background:none;border:none;color:rgba(255,255,255,.75);font-size:13px;cursor:pointer;padding:7px 12px;border-radius:6px}
+.nav-link:hover{background:rgba(255,255,255,.15);color:#fff}
+.nav-cta{background:#fff;color:#1A7A7A;border:none;font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer}
+.nav-cta:hover{background:#e8f4f2}
+.hero{background:#8BBAC4;padding:64px 48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:32px;font-weight:600;color:#1C2D35;line-height:1.25;margin-bottom:12px}
+.hero p{font-size:14px;color:#1C2D35;opacity:.85;line-height:1.7;margin-bottom:24px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{background:#1A7A7A;color:#fff;border:none;padding:13px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px}
+.btn-p:hover{background:#156666}
+.btn-s{background:rgba(255,255,255,.5);color:#1C2D35;border:1.5px solid rgba(28,45,53,.2);padding:12px 22px;border-radius:10px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px}
+.btn-s:hover{background:rgba(255,255,255,.75)}
+.hero-card{background:rgba(255,255,255,.6);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.hstat{display:flex;align-items:center;gap:12px}
+.hstat-icon{width:40px;height:40px;background:#1A7A7A;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hstat-icon i{font-size:20px;color:#fff}
+.hstat strong{display:block;font-size:14px;font-weight:600;color:#1C2D35}
+.hstat span{font-size:12px;color:rgba(28,45,53,.6)}
+.sec{padding:56px 48px}
+.sec-title{font-size:24px;font-weight:600;color:#1C2D35;text-align:center;margin-bottom:8px}
+.sec-sub{font-size:14px;color:rgba(28,45,53,.6);text-align:center;margin-bottom:36px;line-height:1.6}
+.sec-alt{background:#f4f7f8}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.srv-card{background:#fff;border:0.5px solid #dde4e6;border-radius:14px;padding:22px 18px;text-align:center}
+.srv-icon{width:48px;height:48px;background:#E1F5EE;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.srv-icon i{font-size:24px;color:#0F6E56}
+.srv-card h3{font-size:14px;font-weight:600;color:#1C2D35;margin-bottom:6px}
+.srv-card p{font-size:12px;color:rgba(28,45,53,.6);line-height:1.6}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.why-card{text-align:center;padding:16px}
+.why-num{font-size:32px;font-weight:600;color:#1A7A7A;margin-bottom:8px}
+.why-card h3{font-size:15px;font-weight:600;color:#1C2D35;margin-bottom:8px}
+.why-card p{font-size:13px;color:rgba(28,45,53,.6);line-height:1.7}
+.prof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.prof-card{background:#fff;border:0.5px solid #dde4e6;border-radius:14px;padding:20px}
+.prof-av{width:48px;height:48px;border-radius:50%;background:#1A7A7A;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:600;margin-bottom:12px}
+.prof-card h3{font-size:14px;font-weight:600;color:#1C2D35;margin-bottom:4px}
+.badge{display:inline-block;font-size:11px;background:#E1F5EE;color:#0F6E56;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.prof-card p{font-size:12px;color:rgba(28,45,53,.6);line-height:1.6;margin-bottom:10px}
+.prof-tag{font-size:11px;background:#f4f7f8;color:rgba(28,45,53,.6);padding:3px 9px;border-radius:6px;display:inline-block;margin:2px 2px 0 0}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test-card{background:#fff;border:0.5px solid #dde4e6;border-radius:14px;padding:18px}
+.stars{color:#EF9F27;font-size:14px;margin-bottom:10px}
+.test-card p{font-size:13px;color:rgba(28,45,53,.65);line-height:1.7;margin-bottom:12px;font-style:italic}
+.test-card .author{font-size:12px;font-weight:600;color:#1C2D35}
+.test-card .author span{font-weight:400;color:rgba(28,45,53,.5)}
+.faq-list{max-width:640px;margin:0 auto}
+.faq-item{border-bottom:0.5px solid #dde4e6}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 0;font-size:14px;font-weight:600;color:#1C2D35;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.faq-q i{font-size:18px;color:rgba(28,45,53,.4);transition:transform .2s;flex-shrink:0}
+.faq-q.open i{transform:rotate(180deg)}
+.faq-a{font-size:13px;color:rgba(28,45,53,.65);line-height:1.75;padding-bottom:14px;display:none}
+.faq-a.show{display:block}
+.form-wrap{max-width:580px;margin:0 auto;background:#fff;border:0.5px solid #dde4e6;border-radius:16px;padding:28px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:12px;font-weight:600;color:rgba(28,45,53,.6)}
+.form-input,.form-select{padding:10px 14px;border-radius:8px;border:0.5px solid #c5d0d4;background:#fff;font-size:14px;color:#1C2D35;outline:none;width:100%}
+.form-input:focus,.form-select:focus{border-color:#1A7A7A;box-shadow:0 0 0 3px rgba(26,122,122,.1)}
+.btn-send{width:100%;padding:14px;background:#1A7A7A;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-send:hover{background:#156666}
+.form-ok{display:none;background:#E1F5EE;border-radius:10px;padding:18px;text-align:center;color:#0F6E56;font-size:14px;font-weight:600}
+.form-ok i{font-size:24px;display:block;margin-bottom:6px}
+.form-error{display:none;font-size:12px;color:#A32D2D;background:#fce8e8;padding:9px 13px;border-radius:8px;margin-top:8px}
+footer{background:#1C2D35;padding:40px 48px 24px;color:rgba(255,255,255,.65)}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:28px}
+footer h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:12px}
+footer p,footer a{font-size:13px;color:rgba(255,255,255,.55);line-height:1.9;text-decoration:none}
+footer a:hover{color:#fff}
+.frow{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.frow i{font-size:15px;color:#1A7A7A}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,.1);padding-top:16px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.35)}
+.social-row{display:flex;gap:8px}
+.social-btn{width:34px;height:34px;background:rgba(255,255,255,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none}
+.social-btn i{font-size:16px;color:rgba(255,255,255,.55)}
+.social-btn:hover{background:rgba(255,255,255,.15)}
+.wa-btn{position:fixed;bottom:28px;right:28px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;z-index:200}
+.wa-btn i{font-size:26px;color:#fff}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo"><i class="ti ti-ear"></i> Mr. Oído</div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="document.getElementById('srv').scrollIntoView({behavior:'smooth'})">Servicios</button>
+    <button class="nav-link" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})">Nosotros</button>
+    <button class="nav-link" onclick="document.getElementById('test').scrollIntoView({behavior:'smooth'})">Opiniones</button>
+    <button class="nav-link" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</button>
+    <button class="nav-link" onclick="document.getElementById('cita').scrollIntoView({behavior:'smooth'})">Contacto</button>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('cita').scrollIntoView({behavior:'smooth'})">Pedir cita</button>
+</nav>
+<section class="hero" id="hero">
+  <div>
+    <h1>Tu centro auditivo de confianza en Barcelona</h1>
+    <p>Mejoramos tu calidad de vida con las mejores prótesis auditivas, atención personalizada y tecnología de última generación. Presencial, remoto o por videollamada.</p>
+    <div class="hero-btns">
+      <button class="btn-p" onclick="document.getElementById('cita').scrollIntoView({behavior:'smooth'})"><i class="ti ti-calendar-plus"></i> Pedir cita online</button>
+      <button class="btn-s" onclick="alert('Llamando al 93 XXX XX XX...')"><i class="ti ti-phone"></i> Llámanos ahora</button>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hstat"><div class="hstat-icon"><i class="ti ti-users"></i></div><div><strong>+800 pacientes</strong><span>confían en Mr. Oído</span></div></div>
+    <div class="hstat"><div class="hstat-icon"><i class="ti ti-certificate"></i></div><div><strong>Audioprotesistas certificados</strong><span>más de 10 años de experiencia</span></div></div>
+    <div class="hstat"><div class="hstat-icon"><i class="ti ti-wifi"></i></div><div><strong>Ajuste remoto disponible</strong><span>sin necesidad de desplazarte</span></div></div>
+    <div class="hstat"><div class="hstat-icon"><i class="ti ti-map-pin"></i></div><div><strong>Centro en Barcelona</strong><span>fácil acceso en metro y bus</span></div></div>
+  </div>
+</section>
+<section class="sec" id="srv">
+  <div class="sec-title">Nuestros servicios</div>
+  <div class="sec-sub">Todo lo que necesitas para cuidar tu salud auditiva, en un solo lugar</div>
+  <div class="srv-grid">
+    <div class="srv-card"><div class="srv-icon"><i class="ti ti-stethoscope"></i></div><h3>Pruebas audiológicas</h3><p>Diagnóstico completo de tu nivel auditivo con equipos de última generación.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="ti ti-device-airpods"></i></div><h3>Adaptación de audífonos</h3><p>Selección y adaptación personalizada de audífonos multimarca según tu pérdida.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="ti ti-wifi"></i></div><h3>Ajuste remoto</h3><p>Realizamos ajustes leves desde casa a través de la app de tu audífono.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="ti ti-tool"></i></div><h3>Mantenimiento</h3><p>Limpieza, cambio de filtros y revisión técnica para prolongar la vida del audífono.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="ti ti-ear"></i></div><h3>Tapones a medida</h3><p>Tapones personalizados para baño, sueño, música o protección laboral.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="ti ti-calendar-check"></i></div><h3>Revisiones periódicas</h3><p>Seguimiento anual con recordatorios automáticos para no perderte ninguna cita.</p></div>
+  </div>
+</section>
+<section class="sec sec-alt" id="why">
+  <div class="sec-title">¿Por qué Mr. Oído?</div>
+  <div class="sec-sub">La cercanía de un centro de barrio con la tecnología de las grandes cadenas</div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><h3>Cercanía de barrio</h3><p>Te conocemos por tu nombre, recordamos tu historial y te atendemos sin esperas. Somos tu audioprotesista de confianza.</p></div>
+    <div class="why-card"><div class="why-num">02</div><h3>Tecnología moderna</h3><p>Audífonos Bluetooth, ajuste remoto, teleconsulta y app de seguimiento. Igual que las grandes cadenas, con trato humano.</p></div>
+    <div class="why-card"><div class="why-num">03</div><h3>Atención personalizada</h3><p>Tres perfiles de paciente, tres tipos de atención. Nos adaptamos a ti: mayor, adulto activo o familia con niños.</p></div>
+  </div>
+</section>
+<section class="sec" id="perfiles">
+  <div class="sec-title">¿A quién ayudamos?</div>
+  <div class="sec-sub">Soluciones adaptadas a cada etapa de la vida</div>
+  <div class="prof-grid">
+    <div class="prof-card"><div class="prof-av">JG</div><h3>Juan, 80 años</h3><div class="badge">Tercera edad</div><p>No entiende a su familia y le cuesta usar la tecnología. Busca una solución sencilla y discreta.</p><div><span class="prof-tag">WhatsApp con el hijo</span><span class="prof-tag">Audífono pequeño</span><span class="prof-tag">Soporte presencial</span></div></div>
+    <div class="prof-card"><div class="prof-av" style="background:#185FA5">LP</div><h3>Lucía, 6 años</h3><div class="badge" style="background:#E6F1FB;color:#0C447C">Niños / Padres</div><p>Sus padres buscan un audífono resistente y discreto. Tramitamos juntos las ayudas PUA.</p><div><span class="prof-tag">Audífonos infantiles</span><span class="prof-tag">Ayudas PUA</span><span class="prof-tag">Seguimiento escolar</span></div></div>
+    <div class="prof-card"><div class="prof-av" style="background:#854F0B">MP</div><h3>Marta, 38 años</h3><div class="badge" style="background:#FAEEDA;color:#633806">Adulto activo</div><p>Se pierde en reuniones de trabajo. Quiere un audífono Bluetooth discreto y ajuste remoto.</p><div><span class="prof-tag">Ajuste remoto</span><span class="prof-tag">Cita online</span><span class="prof-tag">Bluetooth</span></div></div>
+  </div>
+</section>
+<section class="sec sec-alt" id="test">
+  <div class="sec-title">Qué dicen nuestros pacientes</div>
+  <div class="sec-sub">Más de 800 familias ya confían en Mr. Oído</div>
+  <div class="test-grid">
+    <div class="test-card"><div class="stars"><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i></div><p>"Llevaba años evitando ir al audioprotesista. Aquí me explicaron todo con paciencia. Por fin entiendo a mis nietos."</p><div class="author">Antonio R. <span>· 78 años · Barcelona</span></div></div>
+    <div class="test-card"><div class="stars"><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i></div><p>"El ajuste remoto me ha cambiado la vida. Trabajo mucho y no tenía tiempo de ir al centro. Ahora me ajustan el audífono y listo."</p><div class="author">Sandra M. <span>· 41 años · Gràcia</span></div></div>
+    <div class="test-card"><div class="stars"><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i><i class="ti ti-star"></i></div><p>"Nos ayudaron con toda la tramitación de las ayudas PUA para nuestra hija. Servicio cercano y muy profesional."</p><div class="author">Carles y Laura <span>· Padres de Martina</span></div></div>
+  </div>
+</section>
+<section class="sec" id="faq">
+  <div class="sec-title">Preguntas frecuentes</div>
+  <div class="sec-sub">Todo lo que necesitas saber antes de tu primera visita</div>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Necesito receta médica para comprar un audífono? <i class="ti ti-chevron-down"></i></button><div class="faq-a">No es obligatorio, pero sí recomendable. Puedes venir directamente a hacerte una prueba audiológica gratuita con nosotros y valorar juntos la mejor opción para tu caso.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto cuesta un audífono? <i class="ti ti-chevron-down"></i></button><div class="faq-a">El precio varía según el modelo y la tecnología. Trabajamos con todas las gamas. Siempre te explicamos las diferencias con total transparencia y sin presión.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hay ayudas económicas para audífonos? <i class="ti ti-chevron-down"></i></button><div class="faq-a">Sí. Existen las ayudas PUA para niños con pérdida bilateral, y algunas comunidades tienen subvenciones adicionales. Nos encargamos de toda la tramitación contigo.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué es el ajuste remoto y cómo funciona? <i class="ti ti-chevron-down"></i></button><div class="faq-a">Permite al audioprotesista realizar modificaciones leves en tu audífono a través de la app del fabricante, sin que tengas que venir al centro. Ideal si tienes poca movilidad o poco tiempo.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo probar el audífono antes de comprarlo? <i class="ti ti-chevron-down"></i></button><div class="faq-a">Sí, ofrecemos un período de adaptación de prueba para que puedas comprobar que el audífono se ajusta a tu vida diaria antes de tomar una decisión definitiva.</div></div>
+  </div>
+</section>
+<section class="sec sec-alt" id="cita">
+  <div class="sec-title">Pide tu cita online</div>
+  <div class="sec-sub">Rellena el formulario y te contactamos en menos de 24 horas</div>
+  <div class="form-wrap">
+    <div class="form-ok" id="form-ok"><i class="ti ti-circle-check"></i>Solicitud enviada. Te llamaremos en menos de 24 h.</div>
+    <div id="form-body">
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" id="f-name" placeholder="Tu nombre"/></div>
+        <div class="form-group"><label class="form-label">Teléfono</label><input class="form-input" type="tel" id="f-tel" placeholder="6XX XXX XXX"/></div>
+        <div class="form-group full"><label class="form-label">Email</label><input class="form-input" type="email" id="f-email" placeholder="tu@email.com"/></div>
+        <div class="form-group full"><label class="form-label">Motivo de consulta</label><select class="form-select" id="f-motivo"><option value="">Selecciona un motivo...</option><option>Primera prueba audiológica</option><option>Revisión anual</option><option>Problema con mi audífono</option><option>Información sobre audífonos</option><option>Tapones a medida</option><option>Ajuste remoto</option></select></div>
+        <div class="form-group full"><label class="form-label">Franja horaria preferida</label><select class="form-select" id="f-franja"><option value="">Selecciona una franja...</option><option>Mañana (9:00 – 13:00)</option><option>Mediodía (13:00 – 15:00)</option><option>Tarde (16:00 – 19:00)</option></select></div>
+      </div>
+      <div class="form-error" id="form-error">Por favor, completa todos los campos antes de enviar.</div>
+      <button class="btn-send" onclick="submitForm()"><i class="ti ti-send"></i> Solicitar cita</button>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-grid">
+    <div><h4><i class="ti ti-ear"></i> Mr. Oído</h4><p>Centro auditivo familiar en Barcelona. Atención personalizada, tecnología moderna y precios transparentes.</p></div>
+    <div><h4>Contacto</h4><div class="frow"><i class="ti ti-map-pin"></i><p>Carrer Exemple 123, Barcelona</p></div><div class="frow"><i class="ti ti-phone"></i><p>93 XXX XX XX</p></div><div class="frow"><i class="ti ti-mail"></i><p>hola@mroido.es</p></div><div class="frow"><i class="ti ti-clock"></i><p>L–V 9:00–19:00 · S 9:00–13:00</p></div></div>
+    <div><h4>Servicios</h4><a href="#">Pruebas audiológicas</a><br><a href="#">Adaptación de audífonos</a><br><a href="#">Ajuste remoto</a><br><a href="#">Tapones a medida</a><br><a href="#">Ayudas PUA</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Mr. Oído · Todos los derechos reservados</p>
+    <div class="social-row">
+      <button class="social-btn"><i class="ti ti-brand-instagram"></i></button>
+      <button class="social-btn"><i class="ti ti-brand-whatsapp"></i></button>
+      <button class="social-btn"><i class="ti ti-map-pin"></i></button>
+    </div>
+  </div>
+</footer>
+<button class="wa-btn" onclick="alert('Abriendo WhatsApp...')"><i class="ti ti-brand-whatsapp"></i></button>
+<script>
+function toggleFaq(btn){const a=btn.nextElementSibling,o=btn.classList.contains('open');document.querySelectorAll('.faq-q.open').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('show');});if(!o){btn.classList.add('open');a.classList.add('show');}}
+function submitForm(){const n=document.getElementById('f-name').value.trim(),t=document.getElementById('f-tel').value.trim(),e=document.getElementById('f-email').value.trim(),m=document.getElementById('f-motivo').value,f=document.getElementById('f-franja').value,err=document.getElementById('form-error');if(!n||!t||!e||!m||!f){err.style.display='block';return;}err.style.display='none';document.getElementById('form-body').style.display='none';document.getElementById('form-ok').style.display='block';}
+</script>
+</body>
+</html>
