@@ -3,180 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mr. Oído — Centro Auditivo Barcelona</title>
+<title>Mister Oído — Centro Auditivo Barcelona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#172b34;--muted:#60727a;--teal:#147876;--teal-dark:#0f5f5d;
-  --mint:#e8f6f2;--sky:#dceff2;--line:#d9e4e7;--soft:#f6f9f9;
-  --gold:#c4862e;--gold-light:#faeeda;
-  --shadow:0 20px 44px rgba(23,43,52,.10);
-  --shadow-lg:0 32px 64px rgba(23,43,52,.14);
+  --navy:#0d2040;
+  --blue:#1e50a0;
+  --blue-dark:#163a7a;
+  --blue-mid:#2b65c0;
+  --sky:#4a9fd4;
+  --sky-light:#e8f2fb;
+  --sky-pale:#f0f6fd;
+  --ink:#0d1f3c;
+  --muted:#5a6e88;
+  --line:#dce6f0;
+  --soft:#f5f8fd;
+  --gold:#c4862e;
+  --shadow:0 20px 44px rgba(13,32,64,.10);
+  --shadow-lg:0 32px 64px rgba(13,32,64,.14);
 }
 html{scroll-behavior:smooth}
-body{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
+body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
 img{max-width:100%;display:block}
 
 /* ── NAV ── */
-nav{background:rgba(255,255,255,.96);backdrop-filter:blur(18px);padding:0 48px;height:70px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;border-bottom:1px solid var(--line);box-shadow:0 4px 24px rgba(23,43,52,.06);transition:box-shadow .3s}
-.nav-logo{color:var(--teal);font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
-.nav-logo i{font-size:24px}
+nav{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:0 56px;height:72px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;border-bottom:1px solid var(--line);box-shadow:0 2px 20px rgba(13,32,64,.06)}
+.nav-logo{display:flex;align-items:center;gap:0;cursor:pointer}
+.nav-logo img{height:48px;width:auto;object-fit:contain}
 .nav-links{display:flex;gap:2px}
 .nav-link{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:9px 14px;border-radius:8px;transition:background .18s,color .18s;font-weight:500;position:relative}
-.nav-link:hover{background:var(--mint);color:var(--teal)}
-.nav-link.active{color:var(--teal);font-weight:700}
-.nav-link.active::after{content:"";position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:calc(100% - 16px);height:2.5px;background:var(--teal);border-radius:2px 2px 0 0}
-.nav-cta{background:var(--teal);color:#fff;border:none;font-size:13px;font-weight:700;padding:10px 20px;border-radius:9px;cursor:pointer;box-shadow:0 6px 18px rgba(20,120,118,.25);transition:background .18s,transform .18s,box-shadow .18s}
-.nav-cta:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 10px 24px rgba(20,120,118,.3)}
+.nav-link:hover{background:var(--sky-light);color:var(--blue)}
+.nav-link.active{color:var(--blue);font-weight:700}
+.nav-link.active::after{content:"";position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);width:calc(100% - 16px);height:2.5px;background:var(--blue);border-radius:2px 2px 0 0}
+.nav-cta{background:var(--blue);color:#fff;border:none;font-size:13px;font-weight:700;padding:10px 22px;border-radius:9px;cursor:pointer;box-shadow:0 6px 18px rgba(30,80,160,.3);transition:background .18s,transform .18s,box-shadow .18s}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 10px 24px rgba(30,80,160,.35)}
 
 /* ── HERO ── */
-.hero{position:relative;background:linear-gradient(135deg,#f4faf9 0%,#eaf6f3 50%,#d8edf2 100%);padding:90px 56px 56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(400px,520px);gap:60px;align-items:center;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:auto -8% -24% 46%;height:480px;background:radial-gradient(circle,rgba(20,120,118,.13),transparent 65%);pointer-events:none}
-.hero::after{content:"";position:absolute;top:-80px;left:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(20,120,118,.07),transparent 65%);pointer-events:none}
+.hero{position:relative;background:linear-gradient(135deg,#f0f6fd 0%,#e8f2fb 55%,#ddeaf8 100%);padding:96px 56px 60px;display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,520px);gap:64px;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:auto -6% -20% 48%;height:500px;background:radial-gradient(circle,rgba(30,80,160,.1),transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;top:-100px;left:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(74,159,212,.08),transparent 65%);pointer-events:none}
 .hero>*{position:relative}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(20,120,118,.1);color:var(--teal-dark);font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;margin-bottom:20px;border:1px solid rgba(20,120,118,.15)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(30,80,160,.08);color:var(--blue-dark);font-size:12px;font-weight:700;padding:7px 16px;border-radius:999px;margin-bottom:22px;border:1px solid rgba(30,80,160,.15)}
 .hero h1{font-size:50px;font-weight:800;color:var(--ink);line-height:1.06;margin-bottom:20px;letter-spacing:-.5px;max-width:680px}
-.hero h1 span{color:var(--teal)}
-.hero p{font-size:17px;color:var(--muted);line-height:1.8;margin-bottom:34px;max-width:580px}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:17px;color:var(--muted);line-height:1.82;margin-bottom:36px;max-width:580px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-p{background:var(--teal);color:#fff;border:none;padding:15px 24px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 10px 26px rgba(20,120,118,.28);transition:background .18s,transform .18s,box-shadow .18s}
-.btn-p:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 16px 32px rgba(20,120,118,.32)}
-.btn-s{background:#fff;color:var(--ink);border:1.5px solid #ccd8db;padding:14px 24px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color .18s,color .18s,transform .18s}
-.btn-s:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-1px)}
-.hero-media{display:grid;gap:14px}
-.hero-photo{position:relative;overflow:hidden;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
-.hero-photo img{width:100%;height:360px;object-fit:cover;object-position:center top;transition:transform .6s ease}
-.hero-photo:hover img{transform:scale(1.03)}
-.hero-photo-badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.97);border:1px solid rgba(217,228,231,.9);border-radius:12px;padding:14px 17px;box-shadow:0 12px 28px rgba(23,43,52,.12)}
+.btn-p{background:var(--blue);color:#fff;border:none;padding:15px 26px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 10px 26px rgba(30,80,160,.3);transition:background .18s,transform .18s,box-shadow .18s}
+.btn-p:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 16px 32px rgba(30,80,160,.35)}
+.btn-s{background:#fff;color:var(--ink);border:1.5px solid #c8d8ec;padding:14px 26px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color .18s,color .18s,transform .18s}
+.btn-s:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
+.hero-media{display:grid;gap:16px}
+.hero-photo{position:relative;overflow:hidden;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.hero-photo-badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.97);border:1px solid rgba(220,230,240,.9);border-radius:12px;padding:14px 18px;box-shadow:0 10px 26px rgba(13,32,64,.14);z-index:2}
 .hero-photo-badge strong{display:block;font-size:14px;color:var(--ink)}
 .hero-photo-badge span{font-size:12px;color:var(--muted)}
-.hero-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;box-shadow:0 16px 40px rgba(23,43,52,.07)}
+.hero-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;box-shadow:0 14px 36px rgba(13,32,64,.07)}
 .hstat{display:flex;align-items:center;gap:13px}
-.hstat-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 14px rgba(20,120,118,.22)}
+.hstat-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 14px rgba(30,80,160,.25)}
 .hstat-icon i{font-size:20px;color:#fff}
 .hstat strong{display:block;font-size:13px;font-weight:700;color:var(--ink)}
 .hstat span{font-size:11px;color:var(--muted)}
 
 /* ── TRUST BAND ── */
-.trust-band{padding:20px 56px;background:var(--ink);color:#fff;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.75);font-weight:500}
-.trust-item i{font-size:22px;color:#7dcfc7;flex-shrink:0}
+.trust-band{padding:22px 56px;background:var(--navy);display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.72);font-weight:500}
+.trust-item i{font-size:22px;color:var(--sky);flex-shrink:0}
+
+/* ── BRANDS STRIP ── */
+.brands-strip{padding:28px 56px;background:#fff;border-bottom:1px solid var(--line)}
+.brands-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.brand-label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-right:16px;white-space:nowrap}
+.brand-chip{display:flex;align-items:center;gap:7px;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;color:var(--muted);transition:border-color .18s,color .18s}
+.brand-chip:hover{border-color:var(--blue);color:var(--blue)}
+.brand-chip i{font-size:15px;color:var(--sky)}
 
 /* ── SECTIONS ── */
-.sec{padding:80px 56px}
+.sec{padding:84px 56px}
 .sec-alt{background:var(--soft)}
-.sec-label{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--mint);padding:5px 13px;border-radius:999px;margin-bottom:14px;letter-spacing:.5px;text-transform:uppercase}
-.sec-title{font-size:32px;font-weight:800;color:var(--ink);text-align:center;margin-bottom:10px;letter-spacing:-.3px}
-.sec-sub{font-size:15px;color:var(--muted);text-align:center;margin:0 auto 48px;line-height:1.75;max-width:680px}
+.sec-label{display:inline-block;font-size:11px;font-weight:700;color:var(--blue);background:var(--sky-light);padding:5px 13px;border-radius:999px;margin-bottom:14px;letter-spacing:.5px;text-transform:uppercase}
+.sec-title{font-size:33px;font-weight:800;color:var(--ink);text-align:center;margin-bottom:10px;letter-spacing:-.3px}
+.sec-sub{font-size:15px;color:var(--muted);text-align:center;margin:0 auto 50px;line-height:1.78;max-width:680px}
 
 /* ── SERVICES ── */
 .srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.srv-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 22px;text-align:left;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;cursor:default}
-.srv-card:hover{transform:translateY(-5px);border-color:#a8d0d0;box-shadow:0 20px 44px rgba(23,43,52,.1)}
-.srv-icon{width:50px;height:50px;background:var(--mint);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 0 16px;transition:background .22s}
-.srv-card:hover .srv-icon{background:var(--teal)}
-.srv-icon i{font-size:24px;color:var(--teal);transition:color .22s}
+.srv-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 24px;text-align:left;transition:transform .22s,box-shadow .22s,border-color .22s;cursor:default}
+.srv-card:hover{transform:translateY(-5px);border-color:#a8c4e8;box-shadow:0 20px 44px rgba(13,32,64,.1)}
+.srv-icon{width:52px;height:52px;background:var(--sky-light);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 0 18px;transition:background .22s}
+.srv-card:hover .srv-icon{background:var(--blue)}
+.srv-icon i{font-size:25px;color:var(--blue);transition:color .22s}
 .srv-card:hover .srv-icon i{color:#fff}
 .srv-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px}
-.srv-card p{font-size:13px;color:var(--muted);line-height:1.68}
+.srv-card p{font-size:13px;color:var(--muted);line-height:1.7}
 
 /* ── TECH ── */
-.tech-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:36px;align-items:center;max-width:1100px;margin:0 auto}
-.tech-image{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow-lg);overflow:hidden}
-.tech-image img{width:100%;border-radius:10px;transition:transform .5s ease}
+.tech-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:40px;align-items:center;max-width:1100px;margin:0 auto}
+.tech-image{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow-lg);overflow:hidden}
+.tech-image img{width:100%;border-radius:10px;transition:transform .5s}
 .tech-image:hover img{transform:scale(1.02)}
 .tech-copy h3{font-size:26px;font-weight:800;margin-bottom:14px;color:var(--ink);letter-spacing:-.2px}
-.tech-copy p{font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:22px}
+.tech-copy p{font-size:15px;line-height:1.82;color:var(--muted);margin-bottom:22px}
 .tech-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .tech-point{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:13px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px;transition:border-color .18s,background .18s}
-.tech-point:hover{border-color:var(--teal);background:var(--mint)}
-.tech-point i{color:var(--teal);font-size:18px;flex-shrink:0}
+.tech-point:hover{border-color:var(--blue);background:var(--sky-light)}
+.tech-point i{color:var(--sky);font-size:18px;flex-shrink:0}
 
 /* ── PRODUCT ── */
-.product-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:28px;align-items:center;max-width:1080px;margin:0 auto}
-.product-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 16px 40px rgba(23,43,52,.07);overflow:hidden}
-.product-panel img{width:100%;border-radius:10px;transition:transform .5s ease}
+.product-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:32px;align-items:center;max-width:1080px;margin:0 auto}
+.product-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 16px 40px rgba(13,32,64,.07);overflow:hidden}
+.product-panel img{width:100%;border-radius:10px;transition:transform .5s}
 .product-panel:hover img{transform:scale(1.02)}
-.product-copy h3{font-size:25px;font-weight:800;margin-bottom:14px;color:var(--ink);letter-spacing:-.2px}
-.product-copy p{font-size:15px;line-height:1.8;color:var(--muted)}
+.product-copy h3{font-size:26px;font-weight:800;margin-bottom:14px;color:var(--ink);letter-spacing:-.2px}
+.product-copy p{font-size:15px;line-height:1.82;color:var(--muted)}
 
 /* ── HERO SLIDER ── */
-.swiper-pagination-hero{bottom:12px!important}
+.swiper-pagination-hero{bottom:14px!important}
 .swiper-pagination-hero .swiper-pagination-bullet{background:#fff;opacity:.6;width:7px;height:7px}
-.swiper-pagination-hero .swiper-pagination-bullet-active{opacity:1;width:20px;border-radius:4px;transition:width .3s}
+.swiper-pagination-hero .swiper-pagination-bullet-active{opacity:1;width:22px;border-radius:4px;transition:width .3s}
 
 /* ── WHY ── */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.why-card{text-align:left;padding:26px;background:#fff;border:1px solid var(--line);border-radius:14px;transition:transform .22s,box-shadow .22s}
+.why-card{padding:28px;background:#fff;border:1px solid var(--line);border-radius:14px;transition:transform .22s,box-shadow .22s}
 .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.why-num{font-size:30px;font-weight:800;color:var(--gold);margin-bottom:12px;font-variant-numeric:tabular-nums}
+.why-num{font-size:32px;font-weight:800;color:var(--sky);margin-bottom:12px}
 .why-card h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:9px}
-.why-card p{font-size:13px;color:var(--muted);line-height:1.72}
+.why-card p{font-size:13px;color:var(--muted);line-height:1.74}
 
 /* ── PROFILES ── */
 .prof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.prof-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 10px 28px rgba(23,43,52,.05);transition:transform .22s,box-shadow .22s}
+.prof-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 10px 28px rgba(13,32,64,.05);transition:transform .22s,box-shadow .22s}
 .prof-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.prof-av{width:50px;height:50px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;margin-bottom:14px;box-shadow:0 6px 14px rgba(20,120,118,.25)}
+.prof-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--sky));display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;margin-bottom:14px;box-shadow:0 6px 14px rgba(30,80,160,.25)}
 .prof-card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px}
-.badge{display:inline-block;font-size:11px;background:var(--mint);color:var(--teal-dark);padding:4px 11px;border-radius:999px;margin-bottom:11px;font-weight:700}
-.prof-card p{font-size:13px;color:var(--muted);line-height:1.67;margin-bottom:13px}
+.badge{display:inline-block;font-size:11px;background:var(--sky-light);color:var(--blue-dark);padding:4px 11px;border-radius:999px;margin-bottom:12px;font-weight:700}
+.prof-card p{font-size:13px;color:var(--muted);line-height:1.68;margin-bottom:13px}
 .prof-tag{font-size:11px;background:var(--soft);color:var(--muted);padding:4px 9px;border-radius:6px;display:inline-block;margin:2px 2px 0 0;font-weight:600}
 
 /* ── TESTIMONIALS SWIPER ── */
-.testimonials-wrap{max-width:960px;margin:0 auto;position:relative;padding:0 48px}
+.testimonials-wrap{max-width:980px;margin:0 auto;position:relative;padding:0 52px}
 .swiper-test{overflow:hidden}
-.test-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;height:auto}
+.test-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;height:auto}
 .stars{color:var(--gold);font-size:16px;margin-bottom:14px;display:flex;gap:3px}
-.test-card p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:16px;font-style:italic}
+.test-card blockquote{font-size:14px;color:var(--muted);line-height:1.82;margin-bottom:18px;font-style:italic}
 .test-card .author{font-size:13px;font-weight:700;color:var(--ink)}
 .test-card .author span{font-weight:500;color:var(--muted)}
-.swiper-button-prev,.swiper-button-next{color:var(--teal);width:36px;height:36px;background:#fff;border:1px solid var(--line);border-radius:50%;box-shadow:0 4px 12px rgba(23,43,52,.08)}
+.swiper-button-prev,.swiper-button-next{color:var(--blue);width:38px;height:38px;background:#fff;border:1px solid var(--line);border-radius:50%;box-shadow:0 4px 14px rgba(13,32,64,.1)}
 .swiper-button-prev::after,.swiper-button-next::after{font-size:14px;font-weight:700}
-.swiper-pagination-bullet{background:var(--teal);opacity:.3}
+.swiper-pagination-bullet{background:var(--blue);opacity:.25}
 .swiper-pagination-bullet-active{opacity:1}
 
+/* ── LOGO SLIDER ── */
+.logo-strip{padding:52px 56px;background:#fff}
+.logo-strip .sec-title{margin-bottom:8px}
+.logo-strip .sec-sub{margin-bottom:36px}
+.swiper-logos{overflow:hidden;max-width:900px;margin:0 auto}
+.logo-slide{display:flex;align-items:center;justify-content:center;padding:12px}
+.logo-card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:22px 32px;display:flex;align-items:center;justify-content:center;min-height:90px;transition:border-color .2s,box-shadow .2s}
+.logo-card:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(30,80,160,.1)}
+.logo-card img{max-height:54px;width:auto;object-fit:contain;filter:grayscale(40%);transition:filter .2s}
+.logo-card:hover img{filter:grayscale(0%)}
+
 /* ── FAQ ── */
-.faq-list{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(23,43,52,.05)}
+.faq-list{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(13,32,64,.05)}
 .faq-item{border-bottom:1px solid var(--line)}
 .faq-item:last-child{border-bottom:none}
-.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 22px;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:background .15s}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 24px;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:background .15s}
 .faq-q:hover{background:var(--soft)}
-.faq-q i{font-size:18px;color:var(--teal);transition:transform .25s;flex-shrink:0}
+.faq-q i{font-size:18px;color:var(--blue);transition:transform .25s;flex-shrink:0}
 .faq-q.open i{transform:rotate(180deg)}
-.faq-a{font-size:14px;color:var(--muted);line-height:1.78;padding:0 22px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
-.faq-a.show{max-height:200px;padding:0 22px 18px}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.8;padding:0 24px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.faq-a.show{max-height:200px;padding:0 24px 20px}
 
 /* ── FORM ── */
-.form-wrap{max-width:660px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:36px;box-shadow:var(--shadow-lg)}
+.form-wrap{max-width:660px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:38px;box-shadow:var(--shadow-lg)}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-group{display:flex;flex-direction:column;gap:6px}
 .form-group.full{grid-column:1/-1}
 .form-label{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.3px;text-transform:uppercase}
-.form-input,.form-select{padding:13px 15px;border-radius:10px;border:1.5px solid #c5d0d4;background:#fff;font-size:14px;color:var(--ink);outline:none;width:100%;transition:border-color .18s,box-shadow .18s}
-.form-input:focus,.form-select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(20,120,118,.1)}
-.btn-send{width:100%;padding:16px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 26px rgba(20,120,118,.25);transition:transform .18s,box-shadow .18s}
-.btn-send:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(20,120,118,.3)}
-.form-ok{display:none;background:var(--mint);border-radius:10px;padding:20px;text-align:center;color:var(--teal-dark);font-size:14px;font-weight:700}
-.form-ok i{font-size:28px;display:block;margin-bottom:8px}
+.form-input,.form-select{padding:13px 15px;border-radius:10px;border:1.5px solid #c8d8ec;background:#fff;font-size:14px;color:var(--ink);outline:none;width:100%;transition:border-color .18s,box-shadow .18s}
+.form-input:focus,.form-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,80,160,.1)}
+.btn-send{width:100%;padding:16px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-dark));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 26px rgba(30,80,160,.28);transition:transform .18s,box-shadow .18s}
+.btn-send:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(30,80,160,.34)}
+.form-ok{display:none;background:var(--sky-light);border-radius:10px;padding:22px;text-align:center;color:var(--blue-dark);font-size:14px;font-weight:700}
+.form-ok i{font-size:30px;display:block;margin-bottom:10px}
 .form-error{display:none;font-size:12px;color:#A32D2D;background:#fce8e8;padding:10px 13px;border-radius:8px;margin-top:10px}
 
 /* ── FOOTER ── */
-footer{background:var(--ink);padding:52px 56px 28px;color:rgba(255,255,255,.65)}
-.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-bottom:32px}
-footer h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:14px}
-footer p,footer a{font-size:13px;color:rgba(255,255,255,.55);line-height:1.95;text-decoration:none;transition:color .15s}
+footer{background:var(--navy);padding:56px 56px 28px}
+.footer-logo{margin-bottom:16px}
+.footer-logo img{height:44px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.85}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px}
+footer h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:.3px;text-transform:uppercase}
+footer p,footer a{font-size:13px;color:rgba(255,255,255,.5);line-height:1.95;text-decoration:none;transition:color .15s}
 footer a:hover{color:#fff}
 .frow{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.frow i{font-size:15px;color:#7dcfc7;flex-shrink:0}
-.footer-bottom{border-top:.5px solid rgba(255,255,255,.1);padding-top:18px;display:flex;justify-content:space-between;align-items:center}
-.footer-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+.frow i{font-size:15px;color:var(--sky);flex-shrink:0}
+.footer-bottom{border-top:.5px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.28)}
 .social-row{display:flex;gap:8px}
 .social-btn{width:36px;height:36px;background:rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:background .18s}
-.social-btn:hover{background:rgba(255,255,255,.16)}
+.social-btn:hover{background:rgba(255,255,255,.15)}
 .social-btn i{font-size:17px;color:rgba(255,255,255,.5)}
 
 /* ── WHATSAPP ── */
@@ -187,21 +218,21 @@ footer a:hover{color:#fff}
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:0 22px}.nav-links,.nav-cta{display:none}
-  .hero{grid-template-columns:1fr;padding:54px 22px 34px;gap:36px}
-  .hero h1{font-size:34px;line-height:1.12;max-width:100%}
-  .hero p{font-size:15px;max-width:100%}
+  .hero{grid-template-columns:1fr;padding:56px 22px 36px;gap:36px}
+  .hero h1{font-size:34px;line-height:1.12}
+  .hero p{font-size:15px}
   .hero-btns{display:grid;grid-template-columns:1fr;gap:10px}
   .btn-p,.btn-s{width:100%;justify-content:center}
-  .hero-photo img{height:290px}
   .hero-card{grid-template-columns:1fr}
-  .sec{padding:52px 22px}
+  .sec{padding:56px 22px}
   .sec-title{font-size:26px}
-  .srv-grid,.why-grid,.prof-grid,.footer-grid,.tech-layout,.product-grid,.tech-points,.gallery-grid{grid-template-columns:1fr}
-  .trust-band{padding:18px 22px;grid-template-columns:1fr 1fr;gap:12px}
-  .form-grid{grid-template-columns:1fr}
-  .form-wrap{padding:24px}
+  .srv-grid,.why-grid,.prof-grid,.footer-grid,.tech-layout,.product-grid,.tech-points{grid-template-columns:1fr}
+  .trust-band,.brands-strip{padding:18px 22px}
+  .trust-band{grid-template-columns:1fr 1fr;gap:12px}
+  .form-grid{grid-template-columns:1fr}.form-wrap{padding:24px}
   .footer-bottom{gap:14px;align-items:flex-start;flex-direction:column}
   .testimonials-wrap{padding:0 40px}
+  .logo-strip{padding:40px 22px}
   .wa-btn{display:none}
 }
 </style>
@@ -209,7 +240,9 @@ footer a:hover{color:#fff}
 <body>
 
 <nav>
-  <div class="nav-logo"><i class="ti ti-ear"></i> Mr. Oído</div>
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <img src="assets/images/logos-mroido.jpg" alt="Mister Oído" style="height:52px;width:auto;object-fit:contain;border-radius:6px">
+  </div>
   <div class="nav-links">
     <button class="nav-link" onclick="goTo('srv')">Servicios</button>
     <button class="nav-link" onclick="goTo('why')">Nosotros</button>
@@ -227,38 +260,51 @@ footer a:hover{color:#fff}
     <h1 data-aos="fade-up" data-aos-delay="80">Tu centro auditivo de <span>confianza</span> en Barcelona</h1>
     <p data-aos="fade-up" data-aos-delay="160">Mejoramos tu calidad de vida con las mejores prótesis auditivas, atención personalizada y tecnología de última generación. Presencial, remoto o por videollamada.</p>
     <div class="hero-btns" data-aos="fade-up" data-aos-delay="240">
-      <button class="btn-p" onclick="scrollTo('cita')"><i class="ti ti-calendar-plus"></i> Pedir cita online</button>
+      <button class="btn-p" onclick="goTo('cita')"><i class="ti ti-calendar-plus"></i> Pedir cita online</button>
       <button class="btn-s" onclick="alert('Llamando al 93 XXX XX XX...')"><i class="ti ti-phone"></i> Llámanos ahora</button>
     </div>
   </div>
   <div class="hero-media" data-aos="fade-left" data-aos-delay="120">
     <div class="hero-photo">
-      <div class="swiper swiper-hero" style="border-radius:16px;overflow:hidden">
+      <div class="swiper swiper-hero" style="border-radius:18px;overflow:hidden">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="assets/images/clinic-photo.jpg" alt="Centro Mr. Oído" style="width:100%;height:360px;object-fit:cover;object-position:center top"></div>
-          <div class="swiper-slide"><img src="assets/images/oticon-zeal.png" alt="Audífonos Mr. Oído" style="width:100%;height:360px;object-fit:contain;background:#f4faf9;padding:24px"></div>
-          <div class="swiper-slide"><img src="assets/images/hearing-care.png" alt="Cuidado auditivo" style="width:100%;height:360px;object-fit:contain;background:#f4faf9;padding:24px"></div>
+          <div class="swiper-slide"><img src="assets/images/clinic-photo.jpg" alt="Centro Mister Oído" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="assets/images/oticon-zeal.png" alt="Audífonos Mister Oído" style="width:100%;height:370px;object-fit:contain;background:#f0f6fd;padding:28px"></div>
+          <div class="swiper-slide"><img src="assets/images/hearing-care.png" alt="Cuidado auditivo" style="width:100%;height:370px;object-fit:contain;background:#f0f6fd;padding:28px"></div>
         </div>
         <div class="swiper-pagination swiper-pagination-hero"></div>
       </div>
       <div class="hero-photo-badge"><strong>Primera revisión gratuita</strong><span>Asesoramiento sin compromiso</span></div>
     </div>
     <div class="hero-card">
-      <div class="hstat"><div class="hstat-icon"><i class="ti ti-users"></i></div><div><strong>+800 pacientes</strong><span>confían en Mr. Oído</span></div></div>
-      <div class="hstat"><div class="hstat-icon"><i class="ti ti-certificate"></i></div><div><strong>Certificados</strong><span>+10 años de experiencia</span></div></div>
-      <div class="hstat"><div class="hstat-icon"><i class="ti ti-wifi"></i></div><div><strong>Ajuste remoto</strong><span>sin necesidad de desplazarte</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-users"></i></div><div><strong>+800 pacientes</strong><span>confían en Mister Oído</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-certificate"></i></div><div><strong>Certificados</strong><span>+10 años experiencia</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-wifi"></i></div><div><strong>Ajuste remoto</strong><span>sin desplazarte</span></div></div>
       <div class="hstat"><div class="hstat-icon"><i class="ti ti-map-pin"></i></div><div><strong>Centro en Barcelona</strong><span>metro y bus a la puerta</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- TRUST BAND -->
-<section class="trust-band" aria-label="Garantías de Mr. Oído">
+<section class="trust-band" aria-label="Garantías">
   <div class="trust-item" data-aos="fade-up" data-aos-delay="0"><i class="ti ti-shield-check"></i><span>Prueba y adaptación personalizada</span></div>
   <div class="trust-item" data-aos="fade-up" data-aos-delay="80"><i class="ti ti-device-mobile"></i><span>Seguimiento presencial y remoto</span></div>
   <div class="trust-item" data-aos="fade-up" data-aos-delay="160"><i class="ti ti-heart-handshake"></i><span>Trato cercano para familias</span></div>
   <div class="trust-item" data-aos="fade-up" data-aos-delay="240"><i class="ti ti-cash-banknote"></i><span>Ayuda con subvenciones</span></div>
 </section>
+
+<!-- BRANDS STRIP -->
+<div class="brands-strip" data-aos="fade-up">
+  <div class="brands-inner">
+    <span class="brand-label">Trabajamos con</span>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Oticon</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Phonak</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Signia</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Widex</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Starkey</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> ReSound</div>
+  </div>
+</div>
 
 <!-- SERVICES -->
 <section class="sec" id="srv">
@@ -281,10 +327,10 @@ footer a:hover{color:#fff}
   <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Tecnología auditiva actual</div>
   <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Audífonos discretos, conectados y adaptados a cada tipo de pérdida auditiva</div>
   <div class="tech-layout">
-    <div class="tech-image" data-aos="fade-right"><img src="assets/images/oticon-zeal.png" alt="Audífonos digitales con tecnología avanzada"></div>
+    <div class="tech-image" data-aos="fade-right"><img src="assets/images/oticon-zeal.png" alt="Audífonos digitales avanzados"></div>
     <div class="tech-copy" data-aos="fade-left" data-aos-delay="120">
       <h3>Soluciones pequeñas con gran capacidad de ajuste</h3>
-      <p>Trabajamos con audífonos modernos que permiten mejorar la comprensión del habla, reducir ruido ambiente y ajustar la experiencia según el entorno diario del paciente.</p>
+      <p>Trabajamos con audífonos modernos que permiten mejorar la comprensión del habla, reducir el ruido ambiente y ajustar la experiencia según el entorno diario del paciente.</p>
       <div class="tech-points">
         <div class="tech-point"><i class="ti ti-bluetooth"></i>Conectividad móvil</div>
         <div class="tech-point"><i class="ti ti-volume"></i>Programas por ambiente</div>
@@ -309,11 +355,10 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-
 <!-- WHY -->
-<section class="sec" id="why">
+<section class="sec sec-alt" id="why">
   <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Nosotros</div></div>
-  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">¿Por qué Mr. Oído?</div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">¿Por qué Mister Oído?</div>
   <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">La cercanía de un centro de barrio con la tecnología de las grandes cadenas</div>
   <div class="why-grid">
     <div class="why-card" data-aos="fade-up" data-aos-delay="0"><div class="why-num">01</div><h3>Cercanía de barrio</h3><p>Te conocemos por tu nombre, recordamos tu historial y te atendemos sin esperas. Somos tu audioprotesista de confianza.</p></div>
@@ -323,7 +368,7 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- PROFILES -->
-<section class="sec sec-alt" id="perfiles">
+<section class="sec" id="perfiles">
   <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Pacientes</div></div>
   <div class="sec-title" data-aos="fade-up" data-aos-delay="60">¿A quién ayudamos?</div>
   <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Soluciones adaptadas a cada etapa de la vida</div>
@@ -334,65 +379,52 @@ footer a:hover{color:#fff}
       <div><span class="prof-tag">WhatsApp con el hijo</span><span class="prof-tag">Audífono pequeño</span><span class="prof-tag">Soporte presencial</span></div>
     </div>
     <div class="prof-card" data-aos="fade-up" data-aos-delay="100">
-      <div class="prof-av" style="background:#185FA5">LP</div><h3>Lucía, 6 años</h3><div class="badge" style="background:#E6F1FB;color:#0C447C">Niños / Padres</div>
+      <div class="prof-av" style="background:linear-gradient(135deg,#185FA5,#4a9fd4)">LP</div><h3>Lucía, 6 años</h3><div class="badge" style="background:#E6F1FB;color:#0C447C">Niños / Padres</div>
       <p>Sus padres buscan un audífono resistente y discreto. Tramitamos juntos las ayudas PUA.</p>
       <div><span class="prof-tag">Audífonos infantiles</span><span class="prof-tag">Ayudas PUA</span><span class="prof-tag">Seguimiento escolar</span></div>
     </div>
     <div class="prof-card" data-aos="fade-up" data-aos-delay="200">
-      <div class="prof-av" style="background:#854F0B">MP</div><h3>Marta, 38 años</h3><div class="badge" style="background:#FAEEDA;color:#633806">Adulto activo</div>
+      <div class="prof-av" style="background:linear-gradient(135deg,#854F0B,#c4862e)">MP</div><h3>Marta, 38 años</h3><div class="badge" style="background:#FAEEDA;color:#633806">Adulto activo</div>
       <p>Se pierde en reuniones de trabajo. Quiere un audífono Bluetooth discreto y ajuste remoto.</p>
       <div><span class="prof-tag">Ajuste remoto</span><span class="prof-tag">Cita online</span><span class="prof-tag">Bluetooth</span></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS SLIDER -->
-<section class="sec" id="test">
+<!-- TESTIMONIALS -->
+<section class="sec sec-alt" id="test">
   <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Opiniones</div></div>
   <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Qué dicen nuestros pacientes</div>
-  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Más de 800 familias ya confían en Mr. Oído</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Más de 800 familias ya confían en Mister Oído</div>
   <div class="testimonials-wrap" data-aos="fade-up" data-aos-delay="140">
     <div class="swiper swiper-test">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="test-card">
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <p>"Llevaba años evitando ir al audioprotesista. Aquí me explicaron todo con paciencia. Por fin entiendo a mis nietos."</p>
-            <div class="author">Antonio R. <span>· 78 años · Barcelona</span></div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="test-card">
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <p>"El ajuste remoto me ha cambiado la vida. Trabajo mucho y no tenía tiempo de ir al centro. Ahora me ajustan el audífono y listo."</p>
-            <div class="author">Sandra M. <span>· 41 años · Gràcia</span></div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="test-card">
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <p>"Nos ayudaron con toda la tramitación de las ayudas PUA para nuestra hija. Servicio cercano y muy profesional."</p>
-            <div class="author">Carles y Laura <span>· Padres de Martina</span></div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="test-card">
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <p>"Tenía miedo de que el audífono fuera muy visible. Me recomendaron uno pequeñísimo y ahora casi nadie se da cuenta que lo llevo."</p>
-            <div class="author">Rosa T. <span>· 65 años · Eixample</span></div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="test-card">
-            <div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-            <p>"Primera revisión gratuita, sin presiones. Me explicaron mi tipo de pérdida auditiva y las opciones con total transparencia."</p>
-            <div class="author">Miquel F. <span>· 55 años · Sant Gervasi</span></div>
-          </div>
-        </div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Llevaba años evitando ir al audioprotesista. Aquí me explicaron todo con paciencia. Por fin entiendo a mis nietos."</blockquote><div class="author">Antonio R. <span>· 78 años · Barcelona</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"El ajuste remoto me ha cambiado la vida. Trabajo mucho y no tenía tiempo de ir al centro. Ahora me ajustan el audífono y listo."</blockquote><div class="author">Sandra M. <span>· 41 años · Gràcia</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Nos ayudaron con toda la tramitación de las ayudas PUA para nuestra hija. Servicio cercano y muy profesional."</blockquote><div class="author">Carles y Laura <span>· Padres de Martina</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Tenía miedo de que el audífono fuera muy visible. Me recomendaron uno pequeñísimo y ahora casi nadie se da cuenta."</blockquote><div class="author">Rosa T. <span>· 65 años · Eixample</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Primera revisión gratuita, sin presiones. Me explicaron mi tipo de pérdida auditiva con total transparencia."</blockquote><div class="author">Miquel F. <span>· 55 años · Sant Gervasi</span></div></div></div>
       </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
-      <div class="swiper-pagination"></div>
+      <div class="swiper-pagination" style="bottom:-28px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO SLIDER (marcas) -->
+<section class="logo-strip" data-aos="fade-up">
+  <div class="sec-label" style="display:block;text-align:center;margin-bottom:12px">Marcas</div>
+  <div class="sec-title">Trabajamos con las mejores marcas</div>
+  <div class="sec-sub">Audífonos de fabricantes líderes mundiales, adaptados a cada necesidad y presupuesto</div>
+  <div class="swiper swiper-logos">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--blue)">Oticon</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--navy)">Phonak</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--blue)">Signia</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--navy)">Widex</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--blue)">Starkey</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--navy)">ReSound</span></div></div>
     </div>
   </div>
 </section>
@@ -435,14 +467,15 @@ footer a:hover{color:#fff}
 <footer>
   <div class="footer-grid">
     <div>
-      <h4><i class="ti ti-ear"></i> Mr. Oído</h4>
-      <p>Centro auditivo familiar en Barcelona. Atención personalizada, tecnología moderna y precios transparentes.</p>
+      <div class="footer-logo"><img src="assets/images/logos-mroido.jpg" alt="Mister Oído"></div>
+      <p style="margin-top:4px">Centro auditivo familiar en Barcelona.<br>Atención personalizada, tecnología moderna<br>y precios transparentes.</p>
+      <p style="margin-top:12px;font-size:12px;color:rgba(255,255,255,.3);font-style:italic">Escuchamos. Te ayudamos.</p>
     </div>
     <div>
       <h4>Contacto</h4>
       <div class="frow"><i class="ti ti-map-pin"></i><p>Carrer Exemple 123, Barcelona</p></div>
       <div class="frow"><i class="ti ti-phone"></i><p>93 XXX XX XX</p></div>
-      <div class="frow"><i class="ti ti-mail"></i><p>hola@mroido.es</p></div>
+      <div class="frow"><i class="ti ti-mail"></i><p>hola@misteroido.es</p></div>
       <div class="frow"><i class="ti ti-clock"></i><p>L–V 9:00–19:00 · S 9:00–13:00</p></div>
     </div>
     <div>
@@ -455,7 +488,7 @@ footer a:hover{color:#fff}
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Mr. Oído · Todos los derechos reservados</p>
+    <p>© 2025 Mister Oído · Todos los derechos reservados</p>
     <div class="social-row">
       <button class="social-btn"><i class="ti ti-brand-instagram"></i></button>
       <button class="social-btn"><i class="ti ti-brand-whatsapp"></i></button>
@@ -469,37 +502,32 @@ footer a:hover{color:#fff}
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
-AOS.init({duration:600,easing:'ease-out-cubic',once:true,offset:60});
+AOS.init({duration:620,easing:'ease-out-cubic',once:true,offset:60});
 
 new Swiper('.swiper-hero',{
-  slidesPerView:1,
-  loop:true,
-  autoplay:{delay:4000,disableOnInteraction:false},
+  slidesPerView:1,loop:true,
+  autoplay:{delay:4200,disableOnInteraction:false},
   pagination:{el:'.swiper-pagination-hero',clickable:true},
-  effect:'fade',
-  fadeEffect:{crossFade:true},
-  speed:800,
+  effect:'fade',fadeEffect:{crossFade:true},speed:900,
 });
 
 new Swiper('.swiper-test',{
-  slidesPerView:1,
-  spaceBetween:24,
-  loop:true,
+  slidesPerView:1,spaceBetween:24,loop:true,
   autoplay:{delay:5000,disableOnInteraction:false},
   pagination:{el:'.swiper-pagination',clickable:true},
   navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},
   breakpoints:{640:{slidesPerView:2},900:{slidesPerView:3}}
 });
 
+new Swiper('.swiper-logos',{
+  slidesPerView:2,spaceBetween:16,loop:true,
+  autoplay:{delay:2500,disableOnInteraction:false},
+  speed:700,
+  breakpoints:{480:{slidesPerView:3},768:{slidesPerView:4},1024:{slidesPerView:5}}
+});
+
 function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 
-function toggleFaq(btn){
-  const a=btn.nextElementSibling,o=btn.classList.contains('open');
-  document.querySelectorAll('.faq-q.open').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('show');});
-  if(!o){btn.classList.add('open');a.classList.add('show');}
-}
-
-// Active nav indicator
 (function(){
   const links=[
     {id:'srv',btn:0},{id:'why',btn:1},
@@ -509,16 +537,19 @@ function toggleFaq(btn){
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
-        const match=links.find(l=>l.id===e.target.id);
-        if(match){
-          btns.forEach(b=>b.classList.remove('active'));
-          if(btns[match.btn]) btns[match.btn].classList.add('active');
-        }
+        const m=links.find(l=>l.id===e.target.id);
+        if(m){btns.forEach(b=>b.classList.remove('active'));if(btns[m.btn])btns[m.btn].classList.add('active');}
       }
     });
   },{rootMargin:'-40% 0px -55% 0px'});
   links.forEach(l=>{const el=document.getElementById(l.id);if(el)obs.observe(el);});
 })();
+
+function toggleFaq(btn){
+  const a=btn.nextElementSibling,o=btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('show');});
+  if(!o){btn.classList.add('open');a.classList.add('show');}
+}
 
 function submitForm(){
   const n=document.getElementById('f-name').value.trim(),
