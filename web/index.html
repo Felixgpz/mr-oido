@@ -216,14 +216,14 @@ footer a:hover{color:#fff}
 <nav>
   <div class="nav-logo"><i class="ti ti-ear"></i> Mr. Oído</div>
   <div class="nav-links">
-    <button class="nav-link" onclick="scrollTo('srv')">Servicios</button>
-    <button class="nav-link" onclick="scrollTo('why')">Nosotros</button>
-    <button class="nav-link" onclick="scrollTo('galeria')">Galería</button>
-    <button class="nav-link" onclick="scrollTo('test')">Opiniones</button>
-    <button class="nav-link" onclick="scrollTo('faq')">FAQ</button>
-    <button class="nav-link" onclick="scrollTo('cita')">Contacto</button>
+    <button class="nav-link" onclick="goTo('srv')">Servicios</button>
+    <button class="nav-link" onclick="goTo('galeria')">Galería</button>
+    <button class="nav-link" onclick="goTo('why')">Nosotros</button>
+    <button class="nav-link" onclick="goTo('test')">Opiniones</button>
+    <button class="nav-link" onclick="goTo('faq')">FAQ</button>
+    <button class="nav-link" onclick="goTo('cita')">Contacto</button>
   </div>
-  <button class="nav-cta" onclick="scrollTo('cita')">Pedir cita</button>
+  <button class="nav-cta" onclick="goTo('cita')">Pedir cita</button>
 </nav>
 
 <!-- HERO -->
@@ -506,7 +506,7 @@ new Swiper('.swiper-test',{
   breakpoints:{640:{slidesPerView:2},900:{slidesPerView:3}}
 });
 
-function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 
 function toggleFaq(btn){
   const a=btn.nextElementSibling,o=btn.classList.contains('open');
@@ -517,7 +517,7 @@ function toggleFaq(btn){
 // Active nav indicator
 (function(){
   const links=[
-    {id:'srv',btn:0},{id:'why',btn:1},{id:'galeria',btn:2},
+    {id:'srv',btn:0},{id:'galeria',btn:1},{id:'why',btn:2},
     {id:'test',btn:3},{id:'faq',btn:4},{id:'cita',btn:5}
   ];
   const btns=document.querySelectorAll('.nav-link');
