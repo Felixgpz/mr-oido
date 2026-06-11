@@ -71,8 +71,9 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:0 56px;h
 .hstat span{font-size:11px;color:var(--muted)}
 
 /* ── TRUST BAND ── */
-.trust-band{padding:22px 56px;background:var(--navy);display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.72);font-weight:500}
+.trust-band{padding:0 56px;background:var(--navy);display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.72);font-weight:500;padding:22px 0;border-right:.5px solid rgba(255,255,255,.07)}
+.trust-item:last-child{border-right:none}
 .trust-item i{font-size:22px;color:var(--sky);flex-shrink:0}
 
 /* ── BRANDS STRIP ── */
@@ -92,7 +93,9 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:0 56px;h
 
 /* ── SERVICES ── */
 .srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.srv-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 24px;text-align:left;transition:transform .22s,box-shadow .22s,border-color .22s;cursor:default}
+.srv-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 24px;text-align:left;transition:transform .22s,box-shadow .22s,border-color .22s;cursor:default;position:relative;overflow:hidden}
+.srv-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--sky));opacity:0;transition:opacity .22s}
+.srv-card:hover::before{opacity:1}
 .srv-card:hover{transform:translateY(-5px);border-color:#a8c4e8;box-shadow:0 20px 44px rgba(13,32,64,.1)}
 .srv-icon{width:52px;height:52px;background:var(--sky-light);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 0 18px;transition:background .22s}
 .srv-card:hover .srv-icon{background:var(--blue)}
@@ -128,7 +131,7 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:0 56px;h
 
 /* ── WHY ── */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.why-card{padding:28px;background:#fff;border:1px solid var(--line);border-radius:14px;transition:transform .22s,box-shadow .22s}
+.why-card{padding:30px;background:#fff;border:1px solid var(--line);border-radius:14px;transition:transform .22s,box-shadow .22s;border-top:3px solid var(--blue)}
 .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .why-num{font-size:32px;font-weight:800;color:var(--sky);margin-bottom:12px}
 .why-card h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:9px}
@@ -147,7 +150,7 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:0 56px;h
 /* ── TESTIMONIALS SWIPER ── */
 .testimonials-wrap{max-width:980px;margin:0 auto;position:relative;padding:0 52px}
 .swiper-test{overflow:hidden}
-.test-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;height:auto}
+.test-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;height:auto;border-left:3px solid var(--blue)}
 .stars{color:var(--gold);font-size:16px;margin-bottom:14px;display:flex;gap:3px}
 .test-card blockquote{font-size:14px;color:var(--muted);line-height:1.82;margin-bottom:18px;font-style:italic}
 .test-card .author{font-size:13px;font-weight:700;color:var(--ink)}
@@ -194,21 +197,21 @@ nav{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:0 56px;h
 .form-error{display:none;font-size:12px;color:#A32D2D;background:#fce8e8;padding:10px 13px;border-radius:8px;margin-top:10px}
 
 /* ── FOOTER ── */
-footer{background:var(--navy);padding:56px 56px 28px}
-.footer-logo{margin-bottom:16px}
-.footer-logo img{height:44px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.85}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px}
-footer h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:.3px;text-transform:uppercase}
-footer p,footer a{font-size:13px;color:rgba(255,255,255,.5);line-height:1.95;text-decoration:none;transition:color .15s}
+footer{background:var(--navy);padding:60px 56px 0}
+.footer-logo img{height:60px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.4);font-style:italic;margin-top:10px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:.5px solid rgba(255,255,255,.08)}
+footer h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.45);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase}
+footer p,footer a{font-size:13px;color:rgba(255,255,255,.55);line-height:2;text-decoration:none;transition:color .15s}
 footer a:hover{color:#fff}
-.frow{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.frow{display:flex;align-items:center;gap:10px;margin-bottom:4px}
 .frow i{font-size:15px;color:var(--sky);flex-shrink:0}
-.footer-bottom{border-top:.5px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
-.footer-bottom p{font-size:12px;color:rgba(255,255,255,.28)}
+.footer-bottom{padding:20px 0 28px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.25)}
 .social-row{display:flex;gap:8px}
-.social-btn{width:36px;height:36px;background:rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:background .18s}
-.social-btn:hover{background:rgba(255,255,255,.15)}
-.social-btn i{font-size:17px;color:rgba(255,255,255,.5)}
+.social-btn{width:36px;height:36px;background:rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.08);transition:background .18s,border-color .18s}
+.social-btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.18)}
+.social-btn i{font-size:17px;color:rgba(255,255,255,.55)}
 
 /* ── WHATSAPP ── */
 .wa-btn{position:fixed;bottom:28px;right:28px;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;z-index:300;box-shadow:0 8px 22px rgba(37,211,102,.4);transition:transform .22s,box-shadow .22s}
@@ -241,7 +244,7 @@ footer a:hover{color:#fff}
 
 <nav>
   <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <img src="assets/images/logo-mroido.png" alt="Mister Oído" style="height:62px;width:auto;object-fit:contain">
+    <img src="assets/images/logo-mroido-transparent.png" alt="Mister Oído" style="height:62px;width:auto;object-fit:contain">
   </div>
   <div class="nav-links">
     <button class="nav-link" onclick="goTo('srv')">Servicios</button>
@@ -467,9 +470,9 @@ footer a:hover{color:#fff}
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-logo"><img src="assets/images/logo-mroido.png" alt="Mister Oído"></div>
-      <p style="margin-top:4px">Centro auditivo familiar en Barcelona.<br>Atención personalizada, tecnología moderna<br>y precios transparentes.</p>
-      <p style="margin-top:12px;font-size:12px;color:rgba(255,255,255,.3);font-style:italic">Escuchamos. Te ayudamos.</p>
+      <img src="assets/images/logo-mroido-transparent.png" alt="Mister Oído" class="footer-logo" style="height:60px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;margin-bottom:16px">
+      <p>Centro auditivo familiar en Barcelona.<br>Atención personalizada, tecnología moderna<br>y precios transparentes.</p>
+      <p class="footer-tagline">Escuchamos. Te ayudamos.</p>
     </div>
     <div>
       <h4>Contacto</h4>
@@ -480,19 +483,19 @@ footer a:hover{color:#fff}
     </div>
     <div>
       <h4>Servicios</h4>
-      <a href="#">Pruebas audiológicas</a><br>
-      <a href="#">Adaptación de audífonos</a><br>
-      <a href="#">Ajuste remoto</a><br>
-      <a href="#">Tapones a medida</a><br>
-      <a href="#">Ayudas PUA</a>
+      <a href="#" onclick="goTo('srv');return false">Pruebas audiológicas</a><br>
+      <a href="#" onclick="goTo('srv');return false">Adaptación de audífonos</a><br>
+      <a href="#" onclick="goTo('srv');return false">Ajuste remoto</a><br>
+      <a href="#" onclick="goTo('srv');return false">Tapones a medida</a><br>
+      <a href="#" onclick="goTo('srv');return false">Ayudas PUA</a>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2025 Mister Oído · Todos los derechos reservados</p>
     <div class="social-row">
-      <button class="social-btn"><i class="ti ti-brand-instagram"></i></button>
-      <button class="social-btn"><i class="ti ti-brand-whatsapp"></i></button>
-      <button class="social-btn"><i class="ti ti-map-pin"></i></button>
+      <button class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></button>
+      <button class="social-btn" title="WhatsApp"><i class="ti ti-brand-whatsapp"></i></button>
+      <button class="social-btn" title="Ubicación"><i class="ti ti-map-pin"></i></button>
     </div>
   </div>
 </footer>
