@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Oído — App Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1e50a0;--blue-dark:#163a7a;--blue-mid:#2b65c0;
+  --sky:#4a9fd4;--sky-light:#e8f2fb;
+  --ink:#0d1f3c;--muted:#5a6e88;--line:#dce6f0;
+  --soft:#f5f8fd;--gold:#c4862e;
+  --nav-h:68px;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(135deg,#e8f2fb 0%,#ddeaf8 100%);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px 16px 60px;min-height:100vh;gap:24px}
+
+/* ── DESKTOP LABEL ── */
+.demo-label{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;opacity:.7}
+
+/* ── PHONE FRAME ── */
+.phone{width:375px;height:780px;border-radius:50px;border:10px solid #1a1a2e;background:#0d1f3c;position:relative;overflow:hidden;box-shadow:0 0 0 1px #2a3a5a,0 40px 80px rgba(13,32,64,.35),inset 0 1px 0 rgba(255,255,255,.08);flex-shrink:0}
+.phone::before{content:"";position:absolute;inset:0;border-radius:42px;background:linear-gradient(170deg,rgba(255,255,255,.06) 0%,transparent 40%);pointer-events:none;z-index:200}
+
+/* ── STATUS BAR ── */
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:space-between;padding:14px 22px 0;z-index:150;pointer-events:none}
+.status-time{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.status-icons{display:flex;align-items:center;gap:6px}
+.status-icons i{font-size:14px;color:#fff}
+.status-battery{display:flex;align-items:center;gap:3px;font-size:11px;color:#fff;font-weight:600}
+
+/* ── DYNAMIC ISLAND ── */
+.island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#0d1f3c;border-radius:20px;z-index:160;display:flex;align-items:center;justify-content:center;gap:8px;transition:width .4s cubic-bezier(.34,1.56,.64,1)}
+.island.expanded{width:200px}
+.island-cam{width:10px;height:10px;background:#1a1a2e;border-radius:50%;border:1.5px solid #2a3a5a}
+.island-dot{width:6px;height:6px;background:#1a7a7a;border-radius:50%;opacity:.8}
+
+/* ── SCREEN ── */
+.screen{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}
+.page{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .32s ease;transform:translateX(100%);opacity:0;will-change:transform}
+.page.active{transform:translateX(0);opacity:1}
+.page.exit-left{transform:translateX(-30%);opacity:0}
+.page.slide-up{transform:translateY(100%);opacity:0}
+.page.active.from-up{animation:slideUp .35s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* ── NAVBAR ── */
+.navbar{position:absolute;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(255,255,255,.97);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-around;z-index:100;border-top:1px solid rgba(13,32,64,.08);padding-bottom:6px}
+.nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:9px;font-weight:600;padding:8px 10px;border-radius:12px;transition:color .18s;font-family:'Inter',sans-serif;letter-spacing:.2px}
+.nav-btn.active{color:var(--blue)}
+.nav-btn i{font-size:21px;transition:transform .18s}
+.nav-btn.active i{transform:scale(1.1)}
+.nav-indicator{position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--home-indicator, #1a1a2e);border-radius:2px;width:130px;margin:0 auto;opacity:.25;bottom:6px}
+
+/* ── SCROLL CONTAINER ── */
+.scroll-body{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.scroll-body::-webkit-scrollbar{display:none}
+
+/* ══════════════════════ SPLASH ══════════════════════ */
+#pg-splash{background:linear-gradient(160deg,var(--blue-dark) 0%,var(--blue) 50%,var(--sky) 100%);justify-content:center;align-items:center;gap:0}
+.splash-logo-wrap{display:flex;flex-direction:column;align-items:center;animation:splash-in .8s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes splash-in{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.splash-icon{width:88px;height:88px;background:rgba(255,255,255,.15);border-radius:28px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.splash-icon i{font-size:44px;color:#fff}
+.splash-brand{font-size:34px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.splash-brand span{color:rgba(255,255,255,.7);font-weight:400}
+.splash-tag{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px;font-weight:500}
+.splash-bar{width:160px;height:3px;background:rgba(255,255,255,.2);border-radius:2px;margin:40px auto 0;overflow:hidden}
+.splash-bar-fill{height:100%;background:#fff;border-radius:2px;animation:loadbar 2s ease forwards}
+@keyframes loadbar{from{width:0}to{width:100%}}
+.splash-version{font-size:11px;color:rgba(255,255,255,.35);position:absolute;bottom:40px;font-weight:500}
+
+/* ══════════════════════ LOGIN ══════════════════════ */
+#pg-login{background:var(--soft)}
+.login-hero{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));padding:60px 24px 40px;text-align:center;border-radius:0 0 32px 32px;box-shadow:0 12px 32px rgba(13,32,64,.2)}
+.login-avatar{width:64px;height:64px;background:rgba(255,255,255,.15);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2)}
+.login-avatar i{font-size:32px;color:#fff}
+.login-hero h2{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.login-hero p{font-size:13px;color:rgba(255,255,255,.7);margin-top:5px;font-weight:500}
+.login-form{padding:28px 22px;display:flex;flex-direction:column;gap:14px}
+.field-label{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.field-wrap{position:relative}
+.field-wrap i{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--muted)}
+.field-input{width:100%;padding:13px 14px 13px 42px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:14px;color:var(--ink);outline:none;font-family:'Inter',sans-serif;transition:border-color .18s,box-shadow .18s}
+.field-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,80,160,.1)}
+.btn-primary{width:100%;padding:15px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-dark));color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 8px 20px rgba(30,80,160,.3);transition:transform .18s,box-shadow .18s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(30,80,160,.35)}
+.error-msg{font-size:12px;color:#A32D2D;background:rgba(163,45,45,.08);padding:10px 13px;border-radius:10px;display:none;border:1px solid rgba(163,45,45,.15)}
+.hint-box{background:var(--sky-light);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
+.hint-box p{font-size:12px;color:var(--muted);line-height:1.6}
+.hint-box strong{color:var(--blue)}
+
+/* ══════════════════════ APP HEADER ══════════════════════ */
+.app-header{padding:52px 20px 14px;display:flex;align-items:center;justify-content:space-between;background:transparent;flex-shrink:0}
+.app-header h1{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.2px}
+.back-btn{background:rgba(255,255,255,.2);border:none;border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;backdrop-filter:blur(8px);transition:background .18s}
+.back-btn:hover{background:rgba(255,255,255,.3)}
+.icon-btn{background:rgba(255,255,255,.2);border:none;border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;position:relative;backdrop-filter:blur(8px)}
+.badge{position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:#e53935;border-radius:50%;font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid #0d1f3c}
+
+/* ══════════════════════ HOME ══════════════════════ */
+#pg-home{background:var(--soft)}
+.home-top{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));padding:52px 20px 24px;flex-shrink:0}
+.home-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.home-greeting{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.home-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.4);flex-shrink:0}
+.home-avatar img{width:100%;height:100%;object-fit:cover}
+.home-sub{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:16px;font-weight:500}
+.next-cita-card{background:rgba(255,255,255,.15);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2)}
+.next-cita-icon{width:42px;height:42px;background:rgba(255,255,255,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.next-cita-icon i{font-size:22px;color:#fff}
+.next-cita-text strong{display:block;font-size:13px;font-weight:700;color:#fff}
+.next-cita-text span{font-size:12px;color:rgba(255,255,255,.7)}
+.home-body{padding:18px 18px 80px;flex:1;overflow-y:auto;scrollbar-width:none}
+.home-body::-webkit-scrollbar{display:none}
+.sec-label-app{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:0 0 10px}
+.grid-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.action-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 12px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;text-align:center;transition:transform .18s,box-shadow .18s;box-shadow:0 4px 14px rgba(13,32,64,.05)}
+.action-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(13,32,64,.1)}
+.action-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:2px}
+.action-card span{font-size:12px;color:var(--ink);font-weight:600}
+.tip-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;display:flex;gap:12px;align-items:flex-start;margin-bottom:8px;box-shadow:0 2px 8px rgba(13,32,64,.04)}
+.tip-card i{font-size:20px;color:var(--sky);margin-top:1px;flex-shrink:0}
+.tip-card p{font-size:12px;color:var(--muted);line-height:1.6}
+.tip-card strong{color:var(--ink)}
+
+/* ══════════════════════ CITA ══════════════════════ */
+#pg-cita{background:var(--soft)}
+.cita-top{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));padding:0 0 20px;flex-shrink:0}
+.cal-card{background:#fff;border-radius:20px;margin:0 16px;padding:16px;box-shadow:0 8px 24px rgba(13,32,64,.1)}
+.month-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.month-label{font-size:15px;font-weight:700;color:var(--ink)}
+.month-nav{background:var(--soft);border:none;width:30px;height:30px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--ink);cursor:pointer;transition:background .15s}
+.cal-day.header{font-size:10px;color:var(--muted);cursor:default;font-weight:700}
+.cal-day.available:hover{background:var(--sky-light)}
+.cal-day.selected{background:var(--blue);color:#fff;font-weight:700}
+.cal-day.past{opacity:.3;cursor:default}
+.cal-day.today{font-weight:700;color:var(--blue)}
+.cita-body{padding:16px 16px 84px;flex:1;overflow-y:auto;scrollbar-width:none}
+.cita-body::-webkit-scrollbar{display:none}
+.slots-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:16px}
+.slot{padding:10px 4px;border-radius:10px;background:#fff;border:1.5px solid var(--line);font-size:12px;font-weight:600;color:var(--ink);cursor:pointer;text-align:center;transition:border-color .15s,background .15s;font-family:'Inter',sans-serif}
+.slot.selected{background:var(--blue);color:#fff;border-color:var(--blue)}
+.confirm-banner{background:linear-gradient(135deg,#1a7a4a,#2db87a);border-radius:14px;padding:16px;color:#fff;display:none;margin-bottom:12px}
+.confirm-banner strong{display:block;font-size:15px;font-weight:700;margin-bottom:3px}
+.confirm-banner span{font-size:12px;opacity:.85}
+#btn-confirm{display:none}
+
+/* ══════════════════════ AUDÍFONOS ══════════════════════ */
+#pg-audifonos{background:var(--soft)}
+.audifonos-top{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));padding:0 0 20px;flex-shrink:0}
+.device-card{background:#fff;border-radius:20px;margin:0 16px;overflow:hidden;box-shadow:0 8px 24px rgba(13,32,64,.1)}
+.device-image{width:100%;height:140px;background:linear-gradient(135deg,var(--sky-light),#e0edfb);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.device-image img{height:110px;object-fit:contain}
+.device-info-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0}
+.device-name{font-size:15px;font-weight:700;color:var(--ink)}
+.device-serial{font-size:11px;color:var(--muted);margin-top:2px}
+.connected-badge{display:flex;align-items:center;gap:5px;background:#e6f9f0;border-radius:20px;padding:5px 10px;font-size:11px;font-weight:700;color:#1a7a4a}
+.connected-badge span{width:7px;height:7px;background:#25D366;border-radius:50%;display:inline-block}
+.device-controls{padding:14px 16px 16px}
+.battery-section{margin-bottom:14px}
+.bat-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.bat-label{font-size:12px;font-weight:600;color:var(--ink)}
+.bat-pct{font-size:13px;font-weight:700;color:#1a7a4a}
+.battery-bar{height:9px;background:var(--line);border-radius:5px;overflow:hidden}
+.battery-fill{height:100%;background:linear-gradient(90deg,#25D366,#1a9a56);border-radius:5px;width:72%;transition:width .8s ease}
+.vol-section{margin-bottom:14px}
+.vol-row{display:flex;align-items:center;gap:10px}
+.vol-row label{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;min-width:50px}
+.vol-row input[type=range]{flex:1;accent-color:var(--blue);height:4px;border-radius:2px;cursor:pointer}
+.vol-row span{font-size:13px;font-weight:700;color:var(--ink);min-width:28px;text-align:right}
+.prog-label{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.prog-btn{padding:10px 8px;border-radius:11px;background:var(--soft);border:1.5px solid var(--line);font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;text-align:center;transition:all .18s;font-family:'Inter',sans-serif}
+.prog-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 12px rgba(30,80,160,.25)}
+.audifonos-body{padding:14px 16px 84px;flex:1;overflow-y:auto;scrollbar-width:none}
+.audifonos-body::-webkit-scrollbar{display:none}
+.maint-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;display:flex;align-items:center;gap:12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(13,32,64,.04)}
+.maint-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.maint-card p{font-size:11px;color:var(--muted)}
+.maint-card strong{font-size:13px;color:var(--ink);font-weight:600;display:block;margin-top:2px}
+
+/* ══════════════════════ NOTIFICACIONES ══════════════════════ */
+#pg-notif{background:var(--soft)}
+.notif-top{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));flex-shrink:0}
+.notif-body{padding:14px 16px 84px;flex:1;overflow-y:auto;scrollbar-width:none}
+.notif-body::-webkit-scrollbar{display:none}
+.notif-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;display:flex;gap:12px;align-items:flex-start;margin-bottom:8px;box-shadow:0 2px 8px rgba(13,32,64,.04);cursor:pointer;transition:transform .15s}
+.notif-item:hover{transform:translateX(2px)}
+.notif-item.unread{border-left:3px solid var(--blue)}
+.notif-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;flex-shrink:0;margin-top:5px}
+.notif-dot.read{background:transparent}
+.notif-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notif-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.notif-text p{font-size:12px;color:var(--muted);line-height:1.5}
+.notif-time{font-size:10px;color:var(--muted);margin-top:4px;font-weight:500}
+
+/* ══════════════════════ SOPORTE ══════════════════════ */
+#pg-soporte{background:var(--soft)}
+.soporte-top{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));flex-shrink:0}
+.soporte-body{padding:14px 16px 84px;flex:1;overflow-y:auto;scrollbar-width:none}
+.soporte-body::-webkit-scrollbar{display:none}
+.prob-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:9px;cursor:pointer;box-shadow:0 2px 8px rgba(13,32,64,.04);transition:box-shadow .18s}
+.prob-card.open{box-shadow:0 6px 18px rgba(13,32,64,.1)}
+.prob-card-header{display:flex;align-items:center;gap:12px}
+.prob-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--sky-light)}
+.prob-icon i{font-size:18px;color:var(--blue)}
+.prob-card-header span{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.prob-card-header .chevron{font-size:16px;color:var(--muted);transition:transform .22s}
+.prob-card.open .chevron{transform:rotate(180deg)}
+.prob-steps{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.prob-steps.show{display:block}
+.step-item{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.step-num{width:22px;height:22px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px}
+.step-item p{font-size:12px;color:var(--muted);line-height:1.6}
+.call-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-dark));color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:6px;font-family:'Inter',sans-serif;box-shadow:0 8px 20px rgba(30,80,160,.28)}
+.wa-soporte{width:100%;padding:13px;background:linear-gradient(135deg,#2db87a,#1a7a4a);color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:8px;font-family:'Inter',sans-serif;box-shadow:0 8px 20px rgba(25,135,84,.25)}
+
+/* ══════════════════════ PERFIL ══════════════════════ */
+#pg-perfil{background:var(--soft)}
+.perfil-top{background:linear-gradient(160deg,var(--blue-dark),var(--blue-mid));padding-bottom:60px;flex-shrink:0}
+.perfil-avatar-wrap{display:flex;justify-content:center;margin-top:-40px;padding:0 20px;margin-bottom:4px}
+.perfil-avatar{width:80px;height:80px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 8px 20px rgba(13,32,64,.2)}
+.perfil-avatar img{width:100%;height:100%;object-fit:cover}
+.perfil-body{padding:0 16px 84px;flex:1;overflow-y:auto;scrollbar-width:none}
+.perfil-body::-webkit-scrollbar{display:none}
+.perfil-name{font-size:18px;font-weight:800;color:var(--ink);text-align:center;letter-spacing:-.2px}
+.perfil-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:18px;font-weight:500}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(13,32,64,.04)}
+.info-row{display:flex;align-items:center;gap:12px;padding:11px 0}
+.info-row:not(:last-child){border-bottom:1px solid rgba(13,32,64,.06)}
+.info-row-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-row-icon i{font-size:16px}
+.info-row span{font-size:12px;color:var(--muted);width:72px;flex-shrink:0}
+.info-row strong{font-size:13px;color:var(--ink);flex:1;font-weight:600}
+.hist-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.hist-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:7px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(13,32,64,.04)}
+.hist-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--sky-light)}
+.hist-icon i{font-size:18px;color:var(--blue)}
+.hist-item div p{font-size:13px;font-weight:600;color:var(--ink)}
+.hist-item div span{font-size:11px;color:var(--muted)}
+.logout-btn{width:100%;padding:14px;background:rgba(163,45,45,.08);color:#A32D2D;border:1px solid rgba(163,45,45,.15);border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px;font-family:'Inter',sans-serif;transition:background .18s}
+.logout-btn:hover{background:rgba(163,45,45,.14)}
+
+/* ── HOME INDICATOR ── */
+.home-indicator{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:130px;height:4px;background:rgba(0,0,0,.15);border-radius:2px}
+
+@media(max-width:440px){.phone{width:100%;max-width:375px;height:700px}}
+</style>
+</head>
+<body>
+<span class="demo-label">Demo App · Mister Oído</span>
+<div class="phone">
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span class="status-time" id="clock">9:41</span>
+    <div class="status-icons">
+      <i class="ti ti-signal-4g"></i>
+      <i class="ti ti-wifi"></i>
+      <div class="status-battery"><i class="ti ti-battery-2"></i>87</div>
+    </div>
+  </div>
+  <!-- DYNAMIC ISLAND -->
+  <div class="island" id="island"><div class="island-cam"></div><div class="island-dot"></div></div>
+
+  <div class="screen">
+
+    <!-- ══ SPLASH ══ -->
+    <div class="page active" id="pg-splash">
+      <div class="splash-logo-wrap">
+        <div class="splash-icon"><i class="ti ti-ear"></i></div>
+        <div class="splash-brand">Mr. <span>Oído</span></div>
+        <div class="splash-tag">Tu centro auditivo de confianza</div>
+        <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+      </div>
+      <span class="splash-version">v2.4.1</span>
+    </div>
+
+    <!-- ══ LOGIN ══ -->
+    <div class="page" id="pg-login" style="background:var(--soft)">
+      <div class="login-hero">
+        <div class="login-avatar"><i class="ti ti-ear"></i></div>
+        <h2>Bienvenido de nuevo</h2>
+        <p>Accede a tu centro auditivo</p>
+      </div>
+      <div class="login-form">
+        <div class="error-msg" id="login-error">Usuario o contraseña incorrectos</div>
+        <div>
+          <div class="field-label">Usuario</div>
+          <div class="field-wrap"><i class="ti ti-user"></i><input class="field-input" id="inp-user" type="text" placeholder="Ej: demo"/></div>
+        </div>
+        <div>
+          <div class="field-label">Contraseña</div>
+          <div class="field-wrap"><i class="ti ti-lock"></i><input class="field-input" id="inp-pass" type="password" placeholder="••••"/></div>
+        </div>
+        <button class="btn-primary" id="btn-login">Entrar</button>
+        <div class="hint-box"><p>Demo — Usuario: <strong>demo</strong> · Contraseña: <strong>1234</strong></p></div>
+      </div>
+    </div>
+
+    <!-- ══ HOME ══ -->
+    <div class="page" id="pg-home">
+      <div class="home-top">
+        <div style="padding:52px 20px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div>
+            <div class="home-greeting">Hola, Juan 👋</div>
+            <div class="home-sub">Bienvenido a Mr. Oído</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="icon-btn" onclick="goTo('pg-notif')"><i class="ti ti-bell" style="font-size:19px"></i><span class="badge">2</span></button>
+            <div class="home-avatar"><img src="assets/images/profile-juan.jpg" alt="Juan"></div>
+          </div>
+        </div>
+        <div style="padding:0 20px 20px">
+          <div class="next-cita-card">
+            <div class="next-cita-icon"><i class="ti ti-calendar-event"></i></div>
+            <div class="next-cita-text">
+              <strong>Próxima revisión</strong>
+              <span>15 de julio · 10:30 h · Mr. Oído Barcelona</span>
+            </div>
+            <i class="ti ti-chevron-right" style="color:rgba(255,255,255,.5);font-size:18px;margin-left:auto"></i>
+          </div>
+        </div>
+      </div>
+      <div class="home-body">
+        <div class="sec-label-app">¿Qué necesitas hoy?</div>
+        <div class="grid-actions">
+          <button class="action-card" onclick="goTo('pg-cita')">
+            <div class="action-icon" style="background:#e8f2fb"><i class="ti ti-calendar-plus" style="font-size:26px;color:var(--blue)"></i></div>
+            <span>Pedir cita</span>
+          </button>
+          <button class="action-card" onclick="goTo('pg-audifonos')">
+            <div class="action-icon" style="background:#e6f9f0"><i class="ti ti-device-airpods" style="font-size:26px;color:#1a7a4a"></i></div>
+            <span>Mis audífonos</span>
+          </button>
+          <button class="action-card" onclick="goTo('pg-soporte')">
+            <div class="action-icon" style="background:#faeeda"><i class="ti ti-headset" style="font-size:26px;color:var(--gold)"></i></div>
+            <span>Soporte</span>
+          </button>
+          <button class="action-card" onclick="goTo('pg-perfil')">
+            <div class="action-icon" style="background:#f0e8fb"><i class="ti ti-user-circle" style="font-size:26px;color:#7c3aed"></i></div>
+            <span>Mi perfil</span>
+          </button>
+        </div>
+        <div class="sec-label-app">Consejos del centro</div>
+        <div class="tip-card"><i class="ti ti-bulb"></i><p><strong>Limpieza semanal:</strong> limpia los filtros de tu audífono cada 2 semanas para mantener el sonido nítido.</p></div>
+        <div class="tip-card"><i class="ti ti-battery-charging"></i><p><strong>Carga nocturna:</strong> recarga el audífono cada noche para asegurar una jornada completa de uso.</p></div>
+        <div class="tip-card"><i class="ti ti-volume"></i><p><strong>Ambientes ruidosos:</strong> activa el programa "Ruido exterior" en reuniones o lugares concurridos.</p></div>
+      </div>
+      <nav class="navbar">
+        <button class="nav-btn active" onclick="setNav(this,'pg-home')"><i class="ti ti-home-2"></i><span>Inicio</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-cita')"><i class="ti ti-calendar"></i><span>Cita</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-audifonos')"><i class="ti ti-device-airpods"></i><span>Audífonos</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-soporte')"><i class="ti ti-headset"></i><span>Soporte</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-perfil')"><i class="ti ti-user"></i><span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <!-- ══ CITA ══ -->
+    <div class="page" id="pg-cita">
+      <div class="cita-top">
+        <div class="app-header"><button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i></button><h1>Pedir cita</h1><div style="width:34px"></div></div>
+        <div class="cal-card">
+          <div class="month-row">
+            <button class="month-nav"><i class="ti ti-chevron-left"></i></button>
+            <div class="month-label">Julio 2026</div>
+            <button class="month-nav"><i class="ti ti-chevron-right"></i></button>
+          </div>
+          <div class="cal-grid" id="cal"></div>
+        </div>
+      </div>
+      <div class="cita-body">
+        <div id="slots-section" style="display:none">
+          <div class="slots-title">Franjas disponibles</div>
+          <div class="slots-grid" id="slots"></div>
+        </div>
+        <div class="confirm-banner" id="confirm-banner">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><i class="ti ti-circle-check" style="font-size:22px"></i><strong>¡Cita confirmada!</strong></div>
+          <span id="confirm-text"></span>
+        </div>
+        <button class="btn-primary" id="btn-confirm" onclick="confirmCita()">Confirmar cita</button>
+      </div>
+      <nav class="navbar">
+        <button class="nav-btn" onclick="setNav(this,'pg-home')"><i class="ti ti-home-2"></i><span>Inicio</span></button>
+        <button class="nav-btn active" onclick="setNav(this,'pg-cita')"><i class="ti ti-calendar"></i><span>Cita</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-audifonos')"><i class="ti ti-device-airpods"></i><span>Audífonos</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-soporte')"><i class="ti ti-headset"></i><span>Soporte</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-perfil')"><i class="ti ti-user"></i><span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <!-- ══ AUDÍFONOS ══ -->
+    <div class="page" id="pg-audifonos">
+      <div class="audifonos-top">
+        <div class="app-header"><button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i></button><h1>Mis audífonos</h1><div style="width:34px"></div></div>
+        <div class="device-card">
+          <div class="device-image">
+            <img src="assets/images/oticon-zeal.png" alt="Oticon Zeal">
+          </div>
+          <div class="device-info-row">
+            <div><div class="device-name">Phonak Audéo Lumity</div><div class="device-serial">Serie: PH-2024-00341</div></div>
+            <div class="connected-badge"><span></span>Conectado</div>
+          </div>
+          <div class="device-controls">
+            <div class="battery-section">
+              <div class="bat-row"><span class="bat-label">Batería</span><span class="bat-pct">72%</span></div>
+              <div class="battery-bar"><div class="battery-fill"></div></div>
+            </div>
+            <div class="vol-section">
+              <div class="vol-row">
+                <label>Volumen</label>
+                <input type="range" min="0" max="100" value="65" oninput="document.getElementById('vol-out').textContent=this.value+'%'"/>
+                <span id="vol-out">65%</span>
+              </div>
+            </div>
+            <div class="prog-label">Programa de escucha</div>
+            <div class="prog-grid" id="prog-grid">
+              <button class="prog-btn active" onclick="selectProg(this)"><i class="ti ti-volume" style="display:block;font-size:16px;margin-bottom:3px"></i>Normal</button>
+              <button class="prog-btn" onclick="selectProg(this)"><i class="ti ti-music" style="display:block;font-size:16px;margin-bottom:3px"></i>Música</button>
+              <button class="prog-btn" onclick="selectProg(this)"><i class="ti ti-wind" style="display:block;font-size:16px;margin-bottom:3px"></i>Exterior</button>
+              <button class="prog-btn" onclick="selectProg(this)"><i class="ti ti-phone" style="display:block;font-size:16px;margin-bottom:3px"></i>Teléfono</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="audifonos-body">
+        <div class="maint-card">
+          <div class="maint-icon" style="background:#faeeda"><i class="ti ti-tool" style="font-size:20px;color:var(--gold)"></i></div>
+          <div><p>Próximo mantenimiento</p><strong>3 de septiembre 2026</strong></div>
+        </div>
+        <div class="maint-card">
+          <div class="maint-icon" style="background:#e8f2fb"><i class="ti ti-wifi" style="font-size:20px;color:var(--blue)"></i></div>
+          <div><p>Último ajuste remoto</p><strong>28 de mayo 2026</strong></div>
+        </div>
+        <div class="maint-card">
+          <div class="maint-icon" style="background:#e6f9f0"><i class="ti ti-droplet" style="font-size:20px;color:#1a7a4a"></i></div>
+          <div><p>Filtro cambiado</p><strong>10 de abril 2026</strong></div>
+        </div>
+      </div>
+      <nav class="navbar">
+        <button class="nav-btn" onclick="setNav(this,'pg-home')"><i class="ti ti-home-2"></i><span>Inicio</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-cita')"><i class="ti ti-calendar"></i><span>Cita</span></button>
+        <button class="nav-btn active" onclick="setNav(this,'pg-audifonos')"><i class="ti ti-device-airpods"></i><span>Audífonos</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-soporte')"><i class="ti ti-headset"></i><span>Soporte</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-perfil')"><i class="ti ti-user"></i><span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <!-- ══ NOTIFICACIONES ══ -->
+    <div class="page" id="pg-notif">
+      <div class="notif-top">
+        <div class="app-header"><button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i></button><h1>Notificaciones</h1><div style="width:34px"></div></div>
+      </div>
+      <div class="notif-body">
+        <div class="notif-item unread">
+          <div class="notif-icon" style="background:#e8f2fb"><i class="ti ti-calendar-event" style="font-size:20px;color:var(--blue)"></i></div>
+          <div class="notif-text" style="flex:1">
+            <strong>Cita confirmada</strong>
+            <p>Tu revisión anual está confirmada para el 15 de julio a las 10:30 h en Mr. Oído Barcelona.</p>
+            <div class="notif-time">Hace 2 horas</div>
+          </div>
+          <div class="notif-dot"></div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-icon" style="background:#faeeda"><i class="ti ti-tool" style="font-size:20px;color:var(--gold)"></i></div>
+          <div class="notif-text" style="flex:1">
+            <strong>Mantenimiento próximo</strong>
+            <p>Tu audífono Phonak Audéo Lumity tiene mantenimiento programado en 3 semanas.</p>
+            <div class="notif-time">Ayer</div>
+          </div>
+          <div class="notif-dot"></div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon" style="background:#e6f9f0"><i class="ti ti-adjustments" style="font-size:20px;color:#1a7a4a"></i></div>
+          <div class="notif-text" style="flex:1">
+            <strong>Ajuste remoto completado</strong>
+            <p>El audioprotesista ha actualizado el programa de música de tu audífono.</p>
+            <div class="notif-time">28 may</div>
+          </div>
+          <div class="notif-dot read"></div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon" style="background:#f0e8fb"><i class="ti ti-bulb" style="font-size:20px;color:#7c3aed"></i></div>
+          <div class="notif-text" style="flex:1">
+            <strong>Consejo semanal</strong>
+            <p>Recuerda limpiar el filtro de tu audífono. Una limpieza regular mejora la calidad del sonido.</p>
+            <div class="notif-time">20 may</div>
+          </div>
+          <div class="notif-dot read"></div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon" style="background:#e8f2fb"><i class="ti ti-star" style="font-size:20px;color:var(--sky)"></i></div>
+          <div class="notif-text" style="flex:1">
+            <strong>¿Cómo fue tu visita?</strong>
+            <p>Cuéntanos tu experiencia en la última visita al centro. Tu opinión nos ayuda a mejorar.</p>
+            <div class="notif-time">10 ene</div>
+          </div>
+          <div class="notif-dot read"></div>
+        </div>
+      </div>
+      <nav class="navbar">
+        <button class="nav-btn" onclick="setNav(this,'pg-home')"><i class="ti ti-home-2"></i><span>Inicio</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-cita')"><i class="ti ti-calendar"></i><span>Cita</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-audifonos')"><i class="ti ti-device-airpods"></i><span>Audífonos</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-soporte')"><i class="ti ti-headset"></i><span>Soporte</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-perfil')"><i class="ti ti-user"></i><span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <!-- ══ SOPORTE ══ -->
+    <div class="page" id="pg-soporte">
+      <div class="soporte-top">
+        <div class="app-header"><button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i></button><h1>Soporte</h1><div style="width:34px"></div></div>
+      </div>
+      <div class="soporte-body">
+        <div class="prob-card" id="prob1" onclick="toggleProb('prob1')">
+          <div class="prob-card-header"><div class="prob-icon"><i class="ti ti-volume-off"></i></div><span>Audífono sin sonido</span><i class="ti ti-chevron-down chevron"></i></div>
+          <div class="prob-steps"><div class="step-item"><div class="step-num">1</div><p>Comprueba que el audífono está encendido.</p></div><div class="step-item"><div class="step-num">2</div><p>Verifica que el volumen no está al mínimo.</p></div><div class="step-item"><div class="step-num">3</div><p>Limpia el filtro con el cepillo incluido.</p></div><div class="step-item"><div class="step-num">4</div><p>Si sigue sin funcionar, contacta el centro.</p></div></div>
+        </div>
+        <div class="prob-card" id="prob2" onclick="toggleProb('prob2')">
+          <div class="prob-card-header"><div class="prob-icon"><i class="ti ti-droplet"></i></div><span>Cómo limpiar el audífono</span><i class="ti ti-chevron-down chevron"></i></div>
+          <div class="prob-steps"><div class="step-item"><div class="step-num">1</div><p>Apaga el audífono antes de limpiarlo.</p></div><div class="step-item"><div class="step-num">2</div><p>Usa el cepillo para limpiar la cúpula y el filtro.</p></div><div class="step-item"><div class="step-num">3</div><p>Pasa un paño seco por la carcasa.</p></div><div class="step-item"><div class="step-num">4</div><p>Nunca uses agua ni alcohol directamente.</p></div></div>
+        </div>
+        <div class="prob-card" id="prob3" onclick="toggleProb('prob3')">
+          <div class="prob-card-header"><div class="prob-icon"><i class="ti ti-battery"></i></div><span>Cambiar la pila</span><i class="ti ti-chevron-down chevron"></i></div>
+          <div class="prob-steps"><div class="step-item"><div class="step-num">1</div><p>Abre la tapa del compartimento de pila.</p></div><div class="step-item"><div class="step-num">2</div><p>Retira la pila gastada con cuidado.</p></div><div class="step-item"><div class="step-num">3</div><p>Inserta la nueva respetando la polaridad (+/-).</p></div><div class="step-item"><div class="step-num">4</div><p>Cierra y espera el pitido de encendido.</p></div></div>
+        </div>
+        <div class="prob-card" id="prob4" onclick="toggleProb('prob4')">
+          <div class="prob-card-header"><div class="prob-icon"><i class="ti ti-arrows-left-right"></i></div><span>Audífonos al revés</span><i class="ti ti-chevron-down chevron"></i></div>
+          <div class="prob-steps"><div class="step-item"><div class="step-num">1</div><p>El derecho tiene marca roja y el izquierdo azul.</p></div><div class="step-item"><div class="step-num">2</div><p>El receptor debe quedar orientado al canal auditivo.</p></div><div class="step-item"><div class="step-num">3</div><p>Si notas molestia, comprueba los colores.</p></div></div>
+        </div>
+        <button class="call-btn" onclick="alert('Llamando al centro...')"><i class="ti ti-phone"></i>Llamar al centro — 93 XXX XX XX</button>
+        <button class="wa-soporte" onclick="alert('Abriendo WhatsApp...')"><i class="ti ti-brand-whatsapp"></i>Escribir por WhatsApp</button>
+      </div>
+      <nav class="navbar">
+        <button class="nav-btn" onclick="setNav(this,'pg-home')"><i class="ti ti-home-2"></i><span>Inicio</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-cita')"><i class="ti ti-calendar"></i><span>Cita</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-audifonos')"><i class="ti ti-device-airpods"></i><span>Audífonos</span></button>
+        <button class="nav-btn active" onclick="setNav(this,'pg-soporte')"><i class="ti ti-headset"></i><span>Soporte</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-perfil')"><i class="ti ti-user"></i><span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <!-- ══ PERFIL ══ -->
+    <div class="page" id="pg-perfil">
+      <div class="perfil-top">
+        <div class="app-header"><button class="back-btn" onclick="goBack()"><i class="ti ti-arrow-left"></i></button><h1>Mi perfil</h1><div style="width:34px"></div></div>
+      </div>
+      <div class="scroll-body" style="padding-bottom:0">
+        <div class="perfil-avatar-wrap"><div class="perfil-avatar"><img src="assets/images/profile-juan.jpg" alt="Juan"></div></div>
+        <div class="perfil-body">
+          <div class="perfil-name">Juan Golondrina Pérez</div>
+          <div class="perfil-sub">Paciente desde enero 2022</div>
+          <div class="info-card">
+            <div class="info-row"><div class="info-row-icon" style="background:#e8f2fb"><i class="ti ti-user" style="color:var(--blue)"></i></div><span>Edad</span><strong>80 años</strong></div>
+            <div class="info-row"><div class="info-row-icon" style="background:#e6f9f0"><i class="ti ti-phone" style="color:#1a7a4a"></i></div><span>Teléfono</span><strong>6XX XXX XXX</strong></div>
+            <div class="info-row"><div class="info-row-icon" style="background:#faeeda"><i class="ti ti-map-pin" style="color:var(--gold)"></i></div><span>Ciudad</span><strong>Barcelona</strong></div>
+            <div class="info-row"><div class="info-row-icon" style="background:#f0e8fb"><i class="ti ti-device-airpods" style="color:#7c3aed"></i></div><span>Audífono</span><strong>Phonak Audéo Lumity</strong></div>
+          </div>
+          <div class="hist-title">Historial de visitas</div>
+          <div class="hist-item"><div class="hist-icon"><i class="ti ti-calendar-check"></i></div><div><p>Revisión anual</p><span>10 de enero 2025</span></div></div>
+          <div class="hist-item"><div class="hist-icon"><i class="ti ti-adjustments"></i></div><div><p>Ajuste de programa</p><span>4 de octubre 2024</span></div></div>
+          <div class="hist-item"><div class="hist-icon"><i class="ti ti-tool"></i></div><div><p>Mantenimiento y limpieza</p><span>17 de junio 2024</span></div></div>
+          <div class="hist-item"><div class="hist-icon"><i class="ti ti-ear"></i></div><div><p>Audiometría</p><span>3 de enero 2024</span></div></div>
+          <button class="logout-btn" onclick="goTo('pg-login')"><i class="ti ti-logout" style="margin-right:6px"></i>Cerrar sesión</button>
+        </div>
+      </div>
+      <nav class="navbar">
+        <button class="nav-btn" onclick="setNav(this,'pg-home')"><i class="ti ti-home-2"></i><span>Inicio</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-cita')"><i class="ti ti-calendar"></i><span>Cita</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-audifonos')"><i class="ti ti-device-airpods"></i><span>Audífonos</span></button>
+        <button class="nav-btn" onclick="setNav(this,'pg-soporte')"><i class="ti ti-headset"></i><span>Soporte</span></button>
+        <button class="nav-btn active" onclick="setNav(this,'pg-perfil')"><i class="ti ti-user"></i><span>Perfil</span></button>
+      </nav>
+    </div>
+
+  </div><!-- /screen -->
+  <div class="home-indicator"></div>
+</div><!-- /phone -->
+
+<script>
+/* ── CLOCK ── */
+function updateClock(){const n=new Date(),h=n.getHours(),m=String(n.getMinutes()).padStart(2,'0');document.getElementById('clock').textContent=h+':'+m;}
+updateClock();setInterval(updateClock,10000);
+
+/* ── NAVIGATION ── */
+let current='pg-splash',hist=[];
+function goTo(id){
+  const c=document.getElementById(current),n=document.getElementById(id);
+  if(!n||id===current)return;
+  c.classList.remove('active');c.classList.add('exit-left');
+  n.classList.add('active');
+  setTimeout(()=>c.classList.remove('exit-left'),350);
+  hist.push(current);current=id;
+}
+function goBack(){
+  if(!hist.length)return;
+  const p=hist.pop(),c=document.getElementById(current),b=document.getElementById(p);
+  c.classList.remove('active');b.classList.remove('exit-left');b.classList.add('active');
+  current=p;
+}
+function setNav(btn,id){
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  goTo(id);
+}
+
+/* ── LOGIN ── */
+document.getElementById('btn-login').addEventListener('click',function(){
+  const u=document.getElementById('inp-user').value.trim(),
+        p=document.getElementById('inp-pass').value.trim(),
+        e=document.getElementById('login-error');
+  if(u==='demo'&&p==='1234'){e.style.display='none';goTo('pg-home');}
+  else{e.style.display='block';}
+});
+document.getElementById('inp-pass').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('btn-login').click();});
+
+/* ── CALENDAR ── */
+const avail=[2,3,7,8,9,14,15,16,17,22,23,24,28,29,30],
+      times=['9:00','9:30','10:00','10:30','11:00','11:30','16:00','16:30','17:00'];
+let selDay=null,selSlot=null;
+function buildCal(){
+  const cal=document.getElementById('cal');
+  ['L','M','X','J','V','S','D'].forEach(d=>{const h=document.createElement('div');h.className='cal-day header';h.textContent=d;cal.appendChild(h);});
+  for(let i=0;i<2;i++){const e=document.createElement('div');e.className='cal-day';cal.appendChild(e);}
+  for(let d=1;d<=31;d++){
+    const el=document.createElement('div'),ia=avail.includes(d),ip=d<10;
+    el.className='cal-day'+(ip?' past':ia?' available':'');
+    el.textContent=d;
+    if(ia&&!ip)el.addEventListener('click',()=>selectDay(d,el));
+    cal.appendChild(el);
+  }
+}
+function selectDay(d,el){
+  document.querySelectorAll('.cal-day.selected').forEach(x=>{x.classList.remove('selected');x.classList.add('available');});
+  el.classList.add('selected');el.classList.remove('available');
+  selDay=d;selSlot=null;
+  const ss=document.getElementById('slots-section'),sc=document.getElementById('slots');
+  sc.innerHTML='';
+  times.filter(()=>Math.random()>.3).forEach(t=>{
+    const b=document.createElement('button');b.className='slot';b.textContent=t;
+    b.addEventListener('click',()=>selectSlot(t,b));sc.appendChild(b);
+  });
+  ss.style.display='block';
+  document.getElementById('btn-confirm').style.display='none';
+  document.getElementById('confirm-banner').style.display='none';
+}
+function selectSlot(t,el){
+  document.querySelectorAll('.slot.selected').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');selSlot=t;
+  document.getElementById('btn-confirm').style.display='block';
+}
+function confirmCita(){
+  const b=document.getElementById('confirm-banner');
+  b.style.display='block';
+  document.getElementById('confirm-text').textContent=selDay+' de julio · '+selSlot+' h · Mr. Oído Barcelona';
+  document.getElementById('btn-confirm').style.display='none';
+  document.getElementById('slots-section').style.display='none';
+  document.querySelectorAll('.cal-day.selected').forEach(x=>{x.classList.remove('selected');x.classList.add('available');});
+  selDay=null;selSlot=null;
+}
+
+/* ── SOPORTE ── */
+function toggleProb(id){
+  const c=document.getElementById(id),s=c.querySelector('.prob-steps'),o=c.classList.contains('open');
+  document.querySelectorAll('.prob-card.open').forEach(x=>{x.classList.remove('open');x.querySelector('.prob-steps').classList.remove('show');});
+  if(!o){c.classList.add('open');s.classList.add('show');}
+}
+
+/* ── AUDÍFONOS ── */
+function selectProg(btn){
+  document.querySelectorAll('.prog-btn.active').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+buildCal();
+setTimeout(()=>goTo('pg-login'),2300);
+</script>
+</body>
+</html>
