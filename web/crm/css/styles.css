@@ -170,6 +170,36 @@ html,body{height:100%;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;col
 .m-ok i{font-size:17px}
 .m-err{background:var(--red-light);color:var(--red);font-size:12px;padding:9px 12px;border-radius:8px;display:none}
 
+/* ── ALERTA REVISIÓN VENCIDA ── */
+.alert-banner{background:#fff7ed;border:1.5px solid #f5c48a;border-radius:14px;padding:16px 20px;margin-bottom:20px}
+.alert-banner-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.alert-banner-head i{font-size:20px;color:var(--orange);flex-shrink:0}
+.alert-banner-head strong{font-size:14px;font-weight:700;color:var(--orange)}
+.alert-banner-head span{font-size:13px;color:var(--muted)}
+.alert-chips{display:flex;flex-wrap:wrap;gap:8px}
+.alert-chip{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #f5c48a;border-radius:9px;padding:7px 12px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:background .18s,border-color .18s}
+.alert-chip:hover{background:#fff3e0;border-color:var(--orange)}
+.alert-chip-date{font-size:11px;color:var(--orange);font-weight:500;margin-left:4px}
+.tr-alert td:first-child{border-left:3px solid var(--orange)}
+.alert-dot{display:inline-block;width:7px;height:7px;background:var(--orange);border-radius:50%;margin-left:6px;vertical-align:middle}
+
+/* ── DRAWER ALERTA ── */
+.dr-alerta{background:#fff7ed;border:1.5px solid #f5c48a;border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--orange);font-weight:600;margin-bottom:20px;line-height:1.45}
+.dr-alerta i{font-size:17px;flex-shrink:0;margin-top:1px}
+
+/* ── NOTAS POR VISITA ── */
+.dr-nota-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:10px;margin-bottom:4px}
+.dr-nota-input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--ink);font-family:inherit;resize:none;outline:none;background:#fff;transition:border-color .18s}
+.dr-nota-input:focus{border-color:var(--blue)}
+
+/* ── AJUSTES REMOTOS ── */
+.dr-remoto-item{background:var(--sky-light);border:1px solid #c0daef;border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.dr-remoto-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.dr-remoto-fecha{font-size:12px;font-weight:700;color:var(--blue)}
+.dr-remoto-motivo{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.dr-remoto-resultado{font-size:12px;color:var(--green);display:flex;align-items:center;gap:5px}
+.dr-remoto-resultado i{font-size:14px}
+
 /* ── COLORS FOR AVATARS ── */
 .av-blue{background:var(--blue)}
 .av-sky{background:var(--sky)}
