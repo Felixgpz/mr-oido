@@ -214,9 +214,28 @@ footer a:hover{color:#fff}
 .social-btn i{font-size:17px;color:rgba(255,255,255,.55)}
 
 /* ── WHATSAPP ── */
-.wa-btn{position:fixed;bottom:28px;right:28px;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;z-index:300;box-shadow:0 8px 22px rgba(37,211,102,.4);transition:transform .22s,box-shadow .22s}
-.wa-btn:hover{transform:scale(1.1);box-shadow:0 12px 28px rgba(37,211,102,.5)}
+.wa-btn{position:fixed;bottom:28px;right:28px;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;z-index:300;box-shadow:0 8px 22px rgba(37,211,102,.4);transition:transform .22s,box-shadow .22s;animation:wa-bounce 2.4s ease-in-out infinite}
+.wa-btn:hover{transform:scale(1.1);box-shadow:0 12px 28px rgba(37,211,102,.5);animation:none}
 .wa-btn i{font-size:27px;color:#fff}
+@keyframes wa-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ── PING RING on WA ── */
+.wa-btn::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #25D366;opacity:0;animation:wa-ping 2.4s ease-in-out infinite}
+@keyframes wa-ping{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.55);opacity:0}}
+
+/* ── SCROLL PROGRESS BAR ── */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),var(--sky));z-index:9999;transition:width .08s linear;border-radius:0 2px 2px 0}
+
+/* ── HERO BADGE PULSE ── */
+.hero-badge{animation:badge-pulse 3s ease-in-out infinite}
+@keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(30,80,160,.18)}55%{box-shadow:0 0 0 8px rgba(30,80,160,0)}}
+
+/* ── HERO FLOAT ── */
+.hero-media{animation:hero-float 5s ease-in-out infinite}
+@keyframes hero-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ── COUNTER ── */
+.hstat strong[data-count]{display:block}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -271,19 +290,20 @@ footer a:hover{color:#fff}
     <div class="hero-photo">
       <div class="swiper swiper-hero" style="border-radius:18px;overflow:hidden">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="assets/images/clinic-photo.jpg" alt="Centro Mister Oído" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
-          <div class="swiper-slide"><img src="assets/images/oticon-zeal.png" alt="Audífonos Mister Oído" style="width:100%;height:370px;object-fit:contain;background:#f0f6fd;padding:28px"></div>
-          <div class="swiper-slide"><img src="assets/images/hearing-care.png" alt="Cuidado auditivo" style="width:100%;height:370px;object-fit:contain;background:#f0f6fd;padding:28px"></div>
+          <div class="swiper-slide"><img src="assets/images/clinic-photo.jpg" alt="Pacientes Mister Oído en Barcelona" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="assets/images/barcelona-pareja.jpg" alt="Pareja mayor en Barcelona" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="assets/images/audioprotesista.jpg" alt="Audioprotesista con audífonos" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="assets/images/oticon-zeal.png" alt="Audífonos Oticon" style="width:100%;height:370px;object-fit:contain;background:#f0f6fd;padding:28px"></div>
         </div>
         <div class="swiper-pagination swiper-pagination-hero"></div>
       </div>
       <div class="hero-photo-badge"><strong>Primera revisión gratuita</strong><span>Asesoramiento sin compromiso</span></div>
     </div>
     <div class="hero-card">
-      <div class="hstat"><div class="hstat-icon"><i class="ti ti-users"></i></div><div><strong>+800 pacientes</strong><span>confían en Mister Oído</span></div></div>
-      <div class="hstat"><div class="hstat-icon"><i class="ti ti-certificate"></i></div><div><strong>Certificados</strong><span>+10 años experiencia</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-users"></i></div><div><strong data-count="800" data-prefix="+">+800 pacientes</strong><span>confían en Mister Oído</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-certificate"></i></div><div><strong data-count="10" data-prefix="+" data-suffix=" años">+10 años experiencia</strong><span>certificados</span></div></div>
       <div class="hstat"><div class="hstat-icon"><i class="ti ti-wifi"></i></div><div><strong>Ajuste remoto</strong><span>sin desplazarte</span></div></div>
-      <div class="hstat"><div class="hstat-icon"><i class="ti ti-map-pin"></i></div><div><strong>Centro en Barcelona</strong><span>metro y bus a la puerta</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-map-pin"></i></div><div><strong>Barcelona</strong><span>metro y bus a la puerta</span></div></div>
     </div>
   </div>
 </section>
@@ -330,7 +350,7 @@ footer a:hover{color:#fff}
   <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Tecnología auditiva actual</div>
   <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Audífonos discretos, conectados y adaptados a cada tipo de pérdida auditiva</div>
   <div class="tech-layout">
-    <div class="tech-image" data-aos="fade-right"><img src="assets/images/oticon-zeal.png" alt="Audífonos digitales avanzados"></div>
+    <div class="tech-image" data-aos="fade-right"><img src="assets/images/mujer-audifono.jpg" alt="Mujer con audífono discreto"></div>
     <div class="tech-copy" data-aos="fade-left" data-aos-delay="120">
       <h3>Soluciones pequeñas con gran capacidad de ajuste</h3>
       <p>Trabajamos con audífonos modernos que permiten mejorar la comprensión del habla, reducir el ruido ambiente y ajustar la experiencia según el entorno diario del paciente.</p>
@@ -354,7 +374,7 @@ footer a:hover{color:#fff}
       <h3>Información clara antes de elegir</h3>
       <p>En la demo mostramos el proceso completo: revisión, recomendación, adaptación, mantenimiento y seguimiento. La web no necesita backend para enseñar este flujo de forma convincente.</p>
     </div>
-    <div class="product-panel" data-aos="fade-left" data-aos-delay="120"><img src="assets/images/hearing-care.png" alt="Partes principales de un audífono retroauricular"></div>
+    <div class="product-panel" data-aos="fade-left" data-aos-delay="120"><img src="assets/images/tipos-audifonos.jpg" alt="Tipos de audífonos disponibles"></div>
   </div>
 </section>
 
@@ -363,10 +383,15 @@ footer a:hover{color:#fff}
   <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Nosotros</div></div>
   <div class="sec-title" data-aos="fade-up" data-aos-delay="60">¿Por qué Mister Oído?</div>
   <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">La cercanía de un centro de barrio con la tecnología de las grandes cadenas</div>
-  <div class="why-grid">
-    <div class="why-card" data-aos="fade-up" data-aos-delay="0"><div class="why-num">01</div><h3>Cercanía de barrio</h3><p>Te conocemos por tu nombre, recordamos tu historial y te atendemos sin esperas. Somos tu audioprotesista de confianza.</p></div>
-    <div class="why-card" data-aos="fade-up" data-aos-delay="100"><div class="why-num">02</div><h3>Tecnología moderna</h3><p>Audífonos Bluetooth, ajuste remoto, teleconsulta y app de seguimiento. Igual que las grandes cadenas, con trato humano.</p></div>
-    <div class="why-card" data-aos="fade-up" data-aos-delay="200"><div class="why-num">03</div><h3>Atención personalizada</h3><p>Tres perfiles de paciente, tres tipos de atención. Nos adaptamos a ti: mayor, adulto activo o familia con niños.</p></div>
+  <div style="display:grid;grid-template-columns:1fr minmax(260px,340px);gap:40px;align-items:center;max-width:1100px;margin:0 auto">
+    <div class="why-grid" style="grid-template-columns:1fr">
+      <div class="why-card" data-aos="fade-up" data-aos-delay="0"><div class="why-num">01</div><h3>Cercanía de barrio</h3><p>Te conocemos por tu nombre, recordamos tu historial y te atendemos sin esperas. Somos tu audioprotesista de confianza.</p></div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="100"><div class="why-num">02</div><h3>Tecnología moderna</h3><p>Audífonos Bluetooth, ajuste remoto, teleconsulta y app de seguimiento. Igual que las grandes cadenas, con trato humano.</p></div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="200"><div class="why-num">03</div><h3>Atención personalizada</h3><p>Tres perfiles de paciente, tres tipos de atención. Nos adaptamos a ti: mayor, adulto activo o familia con niños.</p></div>
+    </div>
+    <div data-aos="fade-left" data-aos-delay="120" style="border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg)">
+      <img src="assets/images/familia.jpg" alt="Familia feliz gracias a Mister Oído" style="width:100%;height:340px;object-fit:cover;display:block">
+    </div>
   </div>
 </section>
 
@@ -377,17 +402,20 @@ footer a:hover{color:#fff}
   <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Soluciones adaptadas a cada etapa de la vida</div>
   <div class="prof-grid">
     <div class="prof-card" data-aos="fade-up" data-aos-delay="0">
-      <div class="prof-av">JG</div><h3>Juan, 80 años</h3><div class="badge">Tercera edad</div>
+      <div class="prof-av" style="padding:0;overflow:hidden;width:64px;height:64px;margin-bottom:14px"><img src="assets/images/profile-juan.jpg" alt="Juan" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+      <h3>Juan, 80 años</h3><div class="badge">Tercera edad</div>
       <p>No entiende a su familia y le cuesta usar la tecnología. Busca una solución sencilla y discreta.</p>
       <div><span class="prof-tag">WhatsApp con el hijo</span><span class="prof-tag">Audífono pequeño</span><span class="prof-tag">Soporte presencial</span></div>
     </div>
     <div class="prof-card" data-aos="fade-up" data-aos-delay="100">
-      <div class="prof-av" style="background:linear-gradient(135deg,#185FA5,#4a9fd4)">LP</div><h3>Lucía, 6 años</h3><div class="badge" style="background:#E6F1FB;color:#0C447C">Niños / Padres</div>
+      <div class="prof-av" style="padding:0;overflow:hidden;width:64px;height:64px;margin-bottom:14px"><img src="assets/images/profile-lucia.jpg" alt="Lucía" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+      <h3>Lucía, 6 años</h3><div class="badge" style="background:#E6F1FB;color:#0C447C">Niños / Padres</div>
       <p>Sus padres buscan un audífono resistente y discreto. Tramitamos juntos las ayudas PUA.</p>
       <div><span class="prof-tag">Audífonos infantiles</span><span class="prof-tag">Ayudas PUA</span><span class="prof-tag">Seguimiento escolar</span></div>
     </div>
     <div class="prof-card" data-aos="fade-up" data-aos-delay="200">
-      <div class="prof-av" style="background:linear-gradient(135deg,#854F0B,#c4862e)">MP</div><h3>Marta, 38 años</h3><div class="badge" style="background:#FAEEDA;color:#633806">Adulto activo</div>
+      <div class="prof-av" style="padding:0;overflow:hidden;width:64px;height:64px;margin-bottom:14px"><img src="assets/images/profile-marta.jpg" alt="Marta" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+      <h3>Marta, 38 años</h3><div class="badge" style="background:#FAEEDA;color:#633806">Adulto activo</div>
       <p>Se pierde en reuniones de trabajo. Quiere un audífono Bluetooth discreto y ajuste remoto.</p>
       <div><span class="prof-tag">Ajuste remoto</span><span class="prof-tag">Cita online</span><span class="prof-tag">Bluetooth</span></div>
     </div>
@@ -500,6 +528,7 @@ footer a:hover{color:#fff}
   </div>
 </footer>
 
+<div id="scroll-bar"></div>
 <button class="wa-btn" onclick="alert('Abriendo WhatsApp...')"><i class="ti ti-brand-whatsapp"></i></button>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -553,6 +582,54 @@ function toggleFaq(btn){
   document.querySelectorAll('.faq-q.open').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('show');});
   if(!o){btn.classList.add('open');a.classList.add('show');}
 }
+
+/* ── SCROLL PROGRESS BAR ── */
+(function(){
+  const bar=document.getElementById('scroll-bar');
+  window.addEventListener('scroll',()=>{
+    const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+    bar.style.width=Math.min(pct,100)+'%';
+  },{passive:true});
+})();
+
+/* ── ANIMATED COUNTERS ── */
+(function(){
+  const els=document.querySelectorAll('[data-count]');
+  if(!els.length)return;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      obs.unobserve(e.target);
+      const el=e.target,end=+el.dataset.count,
+            pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',
+            dur=1400,step=16;
+      let start=0,t=null;
+      const tick=()=>{
+        start+=end/(dur/step);
+        if(start>=end){el.textContent=pre+end+suf;return;}
+        el.textContent=pre+Math.round(start)+suf;
+        t=setTimeout(tick,step);
+      };
+      tick();
+    });
+  },{threshold:0.5});
+  els.forEach(el=>obs.observe(el));
+})();
+
+/* ── CARD STAGGER on SCROLL ── */
+(function(){
+  const cards=document.querySelectorAll('.srv-card,.why-card,.prof-card');
+  cards.forEach(c=>{c.style.opacity='0';c.style.transform='translateY(28px)';c.style.transition='opacity .5s ease, transform .5s ease';});
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(!e.isIntersecting)return;
+      obs.unobserve(e.target);
+      setTimeout(()=>{e.target.style.opacity='1';e.target.style.transform='translateY(0)';},
+        parseInt(e.target.dataset.aosDelay||0));
+    });
+  },{threshold:0.12});
+  cards.forEach(c=>obs.observe(c));
+})();
 
 function submitForm(){
   const n=document.getElementById('f-name').value.trim(),
