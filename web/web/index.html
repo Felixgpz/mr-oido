@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mister Oído — Centro Auditivo Barcelona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <img src="../assets/images/logo-mroido-transparent.png" alt="Mister Oído" style="height:62px;width:auto;object-fit:contain">
+  </div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="goTo('srv')">Servicios</button>
+    <button class="nav-link" onclick="goTo('why')">Nosotros</button>
+    <button class="nav-link" onclick="goTo('test')">Opiniones</button>
+    <button class="nav-link" onclick="goTo('faq')">FAQ</button>
+    <button class="nav-link" onclick="goTo('cita')">Contacto</button>
+  </div>
+  <button class="nav-cta" onclick="goTo('cita')">Pedir cita</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div>
+    <div class="hero-badge" data-aos="fade-down"><i class="ti ti-award"></i> Centro auditivo certificado en Barcelona</div>
+    <h1 data-aos="fade-up" data-aos-delay="80">Tu centro auditivo de <span>confianza</span> en Barcelona</h1>
+    <p data-aos="fade-up" data-aos-delay="160">Mejoramos tu calidad de vida con las mejores prótesis auditivas, atención personalizada y tecnología de última generación. Presencial, remoto o por videollamada.</p>
+    <div class="hero-btns" data-aos="fade-up" data-aos-delay="240">
+      <button class="btn-p" onclick="goTo('cita')"><i class="ti ti-calendar-plus"></i> Pedir cita online</button>
+      <button class="btn-s" onclick="alert('Llamando al 93 XXX XX XX...')"><i class="ti ti-phone"></i> Llámanos ahora</button>
+    </div>
+  </div>
+  <div class="hero-media" data-aos="fade-left" data-aos-delay="120">
+    <div class="hero-photo">
+      <div class="swiper swiper-hero" style="border-radius:18px;overflow:hidden">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="../assets/images/clinic-photo.jpg" alt="Pacientes Mister Oído en Barcelona" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="../assets/images/barcelona-pareja.jpg" alt="Pareja mayor en Barcelona" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="../assets/images/audioprotesista.jpg" alt="Audioprotesista con audífonos" style="width:100%;height:370px;object-fit:cover;object-position:center top"></div>
+          <div class="swiper-slide"><img src="../assets/images/oticon-zeal.png" alt="Audífonos Oticon" style="width:100%;height:370px;object-fit:contain;background:#f0f6fd;padding:28px"></div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-hero"></div>
+      </div>
+      <div class="hero-photo-badge"><strong>Primera revisión gratuita</strong><span>Asesoramiento sin compromiso</span></div>
+    </div>
+    <div class="hero-card">
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-users"></i></div><div><strong data-count="800" data-prefix="+">+800 pacientes</strong><span>confían en Mister Oído</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-certificate"></i></div><div><strong data-count="10" data-prefix="+" data-suffix=" años">+10 años experiencia</strong><span>certificados</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-wifi"></i></div><div><strong>Ajuste remoto</strong><span>sin desplazarte</span></div></div>
+      <div class="hstat"><div class="hstat-icon"><i class="ti ti-map-pin"></i></div><div><strong>Barcelona</strong><span>metro y bus a la puerta</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAND -->
+<section class="trust-band" aria-label="Garantías">
+  <div class="trust-item" data-aos="fade-up" data-aos-delay="0"><i class="ti ti-shield-check"></i><span>Prueba y adaptación personalizada</span></div>
+  <div class="trust-item" data-aos="fade-up" data-aos-delay="80"><i class="ti ti-device-mobile"></i><span>Seguimiento presencial y remoto</span></div>
+  <div class="trust-item" data-aos="fade-up" data-aos-delay="160"><i class="ti ti-heart-handshake"></i><span>Trato cercano para familias</span></div>
+  <div class="trust-item" data-aos="fade-up" data-aos-delay="240"><i class="ti ti-cash-banknote"></i><span>Ayuda con subvenciones</span></div>
+</section>
+
+<!-- BRANDS STRIP -->
+<div class="brands-strip" data-aos="fade-up">
+  <div class="brands-inner">
+    <span class="brand-label">Trabajamos con</span>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Oticon</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Phonak</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Signia</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Widex</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> Starkey</div>
+    <div class="brand-chip"><i class="ti ti-device-airpods"></i> ReSound</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="sec" id="srv">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Servicios</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Nuestros servicios</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Todo lo que necesitas para cuidar tu salud auditiva, en un solo lugar</div>
+  <div class="srv-grid">
+    <div class="srv-card" data-aos="fade-up" data-aos-delay="0"><div class="srv-icon"><i class="ti ti-stethoscope"></i></div><h3>Pruebas audiológicas</h3><p>Diagnóstico completo de tu nivel auditivo con equipos de última generación.</p></div>
+    <div class="srv-card" data-aos="fade-up" data-aos-delay="80"><div class="srv-icon"><i class="ti ti-device-airpods"></i></div><h3>Adaptación de audífonos</h3><p>Selección y adaptación personalizada de audífonos multimarca según tu pérdida.</p></div>
+    <div class="srv-card" data-aos="fade-up" data-aos-delay="160"><div class="srv-icon"><i class="ti ti-wifi"></i></div><h3>Ajuste remoto</h3><p>Realizamos ajustes leves desde casa a través de la app de tu audífono.</p></div>
+    <div class="srv-card" data-aos="fade-up" data-aos-delay="0"><div class="srv-icon"><i class="ti ti-tool"></i></div><h3>Mantenimiento</h3><p>Limpieza, cambio de filtros y revisión técnica para prolongar la vida del audífono.</p></div>
+    <div class="srv-card" data-aos="fade-up" data-aos-delay="80"><div class="srv-icon"><i class="ti ti-ear"></i></div><h3>Tapones a medida</h3><p>Tapones personalizados para baño, sueño, música o protección laboral.</p></div>
+    <div class="srv-card" data-aos="fade-up" data-aos-delay="160"><div class="srv-icon"><i class="ti ti-calendar-check"></i></div><h3>Revisiones periódicas</h3><p>Seguimiento anual con recordatorios automáticos para no perderte ninguna cita.</p></div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section class="sec sec-alt" id="tecnologia">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Tecnología</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Tecnología auditiva actual</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Audífonos discretos, conectados y adaptados a cada tipo de pérdida auditiva</div>
+  <div class="tech-layout">
+    <div class="tech-image" data-aos="fade-right"><img src="../assets/images/mujer-audifono.jpg" alt="Mujer con audífono discreto"></div>
+    <div class="tech-copy" data-aos="fade-left" data-aos-delay="120">
+      <h3>Soluciones pequeñas con gran capacidad de ajuste</h3>
+      <p>Trabajamos con audífonos modernos que permiten mejorar la comprensión del habla, reducir el ruido ambiente y ajustar la experiencia según el entorno diario del paciente.</p>
+      <div class="tech-points">
+        <div class="tech-point"><i class="ti ti-bluetooth"></i>Conectividad móvil</div>
+        <div class="tech-point"><i class="ti ti-volume"></i>Programas por ambiente</div>
+        <div class="tech-point"><i class="ti ti-wifi"></i>Ajuste remoto</div>
+        <div class="tech-point"><i class="ti ti-battery-charging"></i>Recargables</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTO -->
+<section class="sec" id="producto">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Cómo funciona</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Cómo funciona un audífono</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Una explicación visual para que el paciente entienda cada parte antes de la adaptación</div>
+  <div class="product-grid">
+    <div class="product-copy" data-aos="fade-right">
+      <h3>Información clara antes de elegir</h3>
+      <p>En la demo mostramos el proceso completo: revisión, recomendación, adaptación, mantenimiento y seguimiento. La web no necesita backend para enseñar este flujo de forma convincente.</p>
+    </div>
+    <div class="product-panel" data-aos="fade-left" data-aos-delay="120"><img src="../assets/images/tipos-audifonos.jpg" alt="Tipos de audífonos disponibles"></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec sec-alt" id="why">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Nosotros</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">¿Por qué Mister Oído?</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">La cercanía de un centro de barrio con la tecnología de las grandes cadenas</div>
+  <div style="display:grid;grid-template-columns:1fr minmax(260px,340px);gap:40px;align-items:center;max-width:1100px;margin:0 auto">
+    <div class="why-grid" style="grid-template-columns:1fr">
+      <div class="why-card" data-aos="fade-up" data-aos-delay="0"><div class="why-num">01</div><h3>Cercanía de barrio</h3><p>Te conocemos por tu nombre, recordamos tu historial y te atendemos sin esperas. Somos tu audioprotesista de confianza.</p></div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="100"><div class="why-num">02</div><h3>Tecnología moderna</h3><p>Audífonos Bluetooth, ajuste remoto, teleconsulta y app de seguimiento. Igual que las grandes cadenas, con trato humano.</p></div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="200"><div class="why-num">03</div><h3>Atención personalizada</h3><p>Tres perfiles de paciente, tres tipos de atención. Nos adaptamos a ti: mayor, adulto activo o familia con niños.</p></div>
+    </div>
+    <div data-aos="fade-left" data-aos-delay="120" style="border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg)">
+      <img src="../assets/images/familia.jpg" alt="Familia feliz gracias a Mister Oído" style="width:100%;height:340px;object-fit:cover;display:block">
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section class="sec" id="perfiles">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Pacientes</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">¿A quién ayudamos?</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Soluciones adaptadas a cada etapa de la vida</div>
+  <div class="prof-grid">
+    <div class="prof-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="prof-av" style="padding:0;overflow:hidden;width:64px;height:64px;margin-bottom:14px"><img src="../assets/images/profile-juan.jpg" alt="Juan" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+      <h3>Juan, 80 años</h3><div class="badge">Tercera edad</div>
+      <p>No entiende a su familia y le cuesta usar la tecnología. Busca una solución sencilla y discreta.</p>
+      <div><span class="prof-tag">WhatsApp con el hijo</span><span class="prof-tag">Audífono pequeño</span><span class="prof-tag">Soporte presencial</span></div>
+    </div>
+    <div class="prof-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="prof-av" style="padding:0;overflow:hidden;width:64px;height:64px;margin-bottom:14px"><img src="../assets/images/profile-lucia.jpg" alt="Lucía" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+      <h3>Lucía, 6 años</h3><div class="badge" style="background:#E6F1FB;color:#0C447C">Niños / Padres</div>
+      <p>Sus padres buscan un audífono resistente y discreto. Tramitamos juntos las ayudas PUA.</p>
+      <div><span class="prof-tag">Audífonos infantiles</span><span class="prof-tag">Ayudas PUA</span><span class="prof-tag">Seguimiento escolar</span></div>
+    </div>
+    <div class="prof-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="prof-av" style="padding:0;overflow:hidden;width:64px;height:64px;margin-bottom:14px"><img src="../assets/images/profile-marta.jpg" alt="Marta" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+      <h3>Marta, 38 años</h3><div class="badge" style="background:#FAEEDA;color:#633806">Adulto activo</div>
+      <p>Se pierde en reuniones de trabajo. Quiere un audífono Bluetooth discreto y ajuste remoto.</p>
+      <div><span class="prof-tag">Ajuste remoto</span><span class="prof-tag">Cita online</span><span class="prof-tag">Bluetooth</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec sec-alt" id="test">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Opiniones</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Qué dicen nuestros pacientes</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Más de 800 familias ya confían en Mister Oído</div>
+  <div class="testimonials-wrap" data-aos="fade-up" data-aos-delay="140">
+    <div class="swiper swiper-test">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Llevaba años evitando ir al audioprotesista. Aquí me explicaron todo con paciencia. Por fin entiendo a mis nietos."</blockquote><div class="author">Antonio R. <span>· 78 años · Barcelona</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"El ajuste remoto me ha cambiado la vida. Trabajo mucho y no tenía tiempo de ir al centro. Ahora me ajustan el audífono y listo."</blockquote><div class="author">Sandra M. <span>· 41 años · Gràcia</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Nos ayudaron con toda la tramitación de las ayudas PUA para nuestra hija. Servicio cercano y muy profesional."</blockquote><div class="author">Carles y Laura <span>· Padres de Martina</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Tenía miedo de que el audífono fuera muy visible. Me recomendaron uno pequeñísimo y ahora casi nadie se da cuenta."</blockquote><div class="author">Rosa T. <span>· 65 años · Eixample</span></div></div></div>
+        <div class="swiper-slide"><div class="test-card"><div class="stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div><blockquote>"Primera revisión gratuita, sin presiones. Me explicaron mi tipo de pérdida auditiva con total transparencia."</blockquote><div class="author">Miquel F. <span>· 55 años · Sant Gervasi</span></div></div></div>
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination" style="bottom:-28px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO SLIDER (marcas) -->
+<section class="logo-strip" data-aos="fade-up">
+  <div class="sec-label" style="display:block;text-align:center;margin-bottom:12px">Marcas</div>
+  <div class="sec-title">Trabajamos con las mejores marcas</div>
+  <div class="sec-sub">Audífonos de fabricantes líderes mundiales, adaptados a cada necesidad y presupuesto</div>
+  <div class="swiper swiper-logos">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--blue)">Oticon</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--navy)">Phonak</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--blue)">Signia</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--navy)">Widex</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--blue)">Starkey</span></div></div>
+      <div class="swiper-slide logo-slide"><div class="logo-card"><span style="font-size:20px;font-weight:800;color:var(--navy)">ReSound</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-alt" id="faq">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">FAQ</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Preguntas frecuentes</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Todo lo que necesitas saber antes de tu primera visita</div>
+  <div class="faq-list" data-aos="fade-up" data-aos-delay="140">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Necesito receta médica para comprar un audífono? <i class="ti ti-chevron-down"></i></button><div class="faq-a">No es obligatorio, pero sí recomendable. Puedes venir directamente a hacerte una prueba audiológica gratuita con nosotros y valorar juntos la mejor opción para tu caso.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto cuesta un audífono? <i class="ti ti-chevron-down"></i></button><div class="faq-a">El precio varía según el modelo y la tecnología. Trabajamos con todas las gamas. Siempre te explicamos las diferencias con total transparencia y sin presión.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hay ayudas económicas para audífonos? <i class="ti ti-chevron-down"></i></button><div class="faq-a">Sí. Existen las ayudas PUA para niños con pérdida bilateral, y algunas comunidades tienen subvenciones adicionales. Nos encargamos de toda la tramitación contigo.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué es el ajuste remoto y cómo funciona? <i class="ti ti-chevron-down"></i></button><div class="faq-a">Permite al audioprotesista realizar modificaciones leves en tu audífono a través de la app del fabricante, sin que tengas que venir al centro. Ideal si tienes poca movilidad o poco tiempo.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Puedo probar el audífono antes de comprarlo? <i class="ti ti-chevron-down"></i></button><div class="faq-a">Sí, ofrecemos un período de adaptación de prueba para que puedas comprobar que el audífono se ajusta a tu vida diaria antes de tomar una decisión definitiva.</div></div>
+  </div>
+</section>
+
+<!-- CITA -->
+<section class="sec" id="cita">
+  <div data-aos="fade-up"><div class="sec-label" style="display:block;text-align:center">Contacto</div></div>
+  <div class="sec-title" data-aos="fade-up" data-aos-delay="60">Pide tu cita online</div>
+  <div class="sec-sub" data-aos="fade-up" data-aos-delay="100">Rellena el formulario y te contactamos en menos de 24 horas</div>
+  <div class="form-wrap" data-aos="fade-up" data-aos-delay="140">
+    <div class="form-ok" id="form-ok"><i class="ti ti-circle-check"></i>Solicitud enviada. Te llamaremos en menos de 24 h.</div>
+    <div id="form-body">
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" id="f-name" placeholder="Tu nombre"/></div>
+        <div class="form-group"><label class="form-label">Teléfono</label><input class="form-input" type="tel" id="f-tel" placeholder="6XX XXX XXX"/></div>
+        <div class="form-group full"><label class="form-label">Email</label><input class="form-input" type="email" id="f-email" placeholder="tu@email.com"/></div>
+        <div class="form-group full"><label class="form-label">Motivo de consulta</label><select class="form-select" id="f-motivo"><option value="">Selecciona un motivo...</option><option>Primera prueba audiológica</option><option>Revisión anual</option><option>Problema con mi audífono</option><option>Información sobre audífonos</option><option>Tapones a medida</option><option>Ajuste remoto</option></select></div>
+        <div class="form-group full"><label class="form-label">Franja horaria preferida</label><select class="form-select" id="f-franja"><option value="">Selecciona una franja...</option><option>Mañana (9:00 – 13:00)</option><option>Mediodía (13:00 – 15:00)</option><option>Tarde (16:00 – 19:00)</option></select></div>
+      </div>
+      <div class="form-error" id="form-error">Por favor, completa todos los campos antes de enviar.</div>
+      <button class="btn-send" onclick="submitForm()"><i class="ti ti-send"></i> Solicitar cita</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="../assets/images/logo-mroido-transparent.png" alt="Mister Oído" class="footer-logo" style="height:60px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;margin-bottom:16px">
+      <p>Centro auditivo familiar en Barcelona.<br>Atención personalizada, tecnología moderna<br>y precios transparentes.</p>
+      <p class="footer-tagline">Escuchamos. Te ayudamos.</p>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <div class="frow"><i class="ti ti-map-pin"></i><p>Carrer Exemple 123, Barcelona</p></div>
+      <div class="frow"><i class="ti ti-phone"></i><p>93 XXX XX XX</p></div>
+      <div class="frow"><i class="ti ti-mail"></i><p>hola@misteroido.es</p></div>
+      <div class="frow"><i class="ti ti-clock"></i><p>L–V 9:00–19:00 · S 9:00–13:00</p></div>
+    </div>
+    <div>
+      <h4>Servicios</h4>
+      <a href="#" onclick="goTo('srv');return false">Pruebas audiológicas</a><br>
+      <a href="#" onclick="goTo('srv');return false">Adaptación de audífonos</a><br>
+      <a href="#" onclick="goTo('srv');return false">Ajuste remoto</a><br>
+      <a href="#" onclick="goTo('srv');return false">Tapones a medida</a><br>
+      <a href="#" onclick="goTo('srv');return false">Ayudas PUA</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Mister Oído · Todos los derechos reservados</p>
+    <div class="social-row">
+      <button class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></button>
+      <button class="social-btn" title="WhatsApp"><i class="ti ti-brand-whatsapp"></i></button>
+      <button class="social-btn" title="Ubicación"><i class="ti ti-map-pin"></i></button>
+    </div>
+  </div>
+</footer>
+
+<div id="scroll-bar"></div>
+<button class="wa-btn" onclick="alert('Abriendo WhatsApp...')"><i class="ti ti-brand-whatsapp"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
