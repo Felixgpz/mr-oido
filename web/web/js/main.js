@@ -1,4 +1,25 @@
-AOS.init({duration:620,easing:'ease-out-cubic',once:true,offset:60});
+AOS.init({duration:680,easing:'ease-out-cubic',once:true,offset:60});
+
+/* ── NAV SHRINK ON SCROLL ── */
+(function(){
+  const nav=document.querySelector('nav');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',window.scrollY>60);
+  },{passive:true});
+})();
+
+/* ── HERO FLOATING PARTICLES ── */
+(function(){
+  const hero=document.querySelector('.hero');
+  if(!hero)return;
+  for(let i=0;i<14;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*6+3;
+    p.style.cssText=`width:${size}px;height:${size}px;background:rgba(30,80,160,${Math.random()*.12+.04});left:${Math.random()*100}%;bottom:${Math.random()*40}%;animation-duration:${Math.random()*4+5}s;animation-delay:${Math.random()*5}s`;
+    hero.appendChild(p);
+  }
+})();
 
 new Swiper('.swiper-hero',{
   slidesPerView:1,loop:true,
