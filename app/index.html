@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mr. Oído — App del paciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="mroido-app.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+/* Native React SVG icons (lucide-style paths) — no runtime library, no React/DOM conflict */
+const ICON_PATHS={
+  "bell":'<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>',
+  "chevron-right":'<path d="m9 18 6-6-6-6"/>',
+  "chevron-left":'<path d="m15 18-6-6 6-6"/>',
+  "arrow-left":'<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  "calendar-plus":'<path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M19 16v6"/><path d="M16 19h6"/>',
+  "calendar-days":'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/>',
+  "calendar-check":'<path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="m16 20 2 2 4-4"/>',
+  "ear":'<path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M6.5 12a3.5 3.5 0 1 1 7 0c0 2-2 3-2 5"/>',
+  "message-circle":'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  "life-buoy":'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/>',
+  "home":'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+  "user":'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  "droplets":'<path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a5 5 0 0 1-10 0c0-.3 0-.6.05-.9"/>',
+  "battery-charging":'<path d="M10 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h6.19"/><path d="M14 5h2a2 2 0 0 1 2 2v3"/><path d="M22 11v2"/><path d="M11 7l-3 5h4l-3 5"/>',
+  "battery-medium":'<rect x="2" y="6" width="16" height="12" rx="2"/><path d="M22 10v4"/><path d="M6 10v4"/><path d="M10 10v4"/>',
+  "volume-2":'<path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A1.4 1.4 0 0 1 5.4 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/>',
+  "wrench":'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  "radio":'<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>',
+  "lightbulb":'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+  "star":'<path d="M11.5 2.5 9.7 8.2 3.7 8.3l4.8 3.6-1.7 5.8 4.9-3.4 4.9 3.4-1.7-5.8 4.8-3.6-6-.1z"/>',
+  "check":'<path d="M20 6 9 17l-5-5"/>',
+  "music":'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  "trees":'<path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/>',
+  "phone":'<path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.4-.5A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.5.4a1 1 0 0 0-.3 1.2 14 14 0 0 0 6.4 6.4z"/>',
+  "circle":'<circle cx="12" cy="12" r="10"/>',
+  "log-out":'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>',
+  "send":'<path d="M14.5 21.7a.5.5 0 0 0 .9 0l6.5-19a.5.5 0 0 0-.6-.6l-19 6.5a.5.5 0 0 0 0 .9l7.9 3.2a2 2 0 0 1 1.1 1.1z"/><path d="m21.9 2.1-10.9 11"/>'
+};
+function makeIcon(name){
+  return React.createElement("svg",{
+    "data-lucide":name, width:22, height:22, viewBox:"0 0 24 24",
+    fill:"none", stroke:"currentColor", strokeWidth:2, strokeLinecap:"round", strokeLinejoin:"round",
+    dangerouslySetInnerHTML:{__html: ICON_PATHS[name]||""}
+  });
+}
+window.makeIcon=makeIcon;
+</script>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback}=React;
+
+/* ---------- data ---------- */
+const PROFILE_IMG="https://felixgpz.github.io/mr-oido/assets/images/profile-juan.jpg";
+
+const TIPS=[
+  {ic:"droplets",t:"Limpieza semanal",d:"Limpia los filtros cada 2 semanas para mantener el sonido nítido."},
+  {ic:"battery-charging",t:"Carga nocturna",d:"Recarga el audífono cada noche para una jornada completa de uso."},
+  {ic:"volume-2",t:"Ambientes ruidosos",d:"Activa el programa “Exterior” en reuniones o lugares concurridos."},
+];
+const SLOTS=["09:30","10:30","12:00","16:30","18:00"];
+const PROGRAMS=[
+  {k:"Normal",ic:"circle"},{k:"Música",ic:"music"},
+  {k:"Exterior",ic:"trees"},{k:"Teléfono",ic:"phone"},
+];
+const MAINT=[
+  {k:"Próximo mantenimiento",v:"3 sep 2026"},
+  {k:"Último ajuste remoto",v:"28 may 2026"},
+  {k:"Filtro cambiado",v:"10 abr 2026"},
+];
+const SUPPORT=[
+  {q:"Audífono sin sonido",steps:["Comprueba que el audífono está encendido.","Verifica que el volumen no está al mínimo.","Limpia el filtro con el cepillo incluido.","Si sigue sin funcionar, contacta el centro."]},
+  {q:"Cómo limpiar el audífono",steps:["Apaga el audífono antes de limpiarlo.","Usa el cepillo para limpiar la cúpula y el filtro.","Pasa un paño seco por la carcasa.","Nunca uses agua ni alcohol directamente."]},
+  {q:"Cambiar la pila",steps:["Abre la tapa del compartimento de pila.","Retira la pila gastada con cuidado.","Inserta la nueva respetando la polaridad (+/-).","Cierra y espera el pitido de encendido."]},
+  {q:"Audífonos al revés",steps:["El derecho tiene marca roja y el izquierdo azul.","El receptor debe quedar orientado al canal auditivo.","Si notas molestia, comprueba los colores."]},
+];
+const HISTORY=[
+  {t:"Revisión anual",d:"10 de enero 2025"},
+  {t:"Ajuste de programa",d:"4 de octubre 2024"},
+  {t:"Mantenimiento y limpieza",d:"17 de junio 2024"},
+  {t:"Audiometría",d:"3 de enero 2024"},
+];
+const NOTIFS=[
+  {ic:"calendar-check",t:"Cita confirmada",b:"Tu revisión anual está confirmada para el 15 de julio a las 10:30 h en Mr. Oído Barcelona.",d:"Hace 2 horas",unread:true},
+  {ic:"wrench",t:"Mantenimiento próximo",b:"Tu audífono Phonak Audéo Lumity tiene mantenimiento programado en 3 semanas.",d:"Ayer",unread:true},
+  {ic:"radio",t:"Ajuste remoto completado",b:"El audioprotesista ha actualizado el programa de música de tu audífono.",d:"28 may"},
+  {ic:"lightbulb",t:"Consejo semanal",b:"Recuerda limpiar el filtro de tu audífono. Una limpieza regular mejora la calidad del sonido.",d:"20 may"},
+  {ic:"star",t:"¿Cómo fue tu visita?",b:"Cuéntanos tu experiencia en la última visita al centro. Tu opinión nos ayuda a mejorar.",d:"10 ene"},
+];
+const CHAT0=[
+  {who:"sys",txt:"Ajuste remoto disponible"},
+  {who:"them",txt:"Hola Juan 👋 ¿Qué tal va el nuevo programa de música que activamos la semana pasada?",t:"10:02"},
+  {who:"me",txt:"Hola Marta. Se escucha mucho mejor, gracias. En la tele aún noto algo de ruido.",t:"10:05"},
+  {who:"them",txt:"Perfecto. Puedo afinar el programa “Exterior” desde aquí mismo, sin que vengas al centro. ¿Te parece?",t:"10:06"},
+  {who:"me",txt:"Sí, estupendo.",t:"10:07"},
+  {who:"sys",txt:"Ajuste remoto aplicado a tu audífono"},
+  {who:"them",txt:"Listo ✅ Pruébalo esta tarde y me cuentas. Cualquier cosa, aquí estoy.",t:"10:09"},
+];
+const QUICK_REPLIES=["Gracias, lo pruebo 🙏","¿Cuándo es mi próxima cita?","Quiero pedir una revisión"];
+
+function icon(name){return window.makeIcon(name);}
+
+/* ---------- Login ---------- */
+function Login({onLogin}){
+  const [u,setU]=useState(""),[p,setP]=useState(""),[err,setErr]=useState(false);
+  const submit=(e)=>{e.preventDefault(); if(u.trim()==="demo"&&p.trim()==="1234"){onLogin();}else{setErr(true);}};
+  return (
+    <form className="login screen-anim" onSubmit={submit}>
+      <img className="logo" src="https://felixgpz.github.io/mr-oido/assets/images/logo-mroido-transparent.png" alt="Mr. Oído"/>
+      <div className="brand-sub">Tu centro auditivo de confianza</div>
+      <div className="ver">v2.4.1</div>
+      <h2 className="welcome">Bienvenido de nuevo</h2>
+      <p className="welcome-sub">Accede a tu centro auditivo</p>
+      {err&&<div className="err">Usuario o contraseña incorrectos</div>}
+      <div className="field"><label>Usuario</label><input value={u} onChange={e=>{setU(e.target.value);setErr(false);}} placeholder="demo" autoComplete="username"/></div>
+      <div className="field"><label>Contraseña</label><input type="password" value={p} onChange={e=>{setP(e.target.value);setErr(false);}} placeholder="••••" autoComplete="current-password"/></div>
+      <button className="btn btn-primary" type="submit">Entrar</button>
+      <div className="hint">Demo — Usuario: <b>demo</b> · Contraseña: <b>1234</b></div>
+    </form>
+  );
+}
+
+/* ---------- Home ---------- */
+function Home({go,openOverlay}){
+  const quicks=[
+    {ic:"calendar-plus",t:"Pedir cita",d:"Reserva online",tab:"cita"},
+    {ic:"ear",t:"Mis audífonos",d:"Control y ajustes",tab:"audifonos"},
+    {ic:"message-circle",t:"Mensajes",d:"Habla con tu centro",ov:"mensajes"},
+    {ic:"life-buoy",t:"Soporte",d:"Guías y ayuda",tab:"soporte"},
+  ];
+  return (
+    <div className="scroll"><div className="screen-anim">
+      <div className="home-top">
+        <div>
+          <h2 className="hello">Hola, Juan 👋</h2>
+          <div className="hello-sub">Bienvenido a Mr. Oído</div>
+        </div>
+        <button className="bell" onClick={()=>openOverlay("notificaciones")} aria-label="Notificaciones">
+          {icon("bell")}<span className="badge">2</span>
+        </button>
+      </div>
+      <div className="pad" style={{paddingTop:0}}>
+        <div className="appt-card">
+          <img src={PROFILE_IMG} alt="Juan"/>
+          <div style={{flex:1}}>
+            <div className="lab">Próxima revisión</div>
+            <div className="when">15 de julio · 10:30 h<br/>Mr. Oído Barcelona</div>
+          </div>
+          {icon("chevron-right")}
+        </div>
+        <div className="sec-label">¿Qué necesitas hoy?</div>
+        <div className="quick-grid">
+          {quicks.map(q=>(
+            <button key={q.t} className="quick" onClick={()=>q.ov?openOverlay(q.ov):go(q.tab)}>
+              <div className="ic">{icon(q.ic)}</div>
+              <div><div className="qt">{q.t}</div></div>
+              <div className="qd">{q.d}</div>
+            </button>
+          ))}
+        </div>
+        <div className="sec-label" style={{marginTop:24}}>Consejos del centro</div>
+      </div>
+      <div className="tips">
+        {TIPS.map(t=>(
+          <div className="tip" key={t.t}>
+            <div className="ic">{icon(t.ic)}</div>
+            <div className="tt">{t.t}</div>
+            <div className="td">{t.d}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{height:24}}/>
+    </div></div>
+  );
+}
+
+/* ---------- Cita ---------- */
+function Cita(){
+  const [day,setDay]=useState(null);
+  const [slot,setSlot]=useState(null);
+  const [done,setDone]=useState(false);
+  // July 2026 starts on Wednesday -> 2 leading blanks (Mon,Tue)
+  const blanks=[0,1]; const days=Array.from({length:31},(_,i)=>i+1);
+  if(done){
+    return (
+      <div className="scroll"><div className="pad screen-anim">
+        <div className="confirm-ok card" style={{marginTop:40}}>
+          <div className="circ">{icon("check")}</div>
+          <h2 style={{fontSize:26}}>¡Cita confirmada!</h2>
+          <p className="muted" style={{fontSize:16}}>Te esperamos el <b>{day} de julio</b> a las <b>{slot} h</b> en Mr. Oído Barcelona.</p>
+          <button className="btn btn-ghost" style={{marginTop:8}} onClick={()=>{setDone(false);setDay(null);setSlot(null);}}>Reservar otra</button>
+        </div>
+      </div></div>
+    );
+  }
+  return (
+    <div className="scroll">
+      <div className="page-head"><div className="eyebrow">Reserva online</div><h1 className="h-title">Pedir cita</h1></div>
+      <div className="pad screen-anim" style={{paddingTop:0}}>
+        <div className="card" style={{padding:18}}>
+          <div className="cal-head">
+            <div className="m">Julio 2026</div>
+            <div className="cal-nav"><button>{icon("chevron-left")}</button><button>{icon("chevron-right")}</button></div>
+          </div>
+          <div className="cal-grid">
+            {["L","M","X","J","V","S","D"].map(d=><div className="dow" key={d}>{d}</div>)}
+            {blanks.map(b=><div key={"b"+b}/>)}
+            {days.map(d=>{
+              const dow=(d+1)%7; // 0=Mon ... offset since 1st is Wed(idx2)
+              const weekend=(d+2)%7===6||(d+2)%7===0; // rough Sun closed
+              const sunday=((d-1+2)%7)===6;
+              return (
+                <button key={d} className={"cal-day"+(day===d?" sel":"")} disabled={sunday} onClick={()=>setDay(d)}>
+                  {d}{d===15&&<span className="dot"/>}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="sec-label" style={{marginTop:22}}>Franjas disponibles</div>
+        <div className="slots">
+          {SLOTS.map(s=><button key={s} className={"slot"+(slot===s?" sel":"")} onClick={()=>setSlot(s)}>{s}</button>)}
+        </div>
+        <button className="btn btn-primary" style={{marginTop:26,opacity:day&&slot?1:.5}} disabled={!(day&&slot)} onClick={()=>setDone(true)}>
+          {icon("check")} Confirmar cita
+        </button>
+        <p className="muted center" style={{fontSize:13.5,marginTop:12}}>El 15 de julio tienes tu revisión anual</p>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Audífonos ---------- */
+function Audifonos(){
+  const [vol,setVol]=useState(65);
+  const [prog,setProg]=useState("Normal");
+  return (
+    <div className="scroll">
+      <div className="page-head"><div className="eyebrow">Tu dispositivo</div><h1 className="h-title">Mis audífonos</h1></div>
+      <div className="pad screen-anim" style={{paddingTop:0}}>
+        <div className="card">
+          <div className="device">
+            <div className="dimg">{icon("ear")}</div>
+            <div style={{flex:1}}>
+              <h3 style={{fontSize:20}}>Phonak Audéo Lumity</h3>
+              <div className="muted" style={{fontSize:13.5,marginTop:2}}>Serie: PH-2024-00341</div>
+              <span className="badge-on"><span className="pulse"/> Conectado</span>
+            </div>
+          </div>
+          <div style={{padding:"0 18px 18px"}}>
+            <div className="batt-row">
+              {icon("battery-medium")}
+              <div className="batt-bar"><i style={{width:"72%"}}/></div>
+              <b style={{fontSize:15}}>72%</b>
+            </div>
+          </div>
+        </div>
+
+        <div className="card ctl-card">
+          <div className="ct">Volumen <b>{vol}%</b></div>
+          <input type="range" min="0" max="100" value={vol} onChange={e=>setVol(+e.target.value)}/>
+        </div>
+
+        <div className="card ctl-card">
+          <div className="ct">Programa de escucha</div>
+          <div className="prog-grid">
+            {PROGRAMS.map(p=>(
+              <button key={p.k} className={"prog"+(prog===p.k?" sel":"")} onClick={()=>setProg(p.k)}>
+                {icon(p.ic)} {p.k}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="card ctl-card">
+          <div className="ct" style={{marginBottom:4}}>Estado y mantenimiento</div>
+          {MAINT.map(m=>(
+            <div className="maint" key={m.k}><span className="mk">{m.k}</span><span className="mv">{m.v}</span></div>
+          ))}
+        </div>
+        <div style={{height:8}}/>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Soporte ---------- */
+function Soporte(){
+  const [open,setOpen]=useState(0);
+  return (
+    <div className="scroll">
+      <div className="page-head"><div className="eyebrow">Ayuda</div><h1 className="h-title">Soporte</h1></div>
+      <div className="pad screen-anim" style={{paddingTop:0}}>
+        {SUPPORT.map((s,i)=>(
+          <div className={"acc"+(open===i?" open":"")} key={s.q}>
+            <button onClick={()=>setOpen(open===i?-1:i)}>{s.q} {icon("chevron-right")}</button>
+            <div className="body" style={{maxHeight:open===i?s.steps.length*64+20:0}}>
+              <div className="body-pad">
+                {s.steps.map((st,k)=>(
+                  <div className="step" key={k}><div className="n">{k+1}</div><p>{st}</p></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="support-actions">
+          <button className="btn btn-primary">{icon("phone")} Llamar al centro · 93 XXX XX XX</button>
+          <button className="btn btn-amber">{icon("message-circle")} Escribir por WhatsApp</button>
+        </div>
+        <div style={{height:8}}/>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Perfil ---------- */
+function Perfil({onLogout}){
+  const info=[["Edad","80 años"],["Teléfono","6XX XXX XXX"],["Ciudad","Barcelona"],["Audífono","Phonak Audéo Lumity"]];
+  return (
+    <div className="scroll">
+      <div className="page-head"><div className="eyebrow">Tu cuenta</div><h1 className="h-title">Mi perfil</h1></div>
+      <div className="pad screen-anim" style={{paddingTop:0}}>
+        <div className="profile-head">
+          <img src={PROFILE_IMG} alt="Juan"/>
+          <div className="pn">Juan Golondrina Pérez</div>
+          <div className="ps">Paciente desde enero 2022</div>
+        </div>
+        <div className="card" style={{marginBottom:18}}>
+          {info.map(r=><div className="info-row" key={r[0]}><span className="k">{r[0]}</span><span className="v">{r[1]}</span></div>)}
+        </div>
+        <div className="sec-label">Historial de visitas</div>
+        <div className="card" style={{padding:"12px 18px"}}>
+          {HISTORY.map(h=>(
+            <div className="hist" key={h.t}><span className="dot"/><div><div className="ht">{h.t}</div><div className="hd">{h.d}</div></div></div>
+          ))}
+        </div>
+        <button className="btn btn-ghost" style={{marginTop:18,color:"#a23232"}} onClick={onLogout}>{icon("log-out")} Cerrar sesión</button>
+        <div style={{height:8}}/>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Overlays ---------- */
+function Notificaciones({onBack,show}){
+  return (
+    <div className={"overlay"+(show?" show":"")}>
+      <div className="ov-head">
+        <button className="back back-labeled" onClick={onBack} type="button" aria-label="Volver al inicio">
+          {icon("arrow-left")}<span>Volver</span>
+        </button>
+        <div className="ot">Notificaciones</div>
+      </div>
+      <div className="scroll"><div className="pad">
+        {NOTIFS.map((n,i)=>(
+          <div className={"notif"+(n.unread?" unread":"")} key={i}>
+            <div className="ic">{icon(n.ic)}</div>
+            <div><div className="nt">{n.t}</div><div className="nb">{n.b}</div><div className="nd">{n.d}</div></div>
+          </div>
+        ))}
+      </div></div>
+    </div>
+  );
+}
+
+function Mensajes({onBack,show}){
+  const [msgs,setMsgs]=useState(CHAT0);
+  const [txt,setTxt]=useState("");
+  const endRef=useRef(null);
+  useEffect(()=>{ if(endRef.current) endRef.current.scrollTop=endRef.current.scrollHeight; },[msgs]);
+  const send=(t)=>{
+    const v=(t||txt).trim(); if(!v)return;
+    setTxt("");
+    setMsgs(m=>[...m,{who:"me",txt:v,t:"ahora"}]);
+    setTimeout(()=>setMsgs(m=>[...m,{who:"them",txt:"Gracias por escribir, Juan. Te responderé en breve. Si es urgente, llámanos al 93 XXX XX XX 😊",t:"ahora"}]),900);
+  };
+  return (
+    <div className={"overlay"+(show?" show":"")}>
+      <div className="ov-head">
+        <button className="back" onClick={onBack}>{icon("arrow-left")}</button>
+        <div style={{flex:1}}>
+          <div className="ot">Marta · Audioprotesista</div>
+          <div className="os"><span className="pulse"/> En línea</div>
+        </div>
+        {icon("phone")}
+      </div>
+      <div className="chat-scroll" ref={endRef}>
+        <div className="chat-day">Hoy</div>
+        {msgs.map((m,i)=> m.who==="sys"
+          ? <div className="chat-system" key={i}>{icon("radio")} {m.txt}</div>
+          : <div className={"bubble "+m.who} key={i}>{m.txt}{m.t&&<span className="t">{m.t}</span>}</div>
+        )}
+      </div>
+      <div className="quick-replies">
+        {QUICK_REPLIES.map(q=><button className="qr" key={q} onClick={()=>send(q)}>{q}</button>)}
+      </div>
+      <form className="chat-input" onSubmit={e=>{e.preventDefault();send();}}>
+        <input value={txt} onChange={e=>setTxt(e.target.value)} placeholder="Escribe un mensaje…"/>
+        <button className="send" type="submit" aria-label="Enviar">{icon("send")}</button>
+      </form>
+    </div>
+  );
+}
+
+/* ---------- App shell ---------- */
+const TABS=[
+  {k:"home",t:"Inicio",ic:"home"},
+  {k:"cita",t:"Cita",ic:"calendar-days"},
+  {k:"audifonos",t:"Audífonos",ic:"ear"},
+  {k:"soporte",t:"Soporte",ic:"life-buoy"},
+  {k:"perfil",t:"Perfil",ic:"user"},
+];
+
+function App(){
+  const [loggedIn,setLoggedIn]=useState(()=>localStorage.getItem("mroido_login")==="1");
+  const [tab,setTab]=useState(()=>localStorage.getItem("mroido_tab")||"home");
+  const [overlay,setOverlay]=useState(null);     // current overlay id (null=none)
+
+  useEffect(()=>{localStorage.setItem("mroido_login",loggedIn?"1":"0");},[loggedIn]);
+  useEffect(()=>{localStorage.setItem("mroido_tab",tab);},[tab]);
+
+  const openOverlay=useCallback((id)=>{ setOverlay(id); },[]);
+  const closeOverlay=useCallback(()=>{ setOverlay(null); },[]);
+  const go=useCallback((t)=>{ setTab(t); },[]);
+
+  useEffect(()=>{
+    if(!overlay)return;
+    const onKey=(e)=>{ if(e.key==="Escape") closeOverlay(); };
+    window.addEventListener("keydown",onKey);
+    return ()=>window.removeEventListener("keydown",onKey);
+  },[overlay,closeOverlay]);
+
+  const StatusBar=(
+    <div className="statusbar">
+      <span>9:41</span>
+      <span className="right">87 <span className="batt"><i/></span></span>
+    </div>
+  );
+
+  if(!loggedIn){
+    return (
+      <div className="stage"><div className="phone-wrap" id="pw"><div className="phone"><div className="screen">
+        {StatusBar}
+        <div className="viewport"><Login onLogin={()=>setLoggedIn(true)}/></div>
+      </div></div></div></div>
+    );
+  }
+
+  let Screen;
+  if(tab==="home") Screen=<Home key="home" go={go} openOverlay={openOverlay}/>;
+  else if(tab==="cita") Screen=<Cita key="cita"/>;
+  else if(tab==="audifonos") Screen=<Audifonos key="audifonos"/>;
+  else if(tab==="soporte") Screen=<Soporte key="soporte"/>;
+  else Screen=<Perfil key="perfil" onLogout={()=>{setLoggedIn(false);setTab("home");}}/>;
+
+  return (
+    <div className="stage"><div className="phone-wrap" id="pw"><div className="phone"><div className="screen">
+      {StatusBar}
+      <div className="viewport">
+        {Screen}
+      </div>
+      <div className="tabbar">
+        {TABS.map(t=>(
+          <button key={t.k} className={"tab"+(tab===t.k?" active":"")} onClick={()=>go(t.k)}>
+            {icon(t.ic)}<span>{t.t}</span>
+          </button>
+        ))}
+      </div>
+      <Notificaciones show={overlay==="notificaciones"} onBack={closeOverlay}/>
+      <Mensajes show={overlay==="mensajes"} onBack={closeOverlay}/>
+    </div></div></div></div>
+  );
+}
+
+/* ---------- mount + scale ---------- */
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+function scalePhone(){
+  const pw=document.getElementById("pw"); if(!pw)return;
+  const s=Math.min(1,(window.innerHeight-32)/858,(window.innerWidth-32)/402);
+  pw.style.transform="scale("+s+")";
+}
+window.addEventListener("resize",scalePhone);
+const _si=setInterval(()=>{ if(document.getElementById("pw")){scalePhone();clearInterval(_si);} },60);
+</script>
+</body>
+</html>
+

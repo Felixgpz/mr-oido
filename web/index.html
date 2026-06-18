@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mister Oído — Centro Auditivo en Barcelona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#f9f6f0;
+  --paper-2:#efe7da;
+  --card:#fffefb;
+  --blue-soft:#e6eef5;
+  --ink:#1b2a3a;
+  --ink-2:#586577;
+  --line:rgba(27,42,58,0.12);
+  --line-soft:rgba(27,42,58,0.07);
+  --blue:#2b6c9b;
+  --blue-deep:#1c4d73;
+  --amber:#bf8438;
+  --maxw:1180px;
+  --r:16px;
+  --shadow:0 1px 2px rgba(27,42,58,.04), 0 18px 40px -24px rgba(27,42,58,.28);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:92px;}
+body{
+  margin:0;
+  font-family:"Source Sans 3",system-ui,sans-serif;
+  font-size:19px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:"Source Serif 4",Georgia,serif;font-weight:600;line-height:1.12;color:var(--ink);margin:0;letter-spacing:-0.01em;}
+p{margin:0;text-wrap:pretty;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin:0 0 18px;
+}
+.eyebrow::before{content:"";width:26px;height:1.5px;background:var(--blue);display:inline-block;}
+.eyebrow.center{justify-content:center;}
+.section{padding:96px 0;}
+.section-head{max-width:680px;margin:0 0 56px;}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.section-head h2{font-size:clamp(32px,4.2vw,46px);}
+.section-head p{font-size:21px;color:var(--ink-2);margin-top:16px;}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:inherit;font-size:18px;font-weight:600;cursor:pointer;
+  padding:15px 26px;border-radius:999px;border:1.5px solid transparent;white-space:nowrap;
+  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.btn:active{transform:translateY(1px);}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 12px 24px -12px rgba(43,108,155,.7);}
+.btn-primary:hover{background:var(--blue-deep);}
+.btn-ghost{background:transparent;color:var(--blue-deep);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--blue);background:#fff;}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(249,246,240,.82);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s, box-shadow .2s;}
+header.scrolled{border-bottom-color:var(--line);box-shadow:0 8px 24px -20px rgba(27,42,58,.5);}
+.nav{display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand img{height:42px;width:auto;}
+.brand .word{font-family:"Source Serif 4",serif;font-weight:700;font-size:22px;letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{font-size:17px;font-weight:500;color:var(--ink-2);transition:color .15s;}
+.nav-links a:hover{color:var(--blue-deep);}
+.nav-cta{display:flex;align-items:center;gap:14px;}
+.menu-btn{display:none;background:none;border:1.5px solid var(--line);border-radius:12px;width:48px;height:48px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;}
+.menu-btn span{width:22px;height:2px;background:var(--ink);border-radius:2px;display:block;}
+
+/* Hero */
+.hero{padding:64px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+.hero h1{font-size:clamp(40px,5.4vw,62px);font-weight:600;}
+.hero h1 em{font-style:normal;color:var(--blue-deep);}
+.hero p.lead{font-size:21px;color:var(--ink-2);margin-top:24px;max-width:520px;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+.hero-media{position:relative;}
+.hero-media .main-img{width:100%;height:520px;object-fit:cover;border-radius:24px;box-shadow:var(--shadow);}
+.float-card{
+  position:absolute;left:-26px;bottom:34px;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:18px;padding:18px 22px;
+  box-shadow:0 24px 48px -24px rgba(27,42,58,.45);max-width:250px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.float-card .dot{flex:none;width:42px;height:42px;border-radius:50%;background:var(--blue-soft);position:relative;}
+.float-card .dot::after{content:"";position:absolute;inset:13px;border-radius:50%;background:var(--blue);}
+.float-card .ttl{font-family:"Source Serif 4",serif;font-weight:700;font-size:18px;color:var(--ink);line-height:1.2;}
+.float-card .sub{font-size:15px;color:var(--ink-2);margin-top:3px;}
+.hero-arcs{position:absolute;top:-18px;right:-12px;width:120px;height:120px;opacity:.5;}
+
+/* Stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:64px;}
+.stat{padding:30px 26px;border-right:1px solid var(--line);}
+.stat:last-child{border-right:none;}
+.stat .num{font-family:"Source Serif 4",serif;font-size:30px;font-weight:700;color:var(--blue-deep);line-height:1;}
+.stat .lab{font-size:16px;color:var(--ink-2);margin-top:8px;}
+
+/* Brands ticker row */
+.brands-row{padding:38px 0;}
+.brands-row .lbl{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);font-weight:700;margin-bottom:18px;text-align:center;}
+.brands-list{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;align-items:center;}
+.brands-list span{font-family:"Source Serif 4",serif;font-size:24px;font-weight:600;color:#9aa5b1;letter-spacing:.01em;transition:color .2s;}
+.brands-list span:hover{color:var(--blue-deep);}
+
+/* Services grid */
+.alt{background:var(--paper-2);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.svc{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s;}
+.svc:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(27,42,58,.04), 0 28px 50px -28px rgba(27,42,58,.4);}
+.svc .mark{width:46px;height:46px;border-radius:13px;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.svc .mark i{display:block;width:16px;height:16px;border-radius:50%;border:3px solid var(--blue);}
+.svc h3{font-size:23px;margin-bottom:10px;}
+.svc p{font-size:17px;color:var(--ink-2);}
+
+/* Two-column feature */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.feature.rev .feature-text{order:2;}
+.feature img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;object-position:center;border-radius:22px;box-shadow:var(--shadow);}
+.feature img.diagram{aspect-ratio:auto;height:auto;object-fit:contain;background:#fff;padding:26px;border:1px solid var(--line-soft);}
+.feature h3{font-size:clamp(28px,3.4vw,38px);margin-bottom:18px;}
+.feature p{font-size:19px;color:var(--ink-2);}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+.chip{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-size:16px;font-weight:600;color:var(--blue-deep);}
+.chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber);}
+
+/* Why us - numbered */
+.why-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+.why-list{display:flex;flex-direction:column;gap:8px;}
+.why-item{display:grid;grid-template-columns:auto 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line);}
+.why-item:last-child{border-bottom:1px solid var(--line);}
+.why-item .n{font-family:"Source Serif 4",serif;font-size:24px;font-weight:700;color:var(--amber);line-height:1;padding-top:4px;}
+.why-item h3{font-size:24px;margin-bottom:8px;}
+.why-item p{font-size:17px;color:var(--ink-2);}
+.why-grid img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;object-position:center;border-radius:22px;box-shadow:var(--shadow);}
+
+/* Patient profiles */
+.profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.profile{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);}
+.profile img{width:100%;height:240px;object-fit:cover;}
+.profile .body{padding:26px;}
+.profile .age{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700;}
+.profile h3{font-size:24px;margin:6px 0 12px;}
+.profile p{font-size:17px;color:var(--ink-2);}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+.tag{background:var(--blue-soft);color:var(--blue-deep);font-size:14px;font-weight:600;padding:6px 13px;border-radius:999px;}
+
+/* Testimonials carousel */
+.t-carousel{max-width:860px;margin:0 auto;position:relative;}
+.t-track{position:relative;}
+.t-slide{position:absolute;top:0;left:0;width:100%;opacity:0;transform:translateY(20px) scale(.99);transition:opacity .7s ease, transform .7s ease;pointer-events:none;text-align:center;padding:0 12px;}
+.t-slide.active{opacity:1;transform:none;pointer-events:auto;}
+.t-mk{font-family:"Source Serif 4",serif;font-size:76px;line-height:1;color:var(--blue);opacity:.28;height:42px;display:block;}
+.t-text{font-family:"Source Serif 4",serif;font-size:clamp(22px,2.6vw,30px);font-weight:500;line-height:1.42;color:var(--ink);max-width:740px;margin:16px auto 26px;}
+.t-who{font-size:17px;font-weight:700;color:var(--ink);}
+.t-who span{display:block;font-weight:400;color:var(--ink-2);font-size:15px;margin-top:3px;}
+.t-controls{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:18px;}
+.t-arrow{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--blue-deep);font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.t-arrow:hover{border-color:var(--blue);background:#fff;color:var(--blue);}
+.t-dots{display:flex;gap:10px;}
+.t-dot{width:10px;height:10px;border-radius:50%;background:var(--line);border:none;cursor:pointer;padding:0;transition:.25s;}
+.t-dot.active{background:var(--blue);transform:scale(1.3);}
+@media(prefers-reduced-motion:reduce){.t-slide{transition:opacity .4s ease;transform:none;}}
+
+/* Brands band */
+.band{background:var(--blue-deep);color:#fff;}
+.band .section-head h2,.band .eyebrow{color:#fff;}
+.band .eyebrow::before{background:#fff;}
+.band .section-head p{color:rgba(255,255,255,.75);}
+.band-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1px solid rgba(255,255,255,.18);}
+.band-grid span{font-family:"Source Serif 4",serif;font-size:23px;font-weight:600;color:rgba(255,255,255,.9);text-align:center;padding:34px 10px;border-right:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);}
+.band-grid span:nth-child(6n){border-right:none;}
+
+/* FAQ */
+.faq-list{max-width:840px;margin:0 auto;}
+.faq{border-bottom:1px solid var(--line);}
+.faq button{width:100%;background:none;border:none;cursor:pointer;text-align:left;font-family:"Source Serif 4",serif;font-size:22px;font-weight:600;color:var(--ink);padding:26px 48px 26px 0;position:relative;}
+.faq button .ic{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:24px;height:24px;}
+.faq button .ic::before,.faq button .ic::after{content:"";position:absolute;background:var(--blue);border-radius:2px;transition:transform .25s ease, opacity .2s;}
+.faq button .ic::before{width:20px;height:2.5px;top:11px;left:2px;}
+.faq button .ic::after{width:2.5px;height:20px;top:2px;left:11px;}
+.faq.open button .ic::after{transform:scaleY(0);opacity:0;}
+.faq .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq .ans p{font-size:18px;color:var(--ink-2);padding:0 60px 26px 0;}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start;}
+.contact-info h2{font-size:clamp(30px,3.6vw,42px);margin-bottom:18px;}
+.contact-info .lead{font-size:20px;color:var(--ink-2);margin-bottom:32px;}
+.info-row{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line);}
+.info-row:last-child{border-bottom:1px solid var(--line);}
+.info-row .k{flex:none;width:140px;font-weight:700;color:var(--blue-deep);font-size:16px;}
+.info-row .v{font-size:17px;color:var(--ink-2);}
+.form-card{background:var(--card);border:1px solid var(--line-soft);border-radius:22px;padding:40px;box-shadow:var(--shadow);}
+.fld{margin-bottom:20px;}
+.fld label{display:block;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.fld input,.fld select{width:100%;font-family:inherit;font-size:18px;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;transition:border-color .15s, box-shadow .15s;}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(43,108,155,.13);}
+.fld-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.form-msg{display:none;border-radius:12px;padding:14px 18px;font-size:16px;font-weight:600;margin-bottom:18px;}
+.form-msg.err{display:block;background:#fdecec;color:#a23232;}
+.form-msg.ok{display:block;background:#e7f3ec;color:#1f6b41;}
+.form-card .btn-primary{width:100%;margin-top:6px;}
+
+/* Footer */
+footer{background:var(--ink);color:rgba(255,255,255,.72);padding:72px 0 36px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;}
+.foot-brand img{height:44px;filter:brightness(0) invert(1);margin-bottom:18px;}
+.foot-brand p{font-size:16px;line-height:1.6;}
+.foot-brand .tag{display:inline-block;margin-top:18px;font-family:"Source Serif 4",serif;font-style:italic;font-size:19px;color:#fff;}
+footer h4{color:#fff;font-size:17px;letter-spacing:.04em;margin-bottom:18px;}
+footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;}
+footer ul li{font-size:16px;}
+footer ul li a:hover{color:#fff;}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.14);margin-top:52px;padding-top:26px;font-size:15px;color:rgba(255,255,255,.5);}
+
+/* Mobile */
+@media(max-width:920px){
+  .hero-grid,.feature,.why-grid,.contact-grid{grid-template-columns:1fr;gap:40px;}
+  .feature.rev .feature-text{order:0;}
+  .svc-grid,.profiles{grid-template-columns:1fr 1fr;}
+  .band-grid{grid-template-columns:repeat(3,1fr);}
+  .band-grid span:nth-child(6n){border-right:1px solid rgba(255,255,255,.18);}
+  .band-grid span:nth-child(3n){border-right:none;}
+  .hero-media .main-img{height:420px;}
+  .why-grid img{height:420px;}
+}
+@media(max-width:680px){
+  body{font-size:18px;}
+  .section{padding:68px 0;}
+  .wrap{padding:0 20px;}
+  .nav-links,.nav-cta .btn{display:none;}
+  .menu-btn{display:flex;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .stat:nth-child(2n){border-right:none;}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line);}
+  .svc-grid,.profiles,.fld-2{grid-template-columns:1fr;columns:1;}
+  .foot-grid{grid-template-columns:1fr;gap:36px;}
+  .float-card{left:14px;right:14px;max-width:none;bottom:-20px;}
+  .hero-media{margin-bottom:30px;}
+  .info-row{flex-direction:column;gap:4px;}
+  .info-row .k{width:auto;}
+}
+/* Mobile drawer */
+.drawer{position:fixed;inset:0;z-index:60;background:rgba(27,42,58,.4);opacity:0;pointer-events:none;transition:opacity .2s;}
+.drawer.open{opacity:1;pointer-events:auto;}
+.drawer-panel{position:absolute;top:0;right:0;height:100%;width:min(340px,86vw);background:var(--paper);padding:28px 26px;transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;gap:6px;}
+.drawer.open .drawer-panel{transform:none;}
+.drawer-panel a{font-family:"Source Serif 4",serif;font-size:22px;font-weight:600;padding:14px 0;border-bottom:1px solid var(--line);}
+.drawer-panel .btn{margin-top:22px;}
+.drawer-close{align-self:flex-end;background:none;border:none;font-size:34px;line-height:1;cursor:pointer;color:var(--ink);margin-bottom:8px;}
+</style>
+</head>
+<body style="background-color: rgb(235, 235, 235)">
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img src="https://felixgpz.github.io/mr-oido/assets/images/logo-mroido-transparent.png" alt="Mister Oído" />
+    </a>
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contacto" class="btn btn-primary">Pedir cita</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-panel">
+    <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú">&times;</button>
+    <a href="#servicios">Servicios</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#opiniones">Opiniones</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#contacto" class="btn btn-primary">Pedir cita</a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Centro auditivo certificado · Barcelona</span>
+        <h1>Tu centro auditivo de <em>confianza</em> en Barcelona</h1>
+        <p class="lead">Mejoramos tu calidad de vida con las mejores prótesis auditivas, atención personalizada y tecnología de última generación. Presencial, remoto o por videollamada.</p>
+        <div class="hero-cta">
+          <a href="#contacto" class="btn btn-primary">Pedir cita online</a>
+          <a href="tel:+34930000000" class="btn btn-ghost">Llámanos ahora</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <svg class="hero-arcs" viewBox="0 0 120 120" fill="none" stroke="#2b6c9b" stroke-width="2">
+          <circle cx="20" cy="100" r="22" stroke-dasharray="2 200" stroke-dashoffset="-10"/>
+          <path d="M20 60 A40 40 0 0 1 60 100" />
+          <path d="M20 40 A60 60 0 0 1 80 100" />
+          <path d="M20 20 A80 80 0 0 1 100 100" />
+          <circle cx="20" cy="100" r="5" fill="#2b6c9b" stroke="none"/>
+        </svg>
+        <img class="main-img" src="https://felixgpz.github.io/mr-oido/assets/images/clinic-photo.jpg" alt="Pacientes en Mister Oído, Barcelona" />
+        <div class="float-card">
+          <span class="dot"></span>
+          <div>
+            <div class="ttl">Primera revisión gratuita</div>
+            <div class="sub">Asesoramiento sin compromiso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><div class="num">+800</div><div class="lab">pacientes confían en nosotros</div></div>
+        <div class="stat"><div class="num">+10 años</div><div class="lab">de experiencia certificada</div></div>
+        <div class="stat"><div class="num">Remoto</div><div class="lab">ajustes sin desplazarte</div></div>
+        <div class="stat"><div class="num">Barcelona</div><div class="lab">metro y bus a la puerta</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS ROW -->
+  <section class="brands-row">
+    <div class="wrap">
+      <div class="lbl">Trabajamos con</div>
+      <div class="brands-list">
+        <span>Oticon</span><span>Phonak</span><span>Signia</span><span>Widex</span><span>Starkey</span><span>ReSound</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section alt" id="servicios">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Servicios</span>
+        <h2>Nuestros servicios</h2>
+        <p>Todo lo que necesitas para cuidar tu salud auditiva, en un solo lugar.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc"><div class="mark"><i></i></div><h3>Pruebas audiológicas</h3><p>Diagnóstico completo de tu nivel auditivo con equipos de última generación.</p></div>
+        <div class="svc"><div class="mark"><i></i></div><h3>Adaptación de audífonos</h3><p>Selección y adaptación personalizada de audífonos multimarca según tu pérdida.</p></div>
+        <div class="svc"><div class="mark"><i></i></div><h3>Ajuste remoto</h3><p>Realizamos ajustes leves desde casa a través de la app de tu audífono.</p></div>
+        <div class="svc"><div class="mark"><i></i></div><h3>Mantenimiento</h3><p>Limpieza, cambio de filtros y revisión técnica para prolongar la vida del audífono.</p></div>
+        <div class="svc"><div class="mark"><i></i></div><h3>Tapones a medida</h3><p>Tapones personalizados para baño, sueño, música o protección laboral.</p></div>
+        <div class="svc"><div class="mark"><i></i></div><h3>Revisiones periódicas</h3><p>Seguimiento anual con recordatorios automáticos para no perderte ninguna cita.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGIA -->
+  <section class="section">
+    <div class="wrap feature">
+      <div class="feature-text">
+        <span class="eyebrow">Tecnología</span>
+        <h3>Soluciones pequeñas con gran capacidad de ajuste</h3>
+        <p>Trabajamos con audífonos modernos que permiten mejorar la comprensión del habla, reducir el ruido ambiente y ajustar la experiencia según el entorno diario del paciente.</p>
+        <div class="chips">
+          <span class="chip">Conectividad móvil</span>
+          <span class="chip">Programas por ambiente</span>
+          <span class="chip">Ajuste remoto</span>
+          <span class="chip">Recargables</span>
+        </div>
+      </div>
+      <img src="https://felixgpz.github.io/mr-oido/assets/images/mujer-audifono.jpg" alt="Mujer con audífono discreto" />
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section alt">
+    <div class="wrap feature rev">
+      <div class="feature-text">
+        <span class="eyebrow">Cómo funciona</span>
+        <h3>Información clara antes de elegir</h3>
+        <p>Te explicamos el proceso completo: revisión, recomendación, adaptación, mantenimiento y seguimiento. Sin tecnicismos y sin prisas, para que entiendas cada parte antes de la adaptación.</p>
+        <div class="chips">
+          <span class="chip">Revisión</span>
+          <span class="chip">Recomendación</span>
+          <span class="chip">Adaptación</span>
+          <span class="chip">Seguimiento</span>
+        </div>
+      </div>
+      <img class="diagram" src="https://felixgpz.github.io/mr-oido/assets/images/tipos-audifonos.jpg" alt="Tipos de audífonos disponibles" />
+    </div>
+  </section>
+
+  <!-- NOSOTROS / POR QUE -->
+  <section class="section" id="nosotros">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Nosotros</span>
+        <h2>¿Por qué Mister Oído?</h2>
+        <p>La cercanía de un centro de barrio con la tecnología de las grandes cadenas.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-list">
+          <div class="why-item"><div class="n">01</div><div><h3>Cercanía de barrio</h3><p>Te conocemos por tu nombre, recordamos tu historial y te atendemos sin esperas. Somos tu audioprotesista de confianza.</p></div></div>
+          <div class="why-item"><div class="n">02</div><div><h3>Tecnología moderna</h3><p>Audífonos Bluetooth, ajuste remoto, teleconsulta y app de seguimiento. Igual que las grandes cadenas, con trato humano.</p></div></div>
+          <div class="why-item"><div class="n">03</div><div><h3>Atención personalizada</h3><p>Tres perfiles de paciente, tres tipos de atención. Nos adaptamos a ti: mayor, adulto activo o familia con niños.</p></div></div>
+        </div>
+        <img src="https://felixgpz.github.io/mr-oido/assets/images/familia.jpg" alt="Familia feliz gracias a Mister Oído" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFILES -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow center">Pacientes</span>
+        <h2>¿A quién ayudamos?</h2>
+        <p>Soluciones adaptadas a cada etapa de la vida.</p>
+      </div>
+      <div class="profiles">
+        <div class="profile">
+          <img src="https://felixgpz.github.io/mr-oido/assets/images/profile-juan.jpg" alt="Juan" />
+          <div class="body">
+            <div class="age">Tercera edad</div>
+            <h3>Juan, 80 años</h3>
+            <p>No entiende a su familia y le cuesta usar la tecnología. Busca una solución sencilla y discreta.</p>
+            <div class="tags"><span class="tag">WhatsApp con el hijo</span><span class="tag">Audífono pequeño</span><span class="tag">Soporte presencial</span></div>
+          </div>
+        </div>
+        <div class="profile">
+          <img src="https://felixgpz.github.io/mr-oido/assets/images/profile-lucia.jpg" alt="Lucía" />
+          <div class="body">
+            <div class="age">Niños / Padres</div>
+            <h3>Lucía, 6 años</h3>
+            <p>Sus padres buscan un audífono resistente y discreto. Tramitamos juntos las ayudas PUA.</p>
+            <div class="tags"><span class="tag">Audífonos infantiles</span><span class="tag">Ayudas PUA</span><span class="tag">Seguimiento escolar</span></div>
+          </div>
+        </div>
+        <div class="profile">
+          <img src="https://felixgpz.github.io/mr-oido/assets/images/profile-marta.jpg" alt="Marta" />
+          <div class="body">
+            <div class="age">Adulto activo</div>
+            <h3>Marta, 38 años</h3>
+            <p>Se pierde en reuniones de trabajo. Quiere un audífono Bluetooth discreto y ajuste remoto.</p>
+            <div class="tags"><span class="tag">Ajuste remoto</span><span class="tag">Cita online</span><span class="tag">Bluetooth</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINIONES -->
+  <section class="section" id="opiniones">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow center">Opiniones</span>
+        <h2>Qué dicen nuestros pacientes</h2>
+        <p>Más de 800 familias ya confían en Mister Oído.</p>
+      </div>
+      <div class="t-carousel" id="tCarousel" aria-roledescription="carrusel" aria-label="Opiniones de pacientes">
+        <div class="t-track" id="tTrack">
+          <article class="t-slide active"><span class="t-mk">&ldquo;</span><p class="t-text">Llevaba años evitando ir al audioprotesista. Aquí me explicaron todo con paciencia. Por fin entiendo a mis nietos.</p><div class="t-who">Antonio R.<span>78 años · Barcelona</span></div></article>
+          <article class="t-slide"><span class="t-mk">&ldquo;</span><p class="t-text">El ajuste remoto me ha cambiado la vida. Trabajo mucho y no tenía tiempo de ir al centro. Ahora me ajustan el audífono y listo.</p><div class="t-who">Sandra M.<span>41 años · Gràcia</span></div></article>
+          <article class="t-slide"><span class="t-mk">&ldquo;</span><p class="t-text">Nos ayudaron con toda la tramitación de las ayudas PUA para nuestra hija. Servicio cercano y muy profesional.</p><div class="t-who">Carles y Laura<span>Padres de Martina</span></div></article>
+          <article class="t-slide"><span class="t-mk">&ldquo;</span><p class="t-text">Tenía miedo de que el audífono fuera muy visible. Me recomendaron uno pequeñísimo y ahora casi nadie se da cuenta.</p><div class="t-who">Rosa T.<span>65 años · Eixample</span></div></article>
+          <article class="t-slide"><span class="t-mk">&ldquo;</span><p class="t-text">Primera revisión gratuita, sin presiones. Me explicaron mi tipo de pérdida auditiva con total transparencia.</p><div class="t-who">Miquel F.<span>55 años · Sant Gervasi</span></div></article>
+        </div>
+        <div class="t-controls">
+          <button class="t-arrow" id="tPrev" type="button" aria-label="Opinión anterior">&lsaquo;</button>
+          <div class="t-dots" id="tDots"></div>
+          <button class="t-arrow" id="tNext" type="button" aria-label="Opinión siguiente">&rsaquo;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARCAS BAND -->
+  <section class="section band">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow center">Marcas</span>
+        <h2>Trabajamos con las mejores marcas</h2>
+        <p>Audífonos de fabricantes líderes mundiales, adaptados a cada necesidad y presupuesto.</p>
+      </div>
+      <div class="band-grid">
+        <span>Oticon</span><span>Phonak</span><span>Signia</span><span>Widex</span><span>Starkey</span><span>ReSound</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow center">FAQ</span>
+        <h2>Preguntas frecuentes</h2>
+        <p>Todo lo que necesitas saber antes de tu primera visita.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq"><button type="button">¿Necesito receta médica para comprar un audífono?<span class="ic"></span></button><div class="ans"><p>No es obligatorio, pero sí recomendable. Puedes venir directamente a hacerte una prueba audiológica gratuita con nosotros y valorar juntos la mejor opción para tu caso.</p></div></div>
+        <div class="faq"><button type="button">¿Cuánto cuesta un audífono?<span class="ic"></span></button><div class="ans"><p>El precio varía según el modelo y la tecnología. Trabajamos con todas las gamas. Siempre te explicamos las diferencias con total transparencia y sin presión.</p></div></div>
+        <div class="faq"><button type="button">¿Hay ayudas económicas para audífonos?<span class="ic"></span></button><div class="ans"><p>Sí. Existen las ayudas PUA para niños con pérdida bilateral, y algunas comunidades tienen subvenciones adicionales. Nos encargamos de toda la tramitación contigo.</p></div></div>
+        <div class="faq"><button type="button">¿Qué es el ajuste remoto y cómo funciona?<span class="ic"></span></button><div class="ans"><p>Permite al audioprotesista realizar modificaciones leves en tu audífono a través de la app del fabricante, sin que tengas que venir al centro. Ideal si tienes poca movilidad o poco tiempo.</p></div></div>
+        <div class="faq"><button type="button">¿Puedo probar el audífono antes de comprarlo?<span class="ic"></span></button><div class="ans"><p>Sí, ofrecemos un período de adaptación de prueba para que puedas comprobar que el audífono se ajusta a tu vida diaria antes de tomar una decisión definitiva.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section alt" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Contacto</span>
+        <h2>Pide tu cita online</h2>
+        <p class="lead">Rellena el formulario y te contactamos en menos de 24 horas.</p>
+        <div class="info-row"><div class="k">Dirección</div><div class="v">Carrer de Guipúscoa, 131</div></div>
+        <div class="info-row"><div class="k">Teléfono</div><div class="v">670 906 284</div></div>
+        <div class="info-row"><div class="k">Email</div><div class="v">clientes@misteroido.com</div></div>
+        <div class="info-row"><div class="k">Horario</div><div class="v">L–V 9:00–19:00 · S 9:00–13:00</div></div>
+      </div>
+      <form class="form-card" id="citaForm" novalidate>
+        <div class="form-msg err" id="msgErr">Por favor, completa todos los campos antes de enviar.</div>
+        <div class="form-msg ok" id="msgOk">Solicitud enviada. Te llamaremos en menos de 24 h.</div>
+        <div class="fld-2">
+          <div class="fld"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" required /></div>
+          <div class="fld"><label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" required /></div>
+        </div>
+        <div class="fld"><label for="email">Email</label><input id="email" name="email" type="email" required /></div>
+        <div class="fld"><label for="motivo">Motivo de consulta</label>
+          <select id="motivo" name="motivo" required>
+            <option value="">Selecciona un motivo…</option>
+            <option>Primera prueba audiológica</option>
+            <option>Revisión anual</option>
+            <option>Problema con mi audífono</option>
+            <option>Información sobre audífonos</option>
+            <option>Tapones a medida</option>
+            <option>Ajuste remoto</option>
+          </select>
+        </div>
+        <div class="fld"><label for="franja">Franja horaria preferida</label>
+          <select id="franja" name="franja" required>
+            <option value="">Selecciona una franja…</option>
+            <option>Mañana (9:00 – 13:00)</option>
+            <option>Mediodía (13:00 – 15:00)</option>
+            <option>Tarde (16:00 – 19:00)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Solicitar cita</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <img src="https://felixgpz.github.io/mr-oido/assets/images/logo-mroido-transparent.png" alt="Mister Oído" />
+      <p>Centro auditivo familiar en Barcelona.<br/>Atención personalizada, tecnología moderna y precios transparentes.</p>
+      <span class="tag" style="color: rgb(255, 255, 255); background-color: rgb(43, 108, 155)">Escuchamos. Te ayudamos.</span>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>Carrer de Guipúscoa, 131</li>
+        <li>670 906 284</li>
+        <li>clientes@misteroido.com</li>
+        <li>L–V 9:00–19:00 · S 9:00–13:00</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Pruebas audiológicas</a></li>
+        <li><a href="#servicios">Adaptación de audífonos</a></li>
+        <li><a href="#servicios">Ajuste remoto</a></li>
+        <li><a href="#servicios">Tapones a medida</a></li>
+        <li><a href="#servicios">Ayudas PUA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© 2025 Mister Oído · Todos los derechos reservados</div>
+</footer>
+
+<script>
+// sticky header shadow
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>10);},{passive:true});
+
+// mobile drawer
+const drawer=document.getElementById('drawer');
+document.getElementById('menuBtn').addEventListener('click',()=>drawer.classList.add('open'));
+document.getElementById('drawerClose').addEventListener('click',()=>drawer.classList.remove('open'));
+drawer.addEventListener('click',e=>{if(e.target===drawer||e.target.tagName==='A')drawer.classList.remove('open');});
+
+// FAQ accordion
+document.querySelectorAll('.faq button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const ans=item.querySelector('.ans');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq.open').forEach(o=>{o.classList.remove('open');o.querySelector('.ans').style.maxHeight=null;});
+    if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+  });
+});
+
+// form
+const form=document.getElementById('citaForm');
+const msgErr=document.getElementById('msgErr'), msgOk=document.getElementById('msgOk');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  msgErr.style.display='none';msgOk.style.display='none';
+  const fields=['nombre','tel','email','motivo','franja'];
+  const ok=fields.every(id=>document.getElementById(id).value.trim()!=='');
+  if(!ok){msgErr.style.display='block';msgErr.scrollIntoView({block:'center'});return;}
+  form.querySelectorAll('input,select').forEach(el=>el.value='');
+  msgOk.style.display='block';
+});
+
+// testimonials carousel
+(function(){
+  const track=document.getElementById('tTrack');
+  if(!track)return;
+  const slides=[...track.children];
+  const dotsWrap=document.getElementById('tDots');
+  const car=document.getElementById('tCarousel');
+  let idx=0, timer=null;
+  slides.forEach((s,i)=>{
+    const d=document.createElement('button');
+    d.type='button';d.className='t-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Ver opinión '+(i+1));
+    d.addEventListener('click',()=>{go(i);reset();});
+    dotsWrap.appendChild(d);
+  });
+  const dots=[...dotsWrap.children];
+  function setHeight(){let m=0;slides.forEach(s=>{m=Math.max(m,s.offsetHeight);});track.style.height=m+'px';}
+  function go(i){
+    idx=(i+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle('active',k===idx));
+    dots.forEach((d,k)=>d.classList.toggle('active',k===idx));
+  }
+  function next(){go(idx+1);}
+  function reset(){clearInterval(timer);timer=setInterval(next,6000);}
+  document.getElementById('tNext').addEventListener('click',()=>{next();reset();});
+  document.getElementById('tPrev').addEventListener('click',()=>{go(idx-1);reset();});
+  car.addEventListener('mouseenter',()=>clearInterval(timer));
+  car.addEventListener('mouseleave',reset);
+  car.addEventListener('focusin',()=>clearInterval(timer));
+  car.addEventListener('focusout',reset);
+  setHeight();reset();
+  addEventListener('resize',setHeight);
+  addEventListener('load',setHeight);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(setHeight);
+})();
+</script>
+</body>
+</html>

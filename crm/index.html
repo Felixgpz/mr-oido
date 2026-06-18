@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mister Oído — CRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen" class="login-screen">
+  <div class="login-box">
+    <img src="../assets/images/logo-mroido-transparent.png" alt="Mister Oído" class="login-logo" onerror="this.style.display='none'">
+    <div class="login-brand">Mister Oído <span>CRM</span></div>
+    <p class="login-desc">Acceso al panel de gestión</p>
+    <div class="form-g"><label>Usuario</label><input type="text" id="l-user" class="fi" placeholder="admin" autocomplete="username"></div>
+    <div class="form-g"><label>Contraseña</label><input type="password" id="l-pass" class="fi" placeholder="••••••" autocomplete="current-password"></div>
+    <div class="l-error" id="l-error">Usuario o contraseña incorrectos</div>
+    <button class="btn-login" id="btn-login">Entrar <i class="ti ti-arrow-right"></i></button>
+    <p class="login-hint"><i class="ti ti-info-circle"></i> Demo: <strong>admin</strong> / <strong>1234</strong></p>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app" class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-brand-icon"><i class="ti ti-ear"></i></div>
+      <div><div class="sb-brand-name">Mister Oído</div><div class="sb-brand-sub">CRM Clínica</div></div>
+    </div>
+    <nav class="sb-nav">
+      <button class="sb-btn active" data-page="dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
+      <button class="sb-btn" data-page="pacientes"><i class="ti ti-users"></i><span>Pacientes</span></button>
+      <button class="sb-btn" data-page="citas"><i class="ti ti-calendar"></i><span>Citas</span></button>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user"><div class="sb-av">A</div><div><div class="sb-uname">Admin</div><div class="sb-urole">Audioprotesista</div></div></div>
+      <button class="sb-logout" id="btn-logout" title="Cerrar sesión"><i class="ti ti-logout"></i></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div><h1 class="page-title" id="page-title">Dashboard</h1><p class="page-sub" id="page-sub">Resumen general de la clínica</p></div>
+      <div class="topbar-right">
+        <div class="today-chip"><i class="ti ti-calendar"></i><span id="today-lbl"></span></div>
+        <button class="btn-new" id="btn-nueva-cita"><i class="ti ti-plus"></i> Nueva cita</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="page active" id="pg-dashboard">
+      <div id="alertas-banner"></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-ico blue"><i class="ti ti-users"></i></div><div class="stat-val" id="s-total">8</div><div class="stat-lbl">Pacientes activos</div></div>
+        <div class="stat-card"><div class="stat-ico green"><i class="ti ti-calendar-check"></i></div><div class="stat-val" id="s-semana">5</div><div class="stat-lbl">Citas esta semana</div></div>
+        <div class="stat-card"><div class="stat-ico orange"><i class="ti ti-clock-exclamation"></i></div><div class="stat-val" id="s-pend">2</div><div class="stat-lbl">Revisiones pendientes</div></div>
+        <div class="stat-card"><div class="stat-ico sky"><i class="ti ti-wifi"></i></div><div class="stat-val" id="s-remoto">7</div><div class="stat-lbl">Ajustes remotos/mes</div></div>
+      </div>
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-head"><h3>Próximas citas</h3><button class="link-btn" data-goto="citas">Ver todas →</button></div>
+          <table class="tbl"><thead><tr><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Motivo</th><th>Estado</th></tr></thead><tbody id="dash-citas-body"></tbody></table>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Actividad reciente</h3></div>
+          <div id="actividad-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACIENTES -->
+    <section class="page" id="pg-pacientes">
+      <div class="toolbar">
+        <div class="search-wrap"><i class="ti ti-search"></i><input type="text" id="search-pac" placeholder="Buscar por nombre…" class="search-inp"></div>
+        <select class="filter-sel" id="filter-estado">
+          <option value="">Todos los estados</option>
+          <option value="activo">Activo</option>
+          <option value="prueba">En prueba</option>
+          <option value="pendiente">Revisión pendiente</option>
+        </select>
+        <select class="filter-sel" id="filter-perfil">
+          <option value="">Todos los perfiles</option>
+          <option value="Tercera edad">Tercera edad</option>
+          <option value="Adulto activo">Adulto activo</option>
+          <option value="Niños / Familia">Niños / Familia</option>
+        </select>
+      </div>
+      <div class="card">
+        <table class="tbl tbl-pac">
+          <thead><tr><th>Paciente</th><th>Edad</th><th>Perfil</th><th>Audífono</th><th>Última visita</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="pac-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CITAS -->
+    <section class="page" id="pg-citas">
+      <div class="toolbar">
+        <select class="filter-sel" id="filter-citas">
+          <option value="">Todas las citas</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="confirmada">Confirmada</option>
+          <option value="realizada">Realizada</option>
+          <option value="cancelada">Cancelada</option>
+        </select>
+      </div>
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Motivo</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="citas-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- DRAWER: FICHA PACIENTE -->
+<div class="overlay" id="drawer-overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div><h3 id="dr-nombre"></h3><span id="dr-badge" class="badge"></span></div>
+    <button class="icon-btn" id="btn-close-drawer"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<!-- MODAL: NUEVA CITA -->
+<div class="overlay" id="modal-overlay"></div>
+<div class="modal" id="modal-cita">
+  <div class="modal-head"><h3>Nueva cita</h3><button class="icon-btn" id="btn-close-modal"><i class="ti ti-x"></i></button></div>
+  <div class="modal-body">
+    <div class="form-g"><label>Paciente</label><select id="m-pac" class="fi"><option value="">Selecciona un paciente…</option></select></div>
+    <div class="fg-row">
+      <div class="form-g"><label>Fecha</label><input type="date" id="m-fecha" class="fi"></div>
+      <div class="form-g"><label>Hora</label>
+        <select id="m-hora" class="fi"><option>9:00</option><option>9:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>16:00</option><option>16:30</option><option>17:00</option></select>
+      </div>
+    </div>
+    <div class="form-g"><label>Motivo</label>
+      <select id="m-motivo" class="fi"><option>Primera revisión</option><option>Revisión anual</option><option>Ajuste de audífono</option><option>Ajuste remoto</option><option>Problema técnico</option><option>Entrega de audífono</option><option>Tapones a medida</option></select>
+    </div>
+    <div class="m-ok" id="m-ok"><i class="ti ti-circle-check"></i> Cita añadida correctamente</div>
+    <div class="m-err" id="m-err">Completa todos los campos.</div>
+    <button class="btn-login" id="btn-guardar-cita">Guardar cita</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
